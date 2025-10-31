@@ -15,8 +15,13 @@ class ViewHelper
      */
     public static function loadHeader(string $page_title): void
     {
+        if(SessionManager::has('username')){
+        $page_title = $page_title ?? 'Default Title';
+        require_once APP_VIEWS_PATH . '/common/header_customer.php';
+        }else {
         $page_title = $page_title ?? 'Default Title';
         require_once APP_VIEWS_PATH . '/common/header.php';
+        }
     }
 
     /**
@@ -36,8 +41,13 @@ class ViewHelper
      */
     public static function loadFooter(): void
     {
+        if(SessionManager::has('username')){
+        require_once APP_VIEWS_PATH . '/common/footer_customer.php';
+        }else {
         require_once APP_VIEWS_PATH . '/common/footer.php';
+        }
     }
+
 
     /**
      * Generates HTML option elements for a select dropdown with secure output.
