@@ -23,9 +23,9 @@ class DashboardController extends BaseController
         SessionManager::set('user_id', 321);
         SessionManager::set('username', 'john');
 
-        return $this->redirect($request, $response, 'products.index');
+        // return $this->redirect($request, $response, 'products.index');
 
-        // return $this->render($res, 'admin/dashboardView.php', $data);
+        return $this->render($response, 'admin/dashboardView.php', $data);
     }
 
 }

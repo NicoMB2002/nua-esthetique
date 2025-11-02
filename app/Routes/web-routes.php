@@ -25,8 +25,9 @@ return static function (Slim\App $app): void {
             '/dashboard', [DashboardController::class, 'index']
         )->setName('dashboard.index');
         $group->get(
-            '/products', [ProductsController::class, 'products']
+            '/products', [ProductsController::class, 'index']
         )->setName('products.index');
+
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]

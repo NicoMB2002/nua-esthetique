@@ -26,6 +26,6 @@ class ProductsController extends BaseController {
         //*Write a key-value pair into the current user session:
         SessionManager::set('username', 'nicolas');
 
-        return $this->render($response, "admin/dashboardView.php", $data);
+        return $this->render($response, 'admin/products/productsIndexView.php', $data);
     }
 }
