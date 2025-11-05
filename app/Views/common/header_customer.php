@@ -32,7 +32,7 @@ use App\Helpers\SessionManager;
 
 
                 <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-black text-decoration-none">
-                 <span class="fs-4"><?= SessionManager::get('username')?></span>
+                    <span class="fs-4"><?= SessionManager::get('username') ?></span>
                 </a>
                 <button type="button" id="myInput" class="btn btn-outline-dark me-2">Log out</button>
 

@@ -40,6 +40,10 @@ class LoginController extends BaseController
 
             SessionManager::set('username',$employee['username']);
             FlashMessage::success("Welcome ".$employee['username']);
+            if ($employee['isAdmin'] == 1) {
+                SessionManager::set('isAdmin',$employee['isAdmin']);
+                return $this->redirect($request, $response,'dashboard.index');
+            }
 
             return $this->redirect($request, $response,'home.index');
          }else {

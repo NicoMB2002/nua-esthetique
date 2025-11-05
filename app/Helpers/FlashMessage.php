@@ -1,6 +1,7 @@
 <?php
 
 
+
 namespace App\Helpers;
 
 class FlashMessage{
@@ -106,6 +107,3 @@ public static function add(string $type, string $message) : void{
         return $script;
     }
 }
-
-
-

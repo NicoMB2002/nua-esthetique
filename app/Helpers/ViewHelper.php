@@ -17,7 +17,11 @@ class ViewHelper
     {
         if(SessionManager::has('username')){
         $page_title = $page_title ?? 'Default Title';
-        require_once APP_VIEWS_PATH . '/common/header_customer.php';
+                if (SessionManager::has('isAdmin')) {
+            require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
+        }else {
+             require_once APP_VIEWS_PATH . '/common/header_customer.php';
+        }
         }else {
         $page_title = $page_title ?? 'Default Title';
         require_once APP_VIEWS_PATH . '/common/header.php';
@@ -43,11 +47,13 @@ class ViewHelper
     {
         if(SessionManager::has('username')){
         require_once APP_VIEWS_PATH . '/common/footer_customer.php';
+        if (SessionManager::has('isAdmin')) {
+            require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
+        }
         }else {
         require_once APP_VIEWS_PATH . '/common/footer.php';
         }
     }
-
 
     /**
      * Generates HTML option elements for a select dropdown with secure output.
