@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
 //TODO: set the page title dynamically based on the view being rendered in the controller.
 $page_title = 'Products list';
@@ -30,9 +31,48 @@ ViewHelper::loadAdminHeader($page_title);
             </button>
         </div>
     </div>
-    <h2>Product Listing</h2>
     <div class="table-responsive small">
-        <h4>The list of products will be rendered here.</h4>
+<!--TODO: render the list of products/categories using an HTML table -->
+
+<h1>Welcome to The Book shop Directory</h1>
+<br>
+<div><?= FlashMessage::render(); ?></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($products as $key => $product) {
+
+                ?>
+                <tr>
+                    <td><?= $product["product_id"] ?></td>
+                    <td> <?= htmlspecialchars($product["name"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["description"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["price"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["stock_quantity"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["created_at"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["updated_at"]) ?> </td>
+                    <td>
+                        <a href="products/edit/<?= $product['id'] ?>" class="btn btn-success">Edit</a>
+                    </td>
+                </tr>
+            <?php }
+            ?>
+        </tbody>
+    </table>
+
+
     </div>
 </main>
 

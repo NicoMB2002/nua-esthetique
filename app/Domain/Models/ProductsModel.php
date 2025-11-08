@@ -3,8 +3,10 @@
 namespace App\Domain\Models;
 use App\Helpers\Core\PDOService;
 
-class ProductModel extends BaseModel
+class ProductsModel extends BaseModel
 {
+
+    private $products_table = "products";
 
     public function __construct(PDOService $pdo_service) {
         parent::__construct($pdo_service);
@@ -18,9 +20,10 @@ class ProductModel extends BaseModel
         return $products;
     }
 
-    public function getOneProduct($id){
-        $query = "Select * from Products where product_id = :product_id";
-        $product = $this->selectOne($query,['product_id'=>$id]);
+    public function getProductById(int $product_id) : mixed {
+
+        $sql = "SELECT * FROM {$this->products_table} WHERE id = :product_id";
+        $product = $this->selectOne($sql, ["product_id" => $product_id]);
         return $product;
     }
 
