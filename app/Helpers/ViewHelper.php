@@ -15,14 +15,17 @@ class ViewHelper
      */
     public static function loadHeader(string $page_title): void
     {
+        if(SessionManager::has('username')){
+        $page_title = $page_title ?? 'Default Title';
+                if (SessionManager::has('isAdmin')) {
+            require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
+        }else {
+             require_once APP_VIEWS_PATH . '/common/header_customer.php';
+        }
+        }else {
         $page_title = $page_title ?? 'Default Title';
         require_once APP_VIEWS_PATH . '/common/header.php';
-    }
-
-    public static function loadAdminHeader(string $page_title): void
-    {
-        $page_title = $page_title ?? 'Default Title';
-        require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
+        }
     }
 
     /**
@@ -42,12 +45,14 @@ class ViewHelper
      */
     public static function loadFooter(): void
     {
+        if(SessionManager::has('username')){
+        require_once APP_VIEWS_PATH . '/common/footer_customer.php';
+        if (SessionManager::has('isAdmin')) {
+            require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
+        }
+        }else {
         require_once APP_VIEWS_PATH . '/common/footer.php';
-    }
-
-    public static function loadAdminFooter(): void
-    {
-        require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
+        }
     }
 
     /**

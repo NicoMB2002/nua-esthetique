@@ -1,9 +1,9 @@
 <?php
-
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
-//TODO: set the page title dynamically based on the view being rendered in the controller.
-$page_title = 'Home';
-ViewHelper::loadHeader($page_title);
+
+
+ViewHelper::loadHeader($data['title']);
 ?>
 
 <h1>Slim Framework-based MVC Application</h1>
@@ -14,6 +14,7 @@ ViewHelper::loadHeader($page_title);
 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. </p>
 
+<?= FlashMessage::render()?>
 
 <?php
 

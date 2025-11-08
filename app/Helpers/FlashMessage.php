@@ -1,57 +1,52 @@
 <?php
 
+
+
 namespace App\Helpers;
 
-class FlashMessage
-{
-    private const FLASH_KEY = 'flash_messages';
+class FlashMessage{
 
-    /**
-     * Add a success message.
-     */
-    public static function success(string $message): void
-    {
-        self::add('success', $message);
+    private const FLASH_KEY =  'flash_messages';
+
+
+public static function success($message){
+
+    self::add('success',$message);
+}
+public static function info($message){
+
+    self::add('info',$message);
+}
+
+public static function warning($message){
+
+    self::add('warning',$message);
+}
+
+public static function error($message){
+
+    self::add('error',$message);
+}
+
+
+
+public static function add(string $type, string $message) : void{
+
+  if(!isset($_SESSION[self::FLASH_KEY])){
+    $_SESSION[self::FLASH_KEY] = [];
+  }
+
+    $_SESSION[self::FLASH_KEY][] = [
+        'type'  => $type,
+        'message'=> $message
+    ];
+
     }
 
-    /**
-     * Add an error message.
-     */
-    public static function error(string $message): void
-    {
-        self::add('error', $message);
-    }
 
-    /**
-     * Add an info message.
-     */
-    public static function info(string $message): void
-    {
-        self::add('info', $message);
-    }
 
-    /**
-     * Add a warning message.
-     */
-    public static function warning(string $message): void
-    {
-        self::add('warning', $message);
-    }
 
-    /**
-     * Add a flash message of any type.
-     */
-    public static function add(string $type, string $message): void
-    {
-        if (!isset($_SESSION[self::FLASH_KEY])) {
-            $_SESSION[self::FLASH_KEY] = [];
-        }
 
-        $_SESSION[self::FLASH_KEY][] = [
-            'type' => $type,
-            'message' => $message
-        ];
-    }
 
     /**
      * Get all flash messages and clear them.
@@ -82,41 +77,33 @@ class FlashMessage
     /**
      * Render all flash messages as Bootstrap alerts.
      */
-    public static function render(bool $dismissible = true): string
+    public static function render(): string
     {
         $messages = self::get();
         if (empty($messages)) {
             return '';
         }
 
-        $bootstrapTypes = [
-            'success' => 'success',
-            'error' => 'danger',
-            'info' => 'info',
-            'warning' => 'warning'
-        ];
 
-        $html = '';
+        $script = '';
         foreach ($messages as $flash) {
-            $type = $bootstrapTypes[$flash['type']] ?? 'info';
+            $type = $flash['type'];
             $message = htmlspecialchars($flash['message']);
 
-            if ($dismissible) {
-                $html .= <<<HTML
-                <div class="alert alert-{$type} alert-dismissible fade show" role="alert">
-                    {$message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                HTML;
-            } else {
-                $html .= <<<HTML
-                <div class="alert alert-{$type}" role="alert">
-                    {$message}
-                </div>
-                HTML;
-            }
-        }
 
-        return $html;
+                $script .= <<<HTML
+                <script>
+                Swal.fire({
+                title: "$type",
+                text: "$message",
+                icon: "$type",
+                  });
+                </script>
+                HTML;
+
+            }
+
+
+        return $script;
     }
 }

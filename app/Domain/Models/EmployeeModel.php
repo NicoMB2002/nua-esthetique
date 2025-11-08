@@ -13,13 +13,13 @@ class EmployeeModel extends BaseModel
 
 
     public function getEmployees(){
-        $query = "Select * from Employees";
+        $query = "Select * from employees";
         $employees = $this->selectAll($query);
         return $employees;
     }
 
     public function getOneEmployee($id){
-        $query = "Select * from Employees where employee_id = :employee_id";
+        $query = "Select * from employees where employee_id = :employee_id";
         $employee = $this->selectOne($query,['employee_id'=>$id]);
         return $employee;
     }
@@ -53,7 +53,7 @@ class EmployeeModel extends BaseModel
     }
 
     public function deleteEmployee($id){
-        $query = "Delete from Employees where employee_id = :employee_id";
+        $query = "Delete from employees where employee_id = :employee_id";
 
         $this->execute($query,['employee_id'=>$id]);
     }
