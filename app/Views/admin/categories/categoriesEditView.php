@@ -9,10 +9,6 @@ ViewHelper::loadAdminHeader($page_title);
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <h2>Edit Categories:</h2>
     <form class="row g-3" method="POST" action="<?= APP_ADMIN_URL ?>/categories/update">
-        <!-- <div class="col-md-6">
-            <label for="inputCategory_id" class="form-label">ID</label>
-            <input type="text" class="form-control" id="inputCategory_id" name="category_id" >
-        </div> -->
         <input type="hidden" name="category_id" value="<?= $category['id'] ?>">
         <div class="col-md-6">
             <label for="inputCategory_name" class="form-label">Name</label>
