@@ -3,23 +3,27 @@
 :root {
 
     /* Color palette */
-    --color-cream-light: #F5EEE6;
-    --color-cream-lighter: #FFF8E3;
-    --color-rose-pale: #F3D7CA;
-    --color-pink-soft: #E6A4B4;
+    --color-light-pink: #F6C9C3; /*Nav Bar & footer color */
+    --color-lighter-pink: #F9F3EF; /*Body Color */
+    --color-rose-pale: #FFF3F3; /*Body color variation 2 */
+    --color-dark-pink: #F8A4A4; /*Pink color Buttons */
 
     /* Text colors */
-    --color-text: #332a20; /* example dark tone */
+    --color-text: #332a20;
     --color-heading: #060503;
-    --color-accent: var(--color-pink-soft);
 
     /* Font sizes */
-    --font-size-base: 16px;
-    --font-size-heading: 2rem;
+    --font-size-base: 20px;
+    --font-size-heading: 33px;
+}
+
+.navBar {
+    background-color: var(--color-light-pink);
 }
 
 body {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Raleway", sans-serif;
+    background-color: var(--color-lighter-pink);
     font-weight: 400;
 }
 

@@ -20,7 +20,7 @@ class ViewHelper
                 if (SessionManager::has('isAdmin')) {
             require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
         }else {
-             require_once APP_VIEWS_PATH . '/common/header_customer.php';
+             require_once APP_VIEWS_PATH . '/common/header.php';
         }
         }else {
         $page_title = $page_title ?? 'Default Title';
