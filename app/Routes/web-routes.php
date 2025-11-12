@@ -47,6 +47,9 @@ return static function (Slim\App $app): void {
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
 
+    $app->get('/', [HomeController::class, 'index'])
+        ->setName('home.index');
+
 
 
 
