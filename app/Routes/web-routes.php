@@ -13,6 +13,7 @@ use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Controllers\UploadController;
 
 
 return static function (Slim\App $app): void {
@@ -43,6 +44,10 @@ return static function (Slim\App $app): void {
 
     $app->post('/processing', [LoginController::class, 'processLogin'])
         ->setName('processLogin');
+
+    $app->get('/upload', [UploadController::class, 'index'])->setName('upload.index');
+
+    $app->post('/upload', [UploadController::class, 'upload'])->setName('upload.process');
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
