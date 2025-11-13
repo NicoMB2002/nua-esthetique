@@ -3,10 +3,10 @@
 :root {
 
     /* Color palette */
-    --color-light-pink: #F6C9C3; /*Nav Bar & footer color */
-    --color-lighter-pink: #F9F3EF; /*Body Color */
-    --color-rose-pale: #FFF3F3; /*Body color variation 2 */
-    --color-dark-pink: #F8A4A4; /*Pink color Buttons */
+    --color-light-black: #262222; /*Nav Bar color */
+    --color-black: #000000; /*Footer Color */
+    --color-light-beige: #F9F3EF; /*Body color */
+    --color-dark-beige: #E0C4A7; /*beige color Buttons */
 
     /* Text colors */
     --color-text: #332a20;
@@ -18,12 +18,12 @@
 }
 
 .navBar {
-    background-color: var(--color-light-pink);
+    background-color: var(--color-light-black);
 }
 
 body {
     font-family: "Raleway", sans-serif;
-    background-color: var(--color-lighter-pink);
+    background-color: var(--color-light-beige);
     font-weight: 400;
 }
 
