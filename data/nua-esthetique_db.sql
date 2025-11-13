@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 22, 2025 at 02:01 PM
+-- Generation Time: Nov 13, 2025 at 12:22 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -48,7 +48,7 @@ CREATE TABLE `customers` (
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password_hash` varchar(100) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `hire_date` date NOT NULL,
@@ -59,6 +59,13 @@ CREATE TABLE `employees` (
   `postal_code` varchar(50) NOT NULL,
   `isAdmin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `username`, `password_hash`, `first_name`, `last_name`, `hire_date`, `date_of_birth`, `phone`, `email`, `address`, `postal_code`, `isAdmin`) VALUES
+(1, 'Luke', '$2a$12$TMMp7pYNruQc/DpBYst27enPd6I1X4g28f9MBGpQhzt2axEsHj/hS', 'Luke', 'Nwantoly', '2025-10-01', '2015-10-01', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -92,6 +99,7 @@ CREATE TABLE `orders_products` (
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `quantity` int(11) NOT NULL,
   `InStock` tinyint(1) NOT NULL,
@@ -150,7 +158,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
