@@ -63,20 +63,24 @@ class FileUploadHelper
 
         $filename = uniqid($filenamePrefix) . '.' . $extension;
 
+        // Create directory if it doesn't exist
         if (!is_dir($directory)) {
             if (mkdir($directory, 0755, true)) {
                 return Result::failure('Failed to create upload directory');
             }
         }
 
+        // Build full file path
         $destination = $directory . DIRECTORY_SEPARATOR . $filename;
 
+        // Move uploaded file to permanent location
         try {
             $uploadedFile->moveTo($destination);
         } catch (Exception $e) {
             return Result::failure('Failed to save uploaded file: ' . $e->getMessage());
         }
 
+        // Return success with filename
         return Result::success('File uploaded successfully', ['filename' => $filename]);
     }
 }
