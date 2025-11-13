@@ -5,7 +5,7 @@ use App\Helpers\ViewHelper;
 $page_title = 'Admin Dashboard';
 
 //TODO: We need to load an admin-specific header.
-ViewHelper::loadHeader($page_title);
+ViewHelper::loadAdminHeader($page_title);
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -170,5 +170,5 @@ ViewHelper::loadHeader($page_title);
 
 ViewHelper::loadJsScripts();
 //TODO: We need to load an admin-specific footer.
-ViewHelper::loadFooter();
+ViewHelper::loadAdminFooter();
 ?>

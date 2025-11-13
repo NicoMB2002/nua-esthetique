@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
 </head>
 
 
@@ -20,7 +20,7 @@
 
 
 
-<header class="p-3 bg-light text-white">
+<header class="navBar">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -36,6 +36,7 @@
 
         <a href="logout"><button type="button" class="btn btn-outline-dark me-2">Login</button></a>
 
+
       </div>
     </div>
-  </header>
+</header>

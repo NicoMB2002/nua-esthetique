@@ -20,12 +20,18 @@ class ViewHelper
                 if (SessionManager::has('isAdmin')) {
             require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
         }else {
-             require_once APP_VIEWS_PATH . '/common/header_customer.php';
+             require_once APP_VIEWS_PATH . '/common/header.php';
         }
         }else {
         $page_title = $page_title ?? 'Default Title';
         require_once APP_VIEWS_PATH . '/common/header.php';
         }
+    }
+
+    public static function loadAdminHeader(string $page_title): void
+    {
+        $page_title = $page_title ?? 'Default Title';
+        require_once APP_VIEWS_PATH . '/common/admin/admin_header.php';
     }
 
     /**
@@ -53,6 +59,11 @@ class ViewHelper
         }else {
         require_once APP_VIEWS_PATH . '/common/footer.php';
         }
+    }
+
+    public static function loadAdminFooter(): void
+    {
+        require_once APP_VIEWS_PATH . '/common/admin/admin_footer.php';
     }
 
     /**
