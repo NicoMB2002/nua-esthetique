@@ -45,9 +45,9 @@ return static function (Slim\App $app): void {
     $app->post('/processing', [LoginController::class, 'processLogin'])
         ->setName('processLogin');
 
-    $app->get('/upload', [UploadController::class, 'index'])->setName('upload.index');
+    $app->get('/upload', [UploadController::class, 'index'])->setName('upload.index'); // GET displays the form
 
-    $app->post('/upload', [UploadController::class, 'upload'])->setName('upload.process');
+    $app->post('/upload', [UploadController::class, 'upload'])->setName('upload.process'); //POST processes uploads
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');

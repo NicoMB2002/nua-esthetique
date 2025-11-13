@@ -43,11 +43,6 @@ public static function add(string $type, string $message) : void{
 
     }
 
-
-
-
-
-
     /**
      * Get all flash messages and clear them.
      */
