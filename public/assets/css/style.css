@@ -18,7 +18,49 @@
 }
 
 .navBar {
-    background-color: var(--color-light-black);
+    background-color: var(--color-black);
+    color: white;
+    padding: 5px;
+}
+
+.navBar a.nav-link {
+    color: white;
+}
+
+.navBar .nav-link:hover {
+    color: grey;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 30px;
+}
+
+
+.nav-icons input {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.nav-icons #accountBtn {
+    border-color: white;
+    color: white;
+    border-radius: 15px;
+}
+
+.nav-icons #cartBtn {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+}
+
+.nav-icons button {
+    width: 110px;
 }
 
 body {
