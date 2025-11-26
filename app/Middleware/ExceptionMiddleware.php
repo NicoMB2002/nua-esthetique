@@ -35,7 +35,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
     ) {
         $this->responseFactory = $responseFactory;
         $this->renderer = $jsonRenderer;
-        $this->viewRenderer = $viewRenderer;
+        $this->viewRenderer = $viewRenderer;    // new assignment
         $this->displayErrorDetails = $displayErrorDetails;
         $this->logger = $logger;
     }
@@ -97,7 +97,9 @@ final class ExceptionMiddleware implements MiddlewareInterface
     {
         $response = $response->withHeader('Content-Type', 'text/html');
 
-        if(exception)
+         if ($exception instanceof HttpNotFoundException) {
+        return $this->viewRenderer->render($response, 'errors/404.php');
+    }
 
         $message = sprintf(
             "\n<br><strong>Error:</strong> %s (%s)\n<br><strong>Message:</strong> %s\n<br>",
