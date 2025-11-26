@@ -6,6 +6,7 @@ declare(strict_types=1);
  * This file contains the routes for the web application.
  */
 
+use App\Controllers\AuthController;
 use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
@@ -30,24 +31,34 @@ return static function (Slim\App $app): void {
         $group->get(
             '/products', [ProductsController::class, 'index']
         )->setName('products.index');
-        $group->get('/logout', [LoginController::class, 'logout'])
-        ->setName('logout.admin');
+        // $group->get('/logout', [LoginController::class, 'logout'])
+        // ->setName('logout.admin');
 
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
-    $app->get('/login', [LoginController::class, 'index'])
-        ->setName('login');
+    // $app->get('/login', [LoginController::class, 'index'])
+    //     ->setName('login');
 
-    $app->get('/logout', [LoginController::class, 'logout'])
-        ->setName('logout');
+    // $app->get('/logout', [LoginController::class, 'logout'])
+    //     ->setName('logout');
 
-    $app->post('/processing', [LoginController::class, 'processLogin'])
-        ->setName('processLogin');
+    // $app->post('/processing', [LoginController::class, 'processLogin'])
+        // ->setName('processLogin');
 
     $app->get('/upload', [UploadController::class, 'index'])->setName('upload.index'); // GET displays the form
 
     $app->post('/upload', [UploadController::class, 'upload'])->setName('upload.process'); //POST processes uploads
+
+
+
+    $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
+    $app->post('/register', [AuthController::class, 'store'])->setName('auth.store');
+
+    $app->get('/login', [AuthController::class, 'login'])->setName('auth.login');
+    $app->post('/login', [AuthController::class, 'authenticate'])->setName('auth.authenticate');
+
+    $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
@@ -63,7 +74,7 @@ return static function (Slim\App $app): void {
         throw new \Slim\Exception\HttpNotFoundException($request, "Something went wrong");
     });
 
-    $app->group('/admin', function ($group){
+    $app->group('/user', function ($group){
 
     });
 };

@@ -15,12 +15,15 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpException;
+use Slim\Views\PhpRenderer;
+use Slim\Exception\HttpNotFoundException;
 use Throwable;
 
 final class ExceptionMiddleware implements MiddlewareInterface
 {
     private ResponseFactoryInterface $responseFactory;
     private JsonRenderer $renderer;
+    private PhpRenderer $viewRenderer;
     private ?LoggerInterface $logger;
     private bool $displayErrorDetails;
 
@@ -32,6 +35,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
     ) {
         $this->responseFactory = $responseFactory;
         $this->renderer = $jsonRenderer;
+        $this->viewRenderer = $viewRenderer;
         $this->displayErrorDetails = $displayErrorDetails;
         $this->logger = $logger;
     }
@@ -92,6 +96,8 @@ final class ExceptionMiddleware implements MiddlewareInterface
     public function renderHtml(ResponseInterface $response, Throwable $exception): ResponseInterface
     {
         $response = $response->withHeader('Content-Type', 'text/html');
+
+        if(exception)
 
         $message = sprintf(
             "\n<br><strong>Error:</strong> %s (%s)\n<br><strong>Message:</strong> %s\n<br>",
