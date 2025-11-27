@@ -3,9 +3,9 @@
 use App\Helpers\ViewHelper;
 
 $page_title = '404 - Page Not Found';
-ViewHelper::loadHeader($page_title);
+ViewHelper::loadAdminHeader($page_title);
 ?>
-
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 <div style="text-align: center; padding: 50px 20px;">
     <h1 style="font-size: 72px; margin: 0; color: #e74c3c;">404</h1>
     <h2 style="margin: 20px 0;">Page Not Found</h2>
@@ -16,7 +16,7 @@ ViewHelper::loadHeader($page_title);
         Go Back Home
     </a>
 </div>
-
+</main>
 <?php
 ViewHelper::loadJsScripts();
 ViewHelper::loadFooter();

@@ -30,6 +30,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
     public function __construct(
         ResponseFactoryInterface $responseFactory,
         JsonRenderer $jsonRenderer,
+        PhpRenderer $viewRenderer,
         ?LoggerInterface $logger = null,
         bool $displayErrorDetails = false,
     ) {
@@ -98,7 +99,12 @@ final class ExceptionMiddleware implements MiddlewareInterface
         $response = $response->withHeader('Content-Type', 'text/html');
 
          if ($exception instanceof HttpNotFoundException) {
-        return $this->viewRenderer->render($response, 'errors/404.php');
+            if (str_contains($_SERVER['REQUEST_URI'],'admin')) {
+               return $this->viewRenderer->render($response, 'errors/admin_404.php');
+            }else {
+                return $this->viewRenderer->render($response, 'errors/404.php');
+            }
+
     }
 
         $message = sprintf(
