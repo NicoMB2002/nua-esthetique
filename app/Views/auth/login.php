@@ -46,7 +46,7 @@ ViewHelper::loadHeader($page_title);
                     <p class="fs-6 text-decoration-underline text-center">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
                 </div>
             </div>
-            <!-- closes form(left side) -->
+            <!-- closes th form(left side) -->
         </div>
 
     </div>

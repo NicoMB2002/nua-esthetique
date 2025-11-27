@@ -8,29 +8,24 @@ ViewHelper::loadHeader($page_title);
 <div class="container mt-5">
     <div class="row-custom">
 
-        <!-- Left Column: Form -->
         <div class="left-column">
             <form method="POST" action="registerEmail">
 
-                <!-- First Name -->
                 <div class="input-row">
                     <div class="icon-label">👤</div>
                     <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
                 </div>
 
-                <!-- Last Name -->
                 <div class="input-row">
                     <div class="icon-label">👤</div>
                     <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
                 </div>
 
-                <!-- Date of Birth -->
                 <div class="input-row">
                     <div class="icon-label">📅</div>
                     <input type="date" id="birth-date" name="birth-date" required>
                 </div>
 
-                <!-- Gender -->
                 <div class="input-row">
                     <div class="icon-label">⚧</div>
                     <select name="gender" id="gender" required>
@@ -44,31 +39,26 @@ ViewHelper::loadHeader($page_title);
                 <fieldset>
                     <legend>Address</legend>
 
-                    <!-- Phone -->
                     <div class="input-row">
                         <div class="icon-label">📞</div>
                         <input type="text" id="phone" name="phone" placeholder="Phone N.">
                     </div>
 
-                    <!-- Street Number -->
                     <div class="input-row">
                         <div class="icon-label">🏠</div>
                         <input type="text" id="street-number" name="street-number" placeholder="Street N.">
                     </div>
 
-                    <!-- Street Name -->
                     <div class="input-row">
                         <div class="icon-label">🏠</div>
                         <input type="text" id="street" name="street-name" placeholder="Street Name">
                     </div>
 
-                    <!-- City -->
                     <div class="input-row">
                         <div class="icon-label">🏢</div>
                         <input type="text" id="city" name="city" placeholder="City">
                     </div>
 
-                    <!-- Province -->
                     <div class="input-row">
                         <div class="icon-label">🗺️</div>
                         <select name="province" id="province">
@@ -88,6 +78,12 @@ ViewHelper::loadHeader($page_title);
                             <option value="YT">Yukon</option>
                         </select>
                     </div>
+
+                    <div class="input-row">
+                        <div class="icon-label">📍</div>
+                        <input type="text" id="postal-code" name="postal-code" placeholder="Postal Code">
+                    </div>
+
                 </fieldset>
 
                 <input type="hidden" name="role" value="customer">

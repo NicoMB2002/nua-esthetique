@@ -9,7 +9,7 @@ ViewHelper::loadHeader($page_title);
 
 <div class="row justify-content-center">
     <div class="col-5">
-        <!-- //TODO:add image placeholder -->
+        <!-- //TODO:add lash image from db -->
         <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor vero iure illo culpa debitis eaque placeat, vel voluptatibus animi odit voluptatum temporibus molestiae deserunt inventore velit veritatis consectetur esse provident! Facere odio voluptatem maiores, mollitia officiis nihil suscipit eius deserunt obcaecati sapiente temporibus expedita velit vel cupiditate sint? Eum, dolorem.
         </p>
