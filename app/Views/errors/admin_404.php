@@ -19,5 +19,5 @@ ViewHelper::loadAdminHeader($page_title);
 </main>
 <?php
 ViewHelper::loadJsScripts();
-ViewHelper::loadFooter();
+ViewHelper::loadAdminFooter();
 ?>
