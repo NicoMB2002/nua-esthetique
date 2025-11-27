@@ -98,9 +98,14 @@ final class ExceptionMiddleware implements MiddlewareInterface
     {
         $response = $response->withHeader('Content-Type', 'text/html');
 
-        if ($exception instanceof HttpNotFoundException) {
-            return $this->viewRenderer->render($response, 'errors/404.php');
-        }
+
+         if ($exception instanceof HttpNotFoundException) {
+            if (str_contains($_SERVER['REQUEST_URI'],'admin')) {
+               return $this->viewRenderer->render($response, 'errors/admin_404.php');
+            }else {
+                return $this->viewRenderer->render($response, 'errors/404.php');
+            }
+
 
         $message = sprintf(
             "\n<br><strong>Error:</strong> %s (%s)\n<br><strong>Message:</strong> %s\n<br>",

@@ -9,24 +9,24 @@ ViewHelper::loadAdminHeader($page_title);
 $product = $data["product"];
 $categories = $data["categories"];
 // dd($product)
-
 $options = ViewHelper::renderSelectOptions($categories, $product["category_id"], 'id', 'name');
 ?>
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <h2>Edit Product:</h2>
 <form class="row g-3" method="POST" action="<?= APP_ADMIN_URL ?>/products/update/ <?= $product["id"]?>">
-    <input type="hidden" name="product_id" value="<?= $product["id"] ?>">
+    <input required type="hidden" name="product_id" value="<?= $product["id"] ?>">
   <div class="col-md-6">
     <label for="inputName" class="form-label">Name</label>
-    <input type="text" value="<?= $product["name"] ?>" name="product_name" class="form-control" id="inputName">
+    <input required type="text" value="<?= $product["name"] ?>" name="product_name" class="form-control" id="inputName">
   </div>
   <div class="col-md-6">
     <label for="inputDescription" class="form-label">Description</label>
-    <input type="text" value="<?= $product["description"] ?>" name="description" class="form-control" id="inputDescription">
+    <input required type="text" value="<?= $product["description"] ?>" name="description" class="form-control" id="inputDescription">
   </div>
   <div class="col-12">
     <label for="inputPrice" class="form-label">Price</label>
-    <input type="text" value="<?= $product["price"] ?>" class="form-control" name="price" id="inputPrice" placeholder="19.99">
+    <input required type="text" value="<?= $product["price"] ?>" class="form-control" name="price" id="inputPrice" placeholder="19.99">
   </div>
   <div class="col-md-4">
     <label for="inputCategory" class="form-label">Category:</label>

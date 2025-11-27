@@ -269,7 +269,7 @@
         data-bs-theme="dark">
         <a
             class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
-            href="#">Company name</a>
+            href="#">  <img src="..\public\assets\resources\images\NuaLogo.png" width="150" height="100" class="me-2" /></a>
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
                 <button
@@ -343,7 +343,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2" href="<?= APP_ADMIN_URL ?>/orders">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#file-earmark"></use>
                                     </svg>
@@ -359,7 +359,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2" href="<?= APP_ADMIN_URL ?>/customers">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
