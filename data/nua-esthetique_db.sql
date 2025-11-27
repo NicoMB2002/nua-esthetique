@@ -57,7 +57,6 @@ CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `role` enum('customer') NOT NULL DEFAULT 'customer',
   `phone` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `postal_code` varchar(50) NOT NULL,
