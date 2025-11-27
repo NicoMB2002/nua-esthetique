@@ -1,0 +1,60 @@
+body {
+    background: #f6f0ea;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.input-row .icon-label {
+    background: #000;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+    font-size: 20px;
+    user-select: none;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-row input:focus {
+    border-color: #c7a98e;
+    box-shadow: 0 0 4px rgba(199, 169, 142, 0.4);
+}
+
+#register-btn {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #d8b89c;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#register-btn:hover {
+    background-color: #c7a98e;
+}
+
+#register-btn:active {
+    background-color: #b7967f;
+}

@@ -53,6 +53,7 @@ return static function (Slim\App $app): void {
 
 
     $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
+    $app->get('/registerEmail', [AuthController::class, 'registerEmail'])->setName('auth.registerEmail');
     $app->post('/register', [AuthController::class, 'store'])->setName('auth.store');
 
     $app->get('/login', [AuthController::class, 'login'])->setName('auth.login');

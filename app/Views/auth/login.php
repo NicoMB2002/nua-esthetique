@@ -1,58 +1,60 @@
 <?php
 
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
-
-$page_title= $data['title'];
+$page_title = 'Home';
 ViewHelper::loadHeader($page_title);
 ?>
-    <div class="container mt-5">
+
+   <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Login</h3>
+            <div class="col-5">
+                <!-- TODO:put image from db -->
+                <div id="login-image">
+                    <!-- //TODO:add image instead of paragraph place holder -->
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, cupiditate quod enim nisi ipsa praesentium labore nihil alias consectetur consequuntur molestiae dolor esse accusantium provident necessitatibus error facilis nam quisquam in velit asperiores beatae ullam? Officiis hic blanditiis assumenda doloribus, molestiae totam amet, molestias magnam vitae repudiandae eaque necessitatibus illo.</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-7">
+                <form action="login" method="POST">
+                    <div id="input-row-identifier">
+                            <label id="identifier-label">✉️</label>
+                            <input
+                                type="text"
+                                id="identifier"
+                                name="identifier"
+                                placeholder="email@example.com"
+                                required>
                     </div>
-                    <div class="card-body">
-                        <?= App\Helpers\FlashMessage::render(true) ?>
-
-                        <form method="POST" action="login">
-                            <div class="mb-3">
-                                <label for="identifier" class="form-label">Email or Username</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="identifier"
-                                    name="identifier"
-                                    placeholder="Enter your email or username"
-                                    required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Enter your password"
-                                    required>
-                            </div>
-
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </div>
-                        </form>
-
-                        <div class="mt-3 text-center">
-                            <p>Don't have an account? <a href="register">Register here</a></p>
-                        </div>
+                     <div id="input-row-password">
+                            <label id="password-label">🔒</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="email@example.com"
+                                required>
                     </div>
+                    <button type="submit" id="login-btn">
+                        Login
+                    </button>
+                </form>
+                <div>
+                    <p class="fs-6 text-decoration-underline text-center">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
                 </div>
             </div>
+            <!-- closes th form(left side) -->
         </div>
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-</html>
+<?= FlashMessage::render()?>
+<?php
+ViewHelper::loadJsScripts();
+ViewHelper::loadFooter();
+?>
+

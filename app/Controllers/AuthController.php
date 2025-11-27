@@ -27,18 +27,74 @@ class AuthController extends BaseController
 
         return $this->render($response, 'auth/register.php', $data);
     }
+    public function registerEmail(Request $request, Response $response, array $args): Response
+    {
+        $getUserInfo = $request->getQueryParams();
+        dd($getUserInfo);
+        SessionManager::set('user-info', $getUserInfo);
+
+        $errors[];
+
+        $phone = $getUserInfo['phone'];
+         //TODO: implement phone is registered method in UserModel
+
+        if ($this->userModel->phoneRegistered($phone)) {
+            $errors[] = "Phone number already registered please choose differently";
+        }
+
+        $postalCode = $getUserInfo['postal-code'];
+        $postalCodePatter = '/^[A-Z]\d[A-Z] \d[A-Z]\d$/';
+        if(!preg_match($postalCodePatter, $postalCode)){
+            $errors[] = "Please Enter a valid postal code";
+        }
+
+        if (!empty($errors)) {
+              FlashMessage::error($error);
+                return $this->redirect($request, $response, 'auth.register');
+        }
+
+        $newUserInfo = [
+            'first_name'=>$getUserInfo['first_name'],
+            'last_name'=>$getUserInfo['last_name'],
+            'dob'=>$getUserInfo['birth-date'],
+            'gender'=>$getUserInfo['gender'],
+            'phone'=>$getUserInfo['phone'],
+            'street_number'=>$getUserInfo['street-number'],
+            'street_name'=>$getUserInfo['street-name'],
+            'city'=>$getUserInfo['city'],
+            'province'=>$getUserInfo['province'],
+            'postal_code' => $getUserInfo['postal-code']
+
+        ];
+
+        return $this->render($response,'auth.registerEmail', $newUserInfo);
+    }
 
     public function store(Request $request, Response $response, array $args): Response
     {
         $data = ["title" => 'Register'];
+        $userInformation = $_SESSION['user-info'];
         $userRegistrationInfo = $request->getParsedBody();
-        $firstName = $userRegistrationInfo['first_name'];
-        $lastName = $userRegistrationInfo['last_name'];
-        $userName = $userRegistrationInfo['username'];
-        $email = $userRegistrationInfo['email'];
-        $password = $userRegistrationInfo['password'];
-        $confirm_password = $userRegistrationInfo['confirm_password'];
-        $role = $userRegistrationInfo['role'];
+        $newUser = array_push($userInformation, $userRegistrationInfo);
+        $firstName = $newUser['first_name'];
+        $lastName = $newUser['last_name'];
+        $dob =$newUser['dob'];
+        $gender = $newUser['gender'];
+        $phone = $newUser['phone'];
+
+        $streetN = $newUser['street_number'];
+        $streetName = $newUser['street_name'];
+        $city = $newUser['city'];
+        $province = strval($newUser['province']);
+
+        $address = $streetN . " " .$streetName . " " . $city . " " .$province;
+
+        $postalCode = $newUser['postal_code'];
+
+        $email = $newUser['dob'];
+        $password = $newUser['password'];
+        $confirm_password = $newUser['confirm_password'];
+        $role = $newUser['role'];
 
         $errors = [];
 
@@ -55,15 +111,14 @@ class AuthController extends BaseController
             $errors[] = "Email already assigned to a registered user";
         }
 
-        if ($this->userModel->usernameExists($userName)) {
-            $errors[] = "Username already in use please choose differently";
-        }
-
         if (strlen($password) < 8) {
             $errors[] = "Password must beat least 8 character s long";
         } else {
             if (!preg_match('/[0-9]/', $password)) {
                 $errors[] = 'Password must contain at least 1 number';
+            }
+            if (!preg_match('/[A-Z]/', $password)) {
+                $errors[] = 'Password must contain at least Upper case character';
             }
         }
 
@@ -81,10 +136,13 @@ class AuthController extends BaseController
                 $userData = [
                     "first_name" => $firstName,
                     "last_name" => $lastName,
-                    "username" => $userName,
+                    "date_of_birth" => $dob,
+                    'gender' => $gender,
+                    'phone' =>$phone,
+                    'address' =>$address,
+                    'postal_code' => $postalCode,
                     "email" => $email,
-                    "password" => $password,
-                    "role" => $role,
+                    "password_hash" => $password,
                 ];
                 $userId = $this->userModel->createUser($userData);
 
