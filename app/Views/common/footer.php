@@ -1,19 +1,44 @@
+<footer class="footer">
+  <div class="footer-container">
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <p class="col-md-4 mb-0 text-muted">© 2022 Company, Inc</p>
+    <div class="footer-logo">
+      <img src="./public/assets/resources/images/NuaLogoShort.png" alt="Nua Salon Logo" width="150" height="150" class="me-2">
+      <p>Nua Salon D'esthetique</p>
+    </div>
 
-    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-    </a>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p>2114 Rue Jean Talon<br>Montreal, QC, H2E 1V3</p>
+      <p>438-922-1682<br><a href="mailto:info@nuaesthetique.com">info@nuaesthetique.com</a></p>
+    </div>
 
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-    </ul>
-  </footer>
-</body>
+    <div class="footer-links">
+      <h4>Useful Links</h4>
+      <ul>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Find a distributor</a></li>
+        <li><a href="#">Shipping and Delivery</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
 
-</html>
+    <div class="footer-newsletter">
+      <h4>Newsletter</h4>
+      <form>
+        <input type="email" placeholder="Enter your email">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <hr>
+    <p>© 2025 Nua Salon D’esthetique</p>
+  </div>
+</footer>
+

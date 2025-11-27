@@ -29,7 +29,7 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img src="./public/assets/resources/images/NuaLogo.png" width="150" height="150" class="me-2" />
+          <img src="./public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
         </a>
 
         <ul class="nav">
