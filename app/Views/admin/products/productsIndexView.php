@@ -45,8 +45,6 @@ ViewHelper::loadAdminHeader($page_title);
                 <th>Description</th>
                 <th>Price</th>
                 <th>Stock Quantity</th>
-                <th>Created at</th>
-                <th>Updated at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,11 +58,9 @@ ViewHelper::loadAdminHeader($page_title);
                     <td> <?= htmlspecialchars($product["name"]) ?> </td>
                     <td> <?= htmlspecialchars($product["description"]) ?> </td>
                     <td> <?= htmlspecialchars($product["price"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["stock_quantity"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["created_at"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["updated_at"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["quantity"]) ?> </td>
                     <td>
-                        <a href="products/edit/<?= $product['id'] ?>" class="btn btn-success">Edit</a>
+                        <a href="products/edit/<?= $product['product_id'] ?>" class="btn btn-success">Edit</a>
                     </td>
                 </tr>
             <?php }

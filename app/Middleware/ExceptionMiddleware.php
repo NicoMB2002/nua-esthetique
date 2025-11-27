@@ -105,7 +105,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
             }else {
                 return $this->viewRenderer->render($response, 'errors/404.php');
             }
-
+        }
 
         $message = sprintf(
             "\n<br><strong>Error:</strong> %s (%s)\n<br><strong>Message:</strong> %s\n<br>",
@@ -128,7 +128,7 @@ final class ExceptionMiddleware implements MiddlewareInterface
         return $response;
     }
 
-    private function getHttpStatusCode(Throwable $exception): int
+    public function getHttpStatusCode(Throwable $exception): int
     {
         $statusCode = StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR;
 

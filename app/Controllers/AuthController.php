@@ -33,7 +33,7 @@ class AuthController extends BaseController
         dd($getUserInfo);
         SessionManager::set('user-info', $getUserInfo);
 
-        $errors[];
+        $errors = [];
 
         $phone = $getUserInfo['phone'];
          //TODO: implement phone is registered method in UserModel
