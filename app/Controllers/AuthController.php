@@ -27,11 +27,33 @@ class AuthController extends BaseController
 
         return $this->render($response, 'auth/register.php', $data);
     }
+    public function registerEmail(Request $request, Response $response, array $args): Response
+    {
+        $getUserInfo = $request->getQueryParams();
+        dd($getUserInfo);
+        SessionManager::set('user-info', $getUserInfo);
+        $newUserInfo = [
+            'first-name'=>$getUserInfo['first-name'],
+            'last-name'=>$getUserInfo['last-name'],
+            'dob'=>$getUserInfo['birth-date'],
+            'gender'=>$getUserInfo['gender'],
+            'gender'=>$getUserInfo['gender'],
+            'gender'=>$getUserInfo['gender'],
+            'gender'=>$getUserInfo['gender'],
+            'gender'=>$getUserInfo['gender'],
+            'gender'=>$getUserInfo['gender'],
+
+        ]
+
+        return $this->render($response,'auth.registerEmail', $newUserInfo);
+    }
 
     public function store(Request $request, Response $response, array $args): Response
     {
         $data = ["title" => 'Register'];
+        $userInformation = $_SESSION['user-info'];
         $userRegistrationInfo = $request->getParsedBody();
+        $newUser = $userInformation + $userRegistrationInfo;
         $firstName = $userRegistrationInfo['first_name'];
         $lastName = $userRegistrationInfo['last_name'];
         $userName = $userRegistrationInfo['username'];
