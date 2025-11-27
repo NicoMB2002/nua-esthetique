@@ -1,14 +1,12 @@
-body{
-    background-color: rgb(251, 225, 193);
-}
-
 #input-row-identifier,
 #input-row-password {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
-
+#login-btn:hover {
+    background: #c7a98e;
+}
 #identifier-label,
 #password-label {
     background: #000;
@@ -64,4 +62,8 @@ body{
 
 #login-btn:active {
     background-color: #b7967f;
+}
+
+#register-link{
+    color: black;
 }

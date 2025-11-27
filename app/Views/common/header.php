@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
     <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/login.css ?>">
+    <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/register.css ?>">
 </head>
 
 

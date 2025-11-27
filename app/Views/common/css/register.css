@@ -1,0 +1,99 @@
+body {
+    background: #f6f0ea;
+    font-family: Arial, sans-serif;
+}
+
+/* ---- Layout ---- */
+#form-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+#left-column {
+    width: 45%;
+}
+
+#right-column {
+    width: 40%;
+    text-align: center;
+}
+
+#right-column img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ---- Login Form Rows ---- */
+#input-row-identifier,
+#input-row-password {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Icon/Label */
+#identifier-label,
+#password-label {
+    background: #000;
+    color: #fff;
+    padding: 12px 15px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+}
+
+/* Inputs */
+#identifier,
+#password {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0 8px 8px 0;
+    outline: none;
+    background: #fff;
+}
+
+#identifier:focus,
+#password:focus {
+    border-color: #c7a98e;
+    box-shadow: 0 0 4px rgba(199, 169, 142, 0.4);
+}
+
+/* Button */
+#login-btn {
+    width: 100%;
+    background: #d7b89a;
+    color: #fff;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#login-btn:hover {
+    background: #c7a98e;
+}
+
+/* Already registered box */
+#registered-box {
+    background: #d7b89a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#registered-box a {
+    color: #fff;
+    text-decoration: underline;
+}
