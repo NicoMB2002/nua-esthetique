@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 27, 2025 at 06:50 PM
+-- Generation Time: Nov 29, 2025 at 03:27 PM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -32,14 +32,14 @@ CREATE TABLE `categories` (
   `name` text NOT NULL,
   `description` text NOT NULL DEFAULT current_timestamp(),
   `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` date NOT NULL DEFAULT current_timestamp()
+  `updated_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at`) VALUES
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Lash Extensions', ' ', '2025-11-27', '2025-11-27'),
 (2, 'Tools', ' ', '2025-11-27', '2025-11-27'),
 (3, 'Adhesive', '', '2025-11-27', '2025-11-27'),
@@ -50,60 +50,14 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `customer_id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `postal_code` varchar(50) NOT NULL,
-  `date_of_birth` date NOT NULL,
-  `receive_notification` tinyint(1) DEFAULT NULL,
-  `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employees`
---
-
-CREATE TABLE `employees` (
-  `employee_id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password_hash` varchar(100) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `hire_date` date NOT NULL,
-  `date_of_birth` date NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `postal_code` varchar(50) NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`employee_id`, `username`, `password_hash`, `first_name`, `last_name`, `hire_date`, `date_of_birth`, `phone`, `email`, `address`, `postal_code`, `isAdmin`) VALUES
-(1, 'Luke', '$2a$12$TMMp7pYNruQc/DpBYst27enPd6I1X4g28f9MBGpQhzt2axEsHj/hS', 'Luke', 'Nwantoly', '2025-10-01', '2015-10-01', '', '', '', '', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `tracking_number` varchar(50) NOT NULL,
-  `order_date` date NOT NULL
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -117,29 +71,48 @@ CREATE TABLE `orders_products` (
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
--- phpMyAdmin SQL Dump
--- version 5.2.3-dev+20250818.dd3d8baef3
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Nov 27, 2025 at 07:08 PM
--- Server version: 11.8.3-MariaDB-log
--- PHP Version: 8.4.10
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- --------------------------------------------------------
 
 --
--- Database: `nua-esthetique_db`
+-- Table structure for table `products`
 --
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `InStock` tinyint(1) NOT NULL DEFAULT 1,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`) VALUES
+(1, 1, 'NUA Lash Extensions – Midnight Luxe', 20, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.'),
+(2, 1, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.'),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.'),
+(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.'),
+(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.'),
+(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.'),
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.'),
+(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `is_primary` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -160,76 +133,8 @@ CREATE TABLE `users` (
   `updated_ at` date NOT NULL DEFAULT current_timestamp(),
   `date_of_birth` varchar(255) NOT NULL,
   `postal_code` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `InStock` tinyint(1) NOT NULL DEFAULT 1,
-  `description` text NOT NULL,
-  `isBulk` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `isBulk`) VALUES
-(1, 1, 'NUA Lash Extensions – Midnight Luxe', 20, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 0),
-(2, 1, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 0),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0),
-(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 0),
-(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', 0),
-(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', 0),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', 0),
-(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_images`
---
-
-CREATE TABLE `product_images` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `file_path` varchar(255) NOT NULL,
-  `is_primary` tinyint(1) NOT NULL DEFAULT 0
+  `phone_number` varchar(255) NOT NULL,
+  `receive_notification` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -243,24 +148,11 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`customer_id`);
-
---
--- Indexes for table `employees`
---
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`employee_id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `customer_id_FK` (`customer_id`);
+  ADD KEY `customer_id_FK` (`user_id`);
 
 --
 -- Indexes for table `orders_products`
@@ -284,6 +176,12 @@ ALTER TABLE `product_images`
   ADD KEY `product_images_FK` (`product_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -292,18 +190,6 @@ ALTER TABLE `product_images`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `employees`
---
-ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -324,6 +210,12 @@ ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -331,7 +223,7 @@ ALTER TABLE `product_images`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `customer_id_FK` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders_products`
