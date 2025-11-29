@@ -77,7 +77,7 @@ class ProductsController extends BaseController
         //? Save the edited product info.
         //* 1) Get the received form data from the request
         $product_info = $request->getParsedBody();
-        // dd($product_info);
+        $this->products_model->updateProduct($product_info);
         //TODO: Add a flash message to be shown to the user in master list (products list)
         //* 2) Ask the model to save the product info
         FlashMessage::success('Update Successful');

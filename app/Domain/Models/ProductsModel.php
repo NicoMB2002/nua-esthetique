@@ -22,7 +22,7 @@ class ProductsModel extends BaseModel
 
     public function getProductById(int $product_id) : mixed {
 
-        $sql = "SELECT * FROM {$this->products_table} WHERE id = :product_id";
+        $sql = "SELECT * FROM {$this->products_table} WHERE product_id = :product_id";
         $product = $this->selectOne($sql, ["product_id" => $product_id]);
         return $product;
     }
@@ -42,6 +42,21 @@ class ProductsModel extends BaseModel
             :description,
             :isBulk
         )";
+
+        $this->execute($query, $info);
+
+    }
+
+
+        public function updateProduct($info = []){
+    $query = "UPDATE  products SET
+            `category_id` = :category,
+            `name` = :name,
+            `price` = :price,
+            `quantity` = :quantity,
+            `description` = :description
+            where product_id = :product_id
+        ";
 
         $this->execute($query, $info);
 

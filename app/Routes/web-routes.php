@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 
 use App\Controllers\AuthController;
+use App\Controllers\CategoriesController;
 use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
@@ -28,9 +29,16 @@ return static function (Slim\App $app): void {
         $group->get( //we use '$group' instead of $app here
             '/dashboard', [DashboardController::class, 'index']
         )->setName('dashboard.index');
-        $group->get(
-            '/products', [ProductsController::class, 'index']
+
+
+        $group->get('/products', [ProductsController::class, 'index']
         )->setName('products.index');
+
+        $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']
+        )->setName('products.edit');
+
+        $group->post('/products/update/{product_id}', [ProductsController::class, 'update']
+        )->setName('products.update');
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
 
@@ -53,7 +61,7 @@ return static function (Slim\App $app): void {
 
 
     $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
-    $app->get('/registerEmail', [AuthController::class, 'registerEmail'])->setName('auth.registerEmail');
+    $app->post('/registerEmail', [AuthController::class, 'registerEmail'])->setName('auth.registerEmail');
     $app->post('/register', [AuthController::class, 'store'])->setName('auth.store');
 
     $app->get('/login', [AuthController::class, 'login'])->setName('auth.login');

@@ -30,7 +30,7 @@ class AuthController extends BaseController
     public function registerEmail(Request $request, Response $response, array $args): Response
     {
         $getUserInfo = $request->getQueryParams();
-        dd($getUserInfo);
+        dd($request->getQueryParams());
         SessionManager::set('user-info', $getUserInfo);
 
         $errors = [];
@@ -49,7 +49,7 @@ class AuthController extends BaseController
         }
 
         if (!empty($errors)) {
-              FlashMessage::error($error);
+              FlashMessage::error($errors);
                 return $this->redirect($request, $response, 'auth.register');
         }
 
