@@ -36,6 +36,30 @@ ViewHelper::loadHeader($data['title']);
   </button>
 </div>
 
+
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+          <img src="assets/img/steaming-morning-tea-stockcake.jpg" class="d-block w-100" alt="" style="height: 50vh; width: 100vw;">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="assets/img/StockCake-Assorted tea collection_1743105401.jpg" class="d-block w-100" alt="" style="height: 50vh;">
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <img src="assets/img/StockCake-Matcha Tea Ceremony_1743105455.jpg" class="d-block w-100" alt="" style="height: 50vh;">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+
 <?= FlashMessage::render()?>
 
 <?php

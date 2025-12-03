@@ -1,15 +1,37 @@
 body {
-    background: #f6f0ea;
+    background: #f0dfcf;
     font-family: Arial, sans-serif;
     padding: 20px;
 }
 
+/* Two-column layout wrapper */
+.row-custom {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Left column (form) */
+.left-column {
+    flex: 1;
+    min-width: 320px;
+}
+
+/* Right column (text + login) */
+.right-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Input rows with icons */
 .input-row {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
+/* Black icon boxes */
 .input-row .icon-label {
     background: #000;
     color: #fff;
@@ -23,7 +45,25 @@ body {
     user-select: none;
 }
 
-.input-row input {
+
+#register-email-label,
+#register-password-label, #confirm-password-label {
+    background: #000;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 70px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Inputs */
+.input-row input,
+.input-row select {
     flex: 1;
     padding: 12px;
     border: 1px solid #ddd;
@@ -33,12 +73,15 @@ body {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.input-row input:focus {
+.input-row input:focus,
+.input-row select:focus {
     border-color: #c7a98e;
     box-shadow: 0 0 4px rgba(199, 169, 142, 0.4);
 }
 
-#register-btn {
+/* Button styling */
+#register-btn,
+#register-login-btn {
     width: 100%;
     padding: 14px 0;
     background-color: #d8b89c;
@@ -50,11 +93,32 @@ body {
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+#register-login-text{
+    color: white;
+}
 
-#register-btn:hover {
+#register-btn:hover,
+#login-btn:hover {
     background-color: #c7a98e;
 }
 
-#register-btn:active {
+#register-btn:active,
+#login-btn:active {
     background-color: #b7967f;
+}
+
+/* Login button inside text column */
+.right-column #login-btn {
+    margin-bottom: 20px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+legend {
+    font-weight: 600;
+    padding: 0 5px;
 }

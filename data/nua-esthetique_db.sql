@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2025 at 03:16 PM
+-- Generation Time: Nov 29, 2025 at 03:27 PM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -32,14 +32,14 @@ CREATE TABLE `categories` (
   `name` text NOT NULL,
   `description` text NOT NULL DEFAULT current_timestamp(),
   `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` date NOT NULL DEFAULT current_timestamp()
+  `updated_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at`) VALUES
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Lash Extensions', ' ', '2025-11-27', '2025-11-27'),
 (2, 'Tools', ' ', '2025-11-27', '2025-11-27'),
 (3, 'Adhesive', '', '2025-11-27', '2025-11-27'),
@@ -55,9 +55,9 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `tracking_number` varchar(50) NOT NULL,
-  `order_date` date NOT NULL
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -91,15 +91,15 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `isBulk`) VALUES
-(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 0),
-(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 0),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0),
-(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 0),
-(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', 0),
-(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', 0),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', 0),
-(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', 0);
+INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`) VALUES
+(1, 1, 'NUA Lash Extensions – Midnight Luxe', 20, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.'),
+(2, 1, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.'),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.'),
+(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.'),
+(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.'),
+(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.'),
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.'),
+(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.');
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,8 @@ CREATE TABLE `users` (
   `updated_ at` date NOT NULL DEFAULT current_timestamp(),
   `date_of_birth` varchar(255) NOT NULL,
   `postal_code` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL
+  `phone_number` varchar(255) NOT NULL,
+  `receive_notification` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -151,7 +152,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `customer_id_FK` (`customer_id`);
+  ADD KEY `customer_id_FK` (`user_id`);
 
 --
 -- Indexes for table `orders_products`
@@ -217,6 +218,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders_products`

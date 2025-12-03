@@ -6,7 +6,7 @@ $page_title = 'Home';
 ViewHelper::loadHeader($page_title);
 ?>
 
-   <div class="container mt-5">
+      <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-5">
                 <!-- TODO:put image from db -->
@@ -21,7 +21,7 @@ ViewHelper::loadHeader($page_title);
             <div class="col-7">
                 <form action="login" method="POST">
                     <div id="input-row-identifier">
-                            <label id="identifier-label">✉️</label>
+                            <label id="identifier-label"><i class="bi bi-envelope-at icon-color"></i></label>
                             <input
                                 type="text"
                                 id="identifier"
@@ -30,7 +30,7 @@ ViewHelper::loadHeader($page_title);
                                 required>
                     </div>
                      <div id="input-row-password">
-                            <label id="password-label">🔒</label>
+                            <label id="password-label"><i class="bi bi-lock-fill icon-color"></i></label>
                             <input
                                 type="password"
                                 id="password"
@@ -46,7 +46,7 @@ ViewHelper::loadHeader($page_title);
                     <p class="fs-6 text-decoration-underline text-center">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
                 </div>
             </div>
-            <!-- closes th form(left side) -->
+            <!-- closes form(left side) -->
         </div>
 
     </div>
