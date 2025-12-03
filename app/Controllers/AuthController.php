@@ -29,8 +29,7 @@ class AuthController extends BaseController
     }
     public function registerEmail(Request $request, Response $response, array $args): Response
     {
-        $getUserInfo = $request->getQueryParams();
-        dd($request->getQueryParams());
+        $getUserInfo = $request->getParsedBody();
         SessionManager::set('user-info', $getUserInfo);
 
         $errors = [];
@@ -67,7 +66,7 @@ class AuthController extends BaseController
 
         ];
 
-        return $this->render($response,'auth.registerEmail', $newUserInfo);
+        return $this->render($response,'auth/registerEmail.php', $newUserInfo);
     }
 
     public function store(Request $request, Response $response, array $args): Response
@@ -163,9 +162,9 @@ class AuthController extends BaseController
 
     public function authenticate(Request $request, Response $response, array $args): Response
     {
-        $inputData = $request->getParsedBody();
 
-        $email = $inputData["identifier"];
+        $inputData = $request->getParsedBody();
+        $email = $inputData["email"];
         $password = $inputData["password"];
 
         $errors = [];

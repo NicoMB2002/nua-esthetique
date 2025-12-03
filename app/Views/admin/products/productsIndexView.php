@@ -42,6 +42,7 @@ ViewHelper::loadAdminHeader($page_title);
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Stock Quantity</th>
@@ -56,6 +57,7 @@ ViewHelper::loadAdminHeader($page_title);
                 <tr>
                     <td><?= $product["product_id"] ?></td>
                     <td> <?= htmlspecialchars($product["name"]) ?> </td>
+                    <td> <?= htmlspecialchars($product["category_name"]) ?> </td>
                     <td> <?= htmlspecialchars($product["description"]) ?> </td>
                     <td> <?= htmlspecialchars($product["price"]) ?> </td>
                     <td> <?= htmlspecialchars($product["quantity"]) ?> </td>

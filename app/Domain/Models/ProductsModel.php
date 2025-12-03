@@ -15,7 +15,7 @@ class ProductsModel extends BaseModel
 
 
     public function getProducts(){
-        $query = "Select * from Products";
+        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id";
         $products = $this->selectAll($query);
         return $products;
     }

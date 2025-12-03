@@ -39,7 +39,7 @@ class UserModel extends BaseModel
     {
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
-        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, username, email, password_hash, role) VALUES (:first_name, :last_name, :username, :email, :password, :role)";
+        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, username, email, password_hash, role,date_of_birth, phone_number, address) VALUES (:first_name, :last_name, :username, :email, :password, :role)";
         $this->execute($sql, [
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -108,6 +108,15 @@ class UserModel extends BaseModel
         $sql = "SELECT COUNT(*) FROM {$this->users_table} WHERE username = :username";
         $count = $this->count($sql, [
             'username' => $username
+        ]);
+        return $count > 0;
+    }
+
+        public function phoneRegistered(string $phone_number): bool
+    {
+        $sql = "SELECT COUNT(*) FROM {$this->users_table} WHERE phone_number = :phone_number";
+        $count = $this->count($sql, [
+            'phone_number' => $phone_number
         ]);
         return $count > 0;
     }

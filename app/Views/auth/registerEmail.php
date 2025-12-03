@@ -2,8 +2,8 @@
 
 use App\Helpers\ViewHelper;
 
-$page_title = $userInfo['title'];
-$userInfo = $newUserInfo['user-info'];
+$page_title = $userInfo['title'] ?? "register Email";
+$userInfo = $data;
 ViewHelper::loadHeader($page_title);
 ?>
 

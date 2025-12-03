@@ -30,14 +30,14 @@ $options = ViewHelper::renderSelectOptions($categories, $product["category_id"],
   </div>
   <div class="col-md-4">
     <label for="inputCategory" class="form-label">Category:</label>
-    <select id="inputCategory" name="category" class="form-select">
-        <?= ViewHelper::renderSelectOptions($data['categories'],'','id','name')?>
+    <select required id="inputCategory" name="category" class="form-select">
+        <?= ViewHelper::renderSelectOptions($data['categories'],$product["category_id"],'id','name')?>
 
     </select>
   </div>
   <div class="col-md-2">
     <label for="inputQuantity" class="form-label">Quantity:</label>
-    <input type="text" value="<?= $product["quantity"] ?>" name="quantity" class="form-control" id="inputQuantity">
+    <input required type="text" value="<?= $product["quantity"] ?>" name="quantity" class="form-control" id="inputQuantity">
   </div>
   <div class="col-12">
     <button type="submit" class="btn btn-success">Save</button>

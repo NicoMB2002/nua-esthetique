@@ -88,7 +88,7 @@ ViewHelper::loadHeader($page_title);
 
                 <input type="hidden" name="role" value="customer">
 
-                <button type="submit" class="btn" id="register-btn">Register</button>
+                <input type="submit" value="Register" class="btn" id="register-btn"></input>
             </form>
         </div>
 

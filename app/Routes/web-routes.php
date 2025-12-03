@@ -39,6 +39,8 @@ return static function (Slim\App $app): void {
 
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']
         )->setName('products.update');
+
+        $group->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
 
