@@ -38,15 +38,18 @@ class UserModel extends BaseModel
     public function createUser(array $data): string
     {
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
-
-        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, username, email, password_hash, role,date_of_birth, phone_number, address) VALUES (:first_name, :last_name, :username, :email, :password, :role)";
+        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, username, email, password_hash, role, date_of_birth, phone_number, address, postal_code) VALUES (:first_name, :last_name, :username, :email, :password, :role, :date_of_birth, :phone_number, :address, :postal_code)";
         $this->execute($sql, [
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $hashedPassword,
-            'role' => $data['role']
+            'role' => $data['role'],
+            'date_of_birth' => $data['birth-date'],
+            'address' => $data['address'],
+            'phone_number' => $data['phone'],
+            'postal_code' => $data['postal_code']
         ]);
         return $this->lastInsertId();
     }

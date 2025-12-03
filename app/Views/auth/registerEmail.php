@@ -2,8 +2,8 @@
 
 use App\Helpers\ViewHelper;
 
-$page_title = $userInfo['title'] ?? "register Email";
-$userInfo = $data;
+$page_title = $data['title'] ?? "register Email";
+
 ViewHelper::loadHeader($page_title);
 ?>
 
@@ -16,7 +16,11 @@ ViewHelper::loadHeader($page_title);
     </div>
 
     <div class="col-7">
-        <form action="login" method="post">
+        <form action="register" method="post">
+                <div class="input-row">
+                <label for="username" class="form-label" id="register-email-label"><i class="bi bi-envelope-at icon-color"></i></label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+            </div>
             <div class="input-row">
                 <label for="email" class="form-label" id="register-email-label"><i class="bi bi-envelope-at icon-color"></i></label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>

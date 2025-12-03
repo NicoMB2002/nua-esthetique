@@ -28,9 +28,7 @@ return static function (Slim\App $app): void {
         //add/ register admin routes
         $group->get( //we use '$group' instead of $app here
             '/dashboard', [DashboardController::class, 'index']
-        )->setName('dashboard.index');
-
-
+        )->setName('admin.dashboard');
         $group->get('/products', [ProductsController::class, 'index']
         )->setName('products.index');
 

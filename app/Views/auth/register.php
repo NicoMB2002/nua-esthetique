@@ -32,7 +32,7 @@ ViewHelper::loadHeader($page_title);
                     <input type="date" id="birth-date" name="birth-date" required>
                 </div>
 
-                <!-- Gender -->
+                <!-- Gender
                 <div class="input-row">
                     <div class="icon-label"><i class="bi bi-gender-trans icon-color"></i></div>
                     <select name="gender" id="gender" required>
@@ -42,7 +42,7 @@ ViewHelper::loadHeader($page_title);
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                </fieldset>
+                </fieldset>-->
 
                 <fieldset>
                     <legend>Address</legend>
@@ -53,16 +53,16 @@ ViewHelper::loadHeader($page_title);
                         <input type="text" id="phone" name="phone" placeholder="Phone N.">
                     </div>
 
-                    <!-- Street Number -->
+                    <!-- Street Address -->
                     <div class="input-row">
                         <div class="icon-label"><i class="bi bi-house-door icon-color"></i></div>
-                        <input type="text" id="street-number" name="street-number" placeholder="Street N.">
+                        <input type="text" id="street-address" name="street-address" placeholder="Street Address">
                     </div>
 
-                    <!-- Street Name -->
+
                     <div class="input-row">
                         <div class="icon-label"><i class="bi bi-house-door icon-color"></i></div>
-                        <input type="text" id="street" name="street-name" placeholder="Street Name">
+                        <input type="text" id="postal_code" name="postal_code" placeholder="Postal Code">
                     </div>
 
                     <!-- City -->
