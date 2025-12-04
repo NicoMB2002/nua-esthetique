@@ -16,6 +16,8 @@ use App\Controllers\LoginController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controllers\UploadController;
+use App\Middleware\AuthMiddleware;
+use App\Middleware\AdminAuthMiddleware;
 
 
 return static function (Slim\App $app): void {
@@ -42,7 +44,7 @@ return static function (Slim\App $app): void {
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
 
-    });
+    })->add(AdminAuthMiddleware::class);
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
     // $app->get('/login', [LoginController::class, 'index'])
@@ -68,6 +70,11 @@ return static function (Slim\App $app): void {
     $app->post('/login', [AuthController::class, 'authenticate'])->setName('auth.authenticate');
 
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
+
+    $app->get('/dashboard', [AuthController::class, 'dashboard'])
+        ->setName('user.dashboard')
+        // checks if user is logged in
+        ->add(AuthMiddleware::class);
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
