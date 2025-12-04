@@ -1,11 +1,13 @@
 <?php
 
+use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
 
 $page_title = $data['title'];
 ViewHelper::loadHeader($page_title);
 ?>
 
+<?= FlashMessage::render()?>
 <div class="container mt-5">
     <div class="row-custom">
 

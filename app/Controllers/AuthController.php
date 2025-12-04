@@ -45,7 +45,10 @@ class AuthController extends BaseController
         }*/
 
         if (!empty($errors)) {
-              FlashMessage::error($errors);
+            foreach ($errors as $error) {
+                 FlashMessage::error($error);
+            }
+
                 return $this->redirect($request, $response, 'auth.register');
         }
 
@@ -78,7 +81,6 @@ class AuthController extends BaseController
         }
 
 
-        $this->userModel->createUser($userInfo);
 
         if (!filter_var($userInfo['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Please input a valid email example@email.com";
@@ -108,7 +110,8 @@ class AuthController extends BaseController
         } else {
             try {
 
-                $userId = $this->userModel->createUser($userInfo);
+
+                $this->userModel->createUser($userInfo);
 
                 FlashMessage::success('Registration successful Please log in');
                 return $this->redirect($request, $response, 'auth.login');
@@ -133,7 +136,6 @@ class AuthController extends BaseController
         $inputData = $request->getParsedBody();
         $email = $inputData["email"];
         $password = $inputData["password"];
-
         $errors = [];
 
         $user = [];
