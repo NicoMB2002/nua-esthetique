@@ -9,7 +9,8 @@ use App\Domain\Models\User;
 use App\Domain\Models\UserModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
-use RobThree\Auth\TwoFactorAuth as TFA;
+use RobThree\Auth\TwoFactorAuth;
+use Psr\Container\ContainerInterface;
 use RobThree\Auth\Providers\Qr\BaconQrCodeProvider;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -20,6 +21,13 @@ use RobThree\Auth\TwoFactorAuth as AuthTwoFactorAuth;
  */
 class TwoFactorController extends BaseController
 {
+    public function __construct(
+        ContainerInterface $container,
+        private TwoFactorAuthModel $twoFactorModel,
+        private UserModel $userModel
+    ) {
+        parent::__construct($container);
+    }
     /**
      * Display the 2FA setup page with QR code.
      */
@@ -30,8 +38,8 @@ class TwoFactorController extends BaseController
         $userEmail = $user['email'];
 
         // Check if user already has 2FA enabled
-        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        if ($twoFactorModel->isEnabled($userId)) {
+        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        if ($this->twoFactorModel->isEnabled($userId)) {
             FlashMessage::add('error', '2FA is already enabled.');
 
             return $this->redirect($request, $response, 'dashboard');
@@ -111,9 +119,9 @@ class TwoFactorController extends BaseController
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Create a new 2FA record: $twoFactorModel->create($userId, $secret)
         // Step 3: Enable 2FA for the user: $twoFactorModel->enable($userId)
-        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        $twoFactorModel->create($userId, $secret);
-        $twoFactorModel->enable($userId);
+        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $this->twoFactorModel->create($userId, $secret);
+        $this->twoFactorModel->enable($userId);
 
         // Clear the setup secret from session
         SessionManager::remove('2fa_setup_secret');
@@ -144,8 +152,8 @@ class TwoFactorController extends BaseController
         // Get the user's TOTP secret from the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Use getSecret($userId) to retrieve the secret
-        $twoFactorAuth = $this->container->get(TwoFactorAuthModel::class);
-        $secret = $twoFactorAuth->getSecret($userId);; // Replace with your implementation
+        // $twoFactorAuth = $this->container->get(TwoFactorAuthModel::class);
+        $secret = $this->twoFactorModel->getSecret($userId);; // Replace with your implementation
 
         // Create a QR code provider and TFA instance
         $qrCode = new BaconQrCodeProvider(4, '#ffffff', '#000000', 'svg');
@@ -195,8 +203,8 @@ class TwoFactorController extends BaseController
         $password = $data['password'] ?? '';
 
         // Verify password before disabling 2FA
-        $userModel = $this->container->get(UserModel::class);
-        $validUser = $userModel->verifyCredentials($user['email'], $password);
+        // $userModel = $this->container->get(UserModel::class);
+        $validUser = $this->userModel->verifyCredentials($user['email'], $password);
 
         if (!$validUser) {
             return $this->render($response, 'auth/2fa-disable.php', [
@@ -208,8 +216,8 @@ class TwoFactorController extends BaseController
         // TODO: Disable 2FA in the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Call the disable($userId) method to disable 2FA
-        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        $twoFactorModel->disable($userId);
+        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $this->twoFactorModel->disable($userId);
 
         FlashMessage::add('success', '2FA has been disabled.');
         return $this->redirect($request, $response, 'dashboard');
