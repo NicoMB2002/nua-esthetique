@@ -38,18 +38,18 @@ class UserModel extends BaseModel
     public function createUser(array $data): string
     {
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
-        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, username, email, password_hash, role, date_of_birth, phone_number, address, postal_code) VALUES (:first_name, :last_name, :username, :email, :password, :role, :date_of_birth, :phone_number, :address, :postal_code)";
+        $sql = "INSERT INTO {$this->users_table} (first_name, last_name, email, username, password_hash, role, address, date_of_birth, postal_code, phone_number) VALUES (:first_name, :last_name, :username, :email, :password, :role, :date_of_birth, :phone_number, :address, :postal_code)";
         $this->execute($sql, [
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'username' => $data['username'],
             'email' => $data['email'],
+            'username' => $data['username'],
             'password' => $hashedPassword,
-            'role' => $data['role'],
-            'date_of_birth' => $data['birth-date'],
+            'role' => 'customer',
             'address' => $data['address'],
-            'phone_number' => $data['phone'],
-            'postal_code' => $data['postal_code']
+            'date_of_birth' => $data['birth-date'],
+            'postal_code' => $data['postal_code'],
+            'phone_number' => $data['phone']
         ]);
         return $this->lastInsertId();
     }
@@ -115,7 +115,7 @@ class UserModel extends BaseModel
         return $count > 0;
     }
 
-        public function phoneRegistered(string $phone_number): bool
+    public function phoneRegistered(string $phone_number): bool
     {
         $sql = "SELECT COUNT(*) FROM {$this->users_table} WHERE phone_number = :phone_number";
         $count = $this->count($sql, [
