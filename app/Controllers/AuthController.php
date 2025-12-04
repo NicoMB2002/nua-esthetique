@@ -117,6 +117,8 @@ class AuthController extends BaseController
                 return $this->redirect($request, $response, 'auth.register');
             }
         }
+
+        return $this->redirect($request, $response, 'auth.login');
     }
 
     public function login(Request $request, Response $response, array $args): Response
@@ -157,6 +159,7 @@ class AuthController extends BaseController
                 return $this->redirect($request, $response, 'auth.login');
             }
         }
+        return $this->redirect($request, $response, 'auth.login');
     }
 
     public function logout(Request $request, Response $response, array $args): Response
