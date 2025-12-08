@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
-    <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/login.css ?>">
-    <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/register.css ?>">
+    <link rel="stylesheet" href="<?=APP_ASSETS_DIR_URL?>/css/login.css ?>">
+    <link rel="stylesheet" href="<?=APP_ASSETS_DIR_URL?>/css/register.css ?>">
 </head>
 
 
@@ -29,7 +29,7 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img src="./public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
+          <img src="../public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
         </a>
 
         <ul class="nav">

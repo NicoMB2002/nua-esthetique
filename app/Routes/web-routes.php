@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 use App\Controllers\AuthController;
 use App\Controllers\CategoriesController;
+use App\Controllers\CustomerController;
 use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
@@ -26,8 +27,7 @@ return static function (Slim\App $app): void {
 
     $app -> group('/admin', function ($group) {
         //add/ register admin routes
-        $group->get( //we use '$group' instead of $app here
-            '/dashboard', [DashboardController::class, 'index']
+        $group->get('/dashboard', [DashboardController::class, 'index']
         )->setName('admin.dashboard');
         $group->get('/products', [ProductsController::class, 'index']
         )->setName('products.index');
@@ -41,6 +41,13 @@ return static function (Slim\App $app): void {
         $group->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
+
+    });
+
+    $app -> group('/user', function($group){
+        $group->get('/dashboard', [CustomerController::class, 'index']
+        )->setName('user.dashboard');
+
 
     });
 

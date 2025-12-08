@@ -2,7 +2,7 @@
   <div class="footer-container">
 
     <div class="footer-logo">
-      <img src="./public/assets/resources/images/NuaLogoShort.png" alt="Nua Salon Logo" width="150" height="150" class="me-2">
+      <img src="../public/assets/resources/images/NuaLogoShort.png" alt="Nua Salon Logo" width="150" height="150" class="me-2">
       <p>Nua Salon D'esthetique</p>
     </div>
 
