@@ -17,6 +17,8 @@ use App\Controllers\LoginController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controllers\UploadController;
+use App\Middleware\AuthMiddleware;
+use App\Middleware\AdminAuthMiddleware;
 
 
 return static function (Slim\App $app): void {
@@ -38,11 +40,17 @@ return static function (Slim\App $app): void {
         $group->post('/products/update/{product_id}', [ProductsController::class, 'update']
         )->setName('products.update');
 
+        $group->get('/categories', [CategoriesController::class, 'index'])
+            ->setName('categories.index');
+
+        $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
+            ->setName('categories.index');
+
         $group->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
 
-    });
+    })->add(AdminAuthMiddleware::class);
 
     $app -> group('/user', function($group){
         $group->get('/dashboard', [CustomerController::class, 'index']
@@ -75,6 +83,11 @@ return static function (Slim\App $app): void {
     $app->post('/login', [AuthController::class, 'authenticate'])->setName('auth.authenticate');
 
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
+
+    $app->get('/dashboard', [AuthController::class, 'dashboard'])
+        ->setName('user.dashboard')
+        // checks if user is logged in
+        ->add(AuthMiddleware::class);
 
     $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');

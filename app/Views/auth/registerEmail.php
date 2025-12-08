@@ -42,6 +42,133 @@ ViewHelper::loadHeader($page_title);
     </div>
 </div>
 
+<style>
+    body {
+    background: #f0dfcf;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* Two-column layout wrapper */
+.row-custom {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Left column (form) */
+.left-column {
+    flex: 1;
+    min-width: 320px;
+}
+
+/* Right column (text + login) */
+.right-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Input rows with icons */
+.input-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Black icon boxes */
+.input-row .icon-label {
+    background: #000;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px 0 0 8px;
+    font-size: 20px;
+    user-select: none;
+}
+
+
+#register-email-label,
+#register-password-label, #confirm-password-label {
+    background: #000;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 70px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Inputs */
+.input-row input,
+.input-row select {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-row input:focus,
+.input-row select:focus {
+    border-color: #c7a98e;
+    box-shadow: 0 0 4px rgba(199, 169, 142, 0.4);
+}
+
+/* Button styling */
+#register-btn,
+#register-login-btn {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #d8b89c;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#register-login-text{
+    color: white;
+}
+
+#register-btn:hover,
+#login-btn:hover {
+    background-color: #c7a98e;
+}
+
+#register-btn:active,
+#login-btn:active {
+    background-color: #b7967f;
+}
+
+/* Login button inside text column */
+.right-column #login-btn {
+    margin-bottom: 20px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+legend {
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

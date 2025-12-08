@@ -27,53 +27,54 @@ class AuthController extends BaseController
 
         return $this->render($response, 'auth/register.php', $data);
     }
-    public function registerEmail(Request $request, Response $response, array $args): Response
-    {
-        $userInfo = $request->getParsedBody();
-        SessionManager::set('user-info', $userInfo);
+    //*Redudndant now that registration is in one page
+    // public function registerUser(Request $request, Response $response, array $args): Response
+    // {
+    //     $userInfo = $request->getParsedBody();
+    //     // SessionManager::set('user-info', $userInfo);
 
-        $errors = [];
+    //     $errors = [];
 
-        if ($this->userModel->phoneRegistered($userInfo['phone'])) {
-            $errors[] = "Phone number already registered please choose differently";
-        }
+    //     if ($this->userModel->phoneRegistered($userInfo['phone'])) {
+    //         $errors[] = "Phone number already registered please choose differently";
+    //     }
 
-        /*$postalCode = $getUserInfo['postal-code'];
-        $postalCodePatter = '/^[A-Z]\d[A-Z] \d[A-Z]\d$/';
-        if(!preg_match($postalCodePatter, $postalCode)){
-            $errors[] = "Please Enter a valid postal code";
-        }*/
+    //     $postalCode = $userInfo['postal-code'];
+    //     $postalCodePatter = '/^[A-Z]\d[A-Z] \d[A-Z]\d$/';
+    //     if(!preg_match($postalCodePatter, $postalCode)){
+    //         $errors[] = "Please Enter a valid postal code";
+    //     }
 
-        if (!empty($errors)) {
-            foreach ($errors as $error) {
-                 FlashMessage::error($error);
-            }
+    //     if (!empty($errors)) {
+    //         foreach ($errors as $error) {
+    //              FlashMessage::error($error);
+    //         }
 
-                return $this->redirect($request, $response, 'auth.register');
-        }
+    //             return $this->redirect($request, $response, 'auth.register');
+    //     }
 
-        return $this->render($response,'auth/registerEmail.php');
-    }
+    //     return $this->render($response,'auth/registerEmail.php');
+    // }
 
     public function store(Request $request, Response $response, array $args): Response
     {
         $data = ["title" => 'Register'];
-        $userInfo = $_SESSION['user-info'];
-        $loginInfo = $request->getParsedBody();
-         $userInfo = $userInfo + $loginInfo;
-       /* $firstName = $newUser['first_name'];
+        // $userInfo = $_SESSION['user-info'];
+        $newUser = $request->getParsedBody();
+
+       $firstName = $newUser['first_name'];
         $lastName = $newUser['last_name'];
         $dob =$newUser['dob'];
         $phone = $newUser['phone'];
         $streetN = $newUser['street_number'];
         $streetName = $newUser['street_name'];
         $city = $newUser['city'];
-        $province = strval($newUser['province']);*/
-        $userInfo['address'] = $userInfo['street-address']." " .$userInfo['city'] . " " .$userInfo['province'];
+        $province = strval($newUser['province']);
+        $newUser['address'] = $newUser['street-address']." " .$newUser['city'] . " " .$newUser['province'];
 
         $errors = [];
 
-        foreach ($userInfo as $field) {
+        foreach ($newUser as $field) {
             if (empty($field)) {
                 $errors[] = "All data must be filled";
                 break;
@@ -82,24 +83,24 @@ class AuthController extends BaseController
 
 
 
-        if (!filter_var($userInfo['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($newUser['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Please input a valid email example@email.com";
-        } else if ($this->userModel->emailExists($userInfo['email'])) {
+        } else if ($this->userModel->emailExists($newUser['email'])) {
             $errors[] = "Email already assigned to a registered user";
         }
 
-        if (strlen($userInfo['password']) < 8) {
+        if (strlen($newUser['password']) < 8) {
             $errors[] = "Password must beat least 8 character s long";
         } else {
-            if (!preg_match('/[0-9]/', $userInfo['password'])) {
+            if (!preg_match('/[0-9]/', $newUser['password'])) {
                 $errors[] = 'Password must contain at least 1 number';
             }
-            if (!preg_match('/[A-Z]/', $userInfo['password'])) {
+            if (!preg_match('/[A-Z]/', $newUser['password'])) {
                 $errors[] = 'Password must contain at least Upper case character';
             }
         }
 
-        if ($userInfo['password'] !== $userInfo['confirm_password']) {
+        if ($newUser['password'] !== $newUser['confirm_password']) {
             $errors[] = "passwords must match";
         }
         if (!empty($errors)) {
@@ -111,7 +112,7 @@ class AuthController extends BaseController
             try {
 
 
-                $this->userModel->createUser($userInfo);
+                $this->userModel->createUser($newUser);
 
                 FlashMessage::success('Registration successful Please log in');
                 return $this->redirect($request, $response, 'auth.login');
