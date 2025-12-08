@@ -55,6 +55,8 @@ return static function (Slim\App $app): void {
     $app -> group('/user', function($group){
         $group->get('/dashboard', [CustomerController::class, 'index']
         )->setName('user.dashboard');
+        $group->get('/products', [CustomerController::class, 'products']
+        )->setName('user.products');
 
 
     });

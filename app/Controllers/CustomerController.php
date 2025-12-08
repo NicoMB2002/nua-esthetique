@@ -21,11 +21,21 @@ class CustomerController extends BaseController
 
 
             $data = ['title'=> 'HomePage'];
-            $data['products'] = $this->products_model->getProductsWithImages();
 
         // return $this->redirect($request, $response, 'products.index');
 
         return $this->render($response, 'user/dashboard.php', $data);
     }
 
+
+    public function products(Request $request, Response $response, array $args): Response {
+
+
+            $data = ['title'=> 'HomePage'];
+            $data['products'] = $this->products_model->getProductsWithImages();
+
+        // return $this->redirect($request, $response, 'products.index');
+
+        return $this->render($response, 'user/products.php', $data);
+    }
 }
