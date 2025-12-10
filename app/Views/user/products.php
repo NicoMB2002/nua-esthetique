@@ -14,22 +14,27 @@ ViewHelper::loadHeader($data['title']);
 <br>
 
 <!--Bootstrap carousel -->
-<div id="carouselExampleIndicators" class="carousel slide">
+<div id="productCarousel" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-  <div class="carousel-inner">
+  <div class="carousel-inner" role="listbox">
 
 
-        <?php foreach ($data['products'] as $product): ?>
 
-            <?php if ($product['product_id'] == 1 ){?>
-                <div class="carousel-item active " data-bs-interval="4000">
+    <?php for ($i = 0; $i < round(count($data['products'])/3); $i++): ?>
+            <?php if ($i == 0 ){?>
+                <div class="item active " data-bs-interval="4000">
             <?php }else {?>
-                <div class="carousel-item " data-bs-interval="4000">
+                <div class="item " data-bs-interval="4000">
             <?php } ?>
+    <?php for ($j = $i*3; $j < $i*3+3; $j++):
+    if (!isset($data['products'][$j])) {
+    break 2;
+    }
+        $product = $data['products'][$j] ?>
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <img
@@ -49,21 +54,38 @@ ViewHelper::loadHeader($data['title']);
                     </div>
                 </div>
             </div>
-        </div>
-        <?php endforeach; ?>
+
+
+    <?php endfor; ?>
+ </div>
+  <?php endfor; ?>
 </div>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <button id="prevBtn" class="left carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <button id="nextBtn" class="right carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
 
+<script>
 
+    $('#productCarousel').carousel();
+
+    $('.left').click(function(){
+        $('#productCarousel').carousel("prev");
+    })
+
+    $('.right').click(function(){
+        $('#productCarousel').carousel("next");
+
+    })
+
+
+</script>
 
 <?= FlashMessage::render()?>
 
