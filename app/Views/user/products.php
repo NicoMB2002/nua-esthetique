@@ -8,10 +8,9 @@ ViewHelper::loadHeader($data['title']);
 //dd($data);
 ?>
 
-
-
-<br>
-<br>
+<div class="d-flex flex-wrap align-items-left justify-content-left"style="width: 300px; margin-bottom: 50px; ">
+  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+</div>
 
 <!--Bootstrap carousel -->
 <div id="productCarousel" class="carousel slide">

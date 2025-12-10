@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 29, 2025 at 03:27 PM
+-- Generation Time: Dec 10, 2025 at 11:51 PM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -26,20 +26,23 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `categories`
 --
+CREATE DATABASE IF NOT EXISTS `nua-esthetique_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `nua-esthetique_db`;
+
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `description` text NOT NULL DEFAULT current_timestamp(),
   `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `deleted_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at`) VALUES
 (1, 'Lash Extensions', ' ', '2025-11-27', '2025-11-27'),
 (2, 'Tools', ' ', '2025-11-27', '2025-11-27'),
 (3, 'Adhesive', '', '2025-11-27', '2025-11-27'),
@@ -55,9 +58,9 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` datetime NOT NULL DEFAULT current_timestamp()
+  `customer_id` int(11) NOT NULL,
+  `tracking_number` varchar(50) NOT NULL,
+  `order_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -84,22 +87,23 @@ CREATE TABLE `products` (
   `price` decimal(10,0) NOT NULL,
   `quantity` int(11) NOT NULL,
   `InStock` tinyint(1) NOT NULL DEFAULT 1,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `isBulk` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`) VALUES
-(1, 1, 'NUA Lash Extensions – Midnight Luxe', 20, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.'),
-(2, 1, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.'),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.'),
-(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.'),
-(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.'),
-(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.'),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.'),
-(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.');
+INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `isBulk`) VALUES
+(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 0),
+(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 0),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0),
+(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 0),
+(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', 0),
+(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', 0),
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', 0),
+(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', 0);
 
 -- --------------------------------------------------------
 
@@ -113,6 +117,20 @@ CREATE TABLE `product_images` (
   `file_path` varchar(255) NOT NULL,
   `is_primary` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `is_primary`) VALUES
+(1, 7, 'public\\uploads\\images\\Brow Freeze Gel.png', 1),
+(2, 2, 'public\\uploads\\images\\Cocoa_Luxe.png', 1),
+(3, 5, 'public\\uploads\\images\\Growth_Serum.png', 1),
+(4, 4, 'public\\uploads\\images\\Lash_Adhesive.png', 1),
+(5, 1, 'public\\uploads\\images\\Midnight_Luxe.png', 1),
+(6, 6, 'public\\uploads\\images\\Mini_Fan.png', 1),
+(7, 8, 'public\\uploads\\images\\Precision_Volume_Tweezer.png', 1),
+(8, 3, 'public\\uploads\\images\\Tweezers.png', 1);
 
 -- --------------------------------------------------------
 
@@ -133,52 +151,21 @@ CREATE TABLE `users` (
   `updated_ at` date NOT NULL DEFAULT current_timestamp(),
   `date_of_birth` varchar(255) NOT NULL,
   `postal_code` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `receive_notification` tinyint(1) DEFAULT NULL
+  `phone_number` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `username`, `password_hash`, `role`, `address`, `created_at`, `updated_ at`, `date_of_birth`, `postal_code`, `phone_number`) VALUES
+(1, 'Luke Ryan', 'Nwantoly', 'NwantolyLuke@gmail.com', 'Luke', '$2y$12$xs5xdIx7aN2vhDHU9DIzIORudu0n4//KKkhMZ.a8kklLdAJk4fSAa', 'admin', '5975 Rue Croissant Précourt Laval QC', '2025-12-02', '2025-12-02', '2025-12-15', 'H7H 2W2', '4383785400'),
+(2, 'Luke Ryan', 'Nwantoly', 'NwantolyRyan@gmail.com', 'Ryan', '$2y$12$pyUT5Ip0Vo9Xa6nq3B4w9OFaKKoiPTjPFoJWisCfl.SEP9kzB4R3y', 'customer', '5975 Rue Croissant Précourt Laval QC', '2025-12-03', '2025-12-03', '2025-12-24', 'H7H 2W2', '4383785406');
 
 --
 -- Indexes for dumped tables
 --
--- Two-factor authentication table
-CREATE TABLE IF NOT EXISTS two_factor_auth (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    secret VARCHAR(255) NOT NULL,
-    enabled BOOLEAN DEFAULT FALSE,
-    enabled_at TIMESTAMP NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_user (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Trusted devices table for "Remember this device" feature
-CREATE TABLE IF NOT EXISTS trusted_devices (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    device_token VARCHAR(255) UNIQUE NOT NULL,
-    device_name VARCHAR(100),
-    user_agent VARCHAR(255),
-    ip_address VARCHAR(45),
-    last_used_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_device_token (device_token),
-    INDEX idx_user_id (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Login attempts table for rate limiting (optional - for future enhancement)
-CREATE TABLE IF NOT EXISTS login_attempts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL,
-    ip_address VARCHAR(45) NOT NULL,
-    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    successful BOOLEAN DEFAULT FALSE,
-    INDEX idx_email_ip (email, ip_address),
-    INDEX idx_attempted_at (attempted_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
 -- Indexes for table `categories`
 --
@@ -190,7 +177,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `customer_id_FK` (`user_id`);
+  ADD KEY `customer_id_FK` (`customer_id`);
 
 --
 -- Indexes for table `orders_products`
@@ -245,23 +232,17 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders_products`

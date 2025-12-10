@@ -56,7 +56,6 @@
       </ul>
 
     <div class="nav-icons">
-        <input type="text" placeholder="Search for..." />
 
         <a href="login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
         <a href="#"><button type="button" id="cartBtn" class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
