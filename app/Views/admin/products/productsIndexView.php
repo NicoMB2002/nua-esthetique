@@ -34,7 +34,7 @@ ViewHelper::loadAdminHeader($page_title);
     <div class="table-responsive small">
 <!--TODO: render the list of products/categories using an HTML table -->
 
-<h1>Welcome to The Book shop Directory</h1>
+<h1>Products Management</h1>
 <br>
 <div><?= FlashMessage::render(); ?></div>
     <table class="table table-striped">
