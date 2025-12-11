@@ -58,10 +58,70 @@
     <div class="nav-icons">
 
         <a href="login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
-        <a href="#"><button type="button" id="cartBtn" class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
+        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
 
     </div>
 
       </div>
     </div>
+
+<div  id="cart" class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">
+
+    </h5>
+    <button id="cartClose" type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+  <ul class="list-group">
+
+    <?php
+ use App\Helpers\SessionManager;
+ $total = 0.0;
+$cart = SessionManager::get('cart');
+ foreach ($cart as $item):
+    $total += ($item[0]['price'] *count($item))
+ ?>
+ <li class="list-group-item text-bg-dark">
+ <?= $item[0]['name']?>
+ -
+ <?= $item[0]['price']?> $
+ X <?= count($item)?? 0?>
+ <br>
+ <form method="post" action="remove_item">
+    <input type="hidden" name="name" value="<?=$item[0]['name']?>">
+          <input  type ='submit' class="btn btn-danger" value="Delete">
+        </form>
+    <form method="post" action="add_item">
+    <input type="hidden" name="id" value='<?=$item[0]['product_id']?>' >
+    <input type="submit" class="btn btn-success btn-sm" value="Add">
+  </form>
+ </li>
+    <?php endforeach; ?>
+ </ul>
+  </div>
+  <footer>
+    <h3> Total: <?= $total?> $</h3>
+  </footer>
+</div>
+
+<script>
+
+    $('#cartBtn').click(function(){
+
+
+        if ($('#cart').hasClass('show')) {
+            $('#cart').removeClass('show');
+        }else{
+        $('#cart').addClass('show');
+        }
+    })
+     $('#cartClose').click(function(){
+
+        $('#cart').removeClass('show');
+    })
+
+
+</script>
 </header>

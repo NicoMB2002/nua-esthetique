@@ -8,9 +8,10 @@ ViewHelper::loadHeader($data['title']);
 //dd($data);
 ?>
 
-<div class="d-flex flex-wrap align-items-left justify-content-left"style="width: 300px; margin-bottom: 50px; ">
-  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-</div>
+    <form method="get" action="" class="form-inline my-2 my-lg-0">
+      <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Search">
+    </form>
 
 <!--Bootstrap carousel -->
 <div id="productCarousel" class="carousel slide">
@@ -50,6 +51,10 @@ ViewHelper::loadHeader($data['title']);
                     </div>
                     <div class="card-footer">
                         <a href="/products/<?= hs($product['product_id']."") ?>" class="btn btn-primary btn-sm">View Details</a>
+                        <form method="post" action="add_item" style="float:right;">
+                            <input type="hidden" name="id" value='<?=$product['product_id']?>' >
+                        <input type="submit" class="btn btn-success btn-sm" value="Add">
+                        </form>
                     </div>
                 </div>
             </div>

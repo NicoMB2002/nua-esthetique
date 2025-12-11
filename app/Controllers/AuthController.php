@@ -149,6 +149,7 @@ class AuthController extends BaseController
                 SessionManager::set('user_email', $user['email']);
                 SessionManager::set('user_name', $user['first_name'] . " " . $user['last_name']);
                 SessionManager::set('user_role', $user['role']);
+                SessionManager::set('cart', []);
                 SessionManager::set('is_authenticated', true);
 
                 FlashMessage::success("Welcome back, {$user['first_name']}!");

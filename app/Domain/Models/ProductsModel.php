@@ -20,6 +20,12 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
+        public function getProductsByID($id){
+        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
+        $products = $this->selectOne($query,['product_id'=>$id]);
+        return $products;
+    }
+
         public function getProductsWithImages(){
         $query = "SELECT
                     p.product_id AS product_id,
@@ -36,6 +42,59 @@ class ProductsModel extends BaseModel
                 LEFT JOIN product_images pi ON
                     p.product_id = pi.product_id";
         $products = $this->selectAll($query);
+        return $products;
+    }
+
+            public function getProductsWithImagesSearch(string $search){
+        $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id where p.name like CONCAT('%', :search ,'%')";
+
+        $products = $this->selectAll($query, ['search'=>$search]);
+                $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id where p.description like CONCAT('%', :search ,'%')";
+
+        $products = $products + $this->selectAll($query, ['search'=>$search]);
+                $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id where c.name like CONCAT('%', :search ,'%')";
+
+        $products = $products + $this->selectAll($query, ['search'=>$search]);
+
         return $products;
     }
 

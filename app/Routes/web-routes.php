@@ -55,9 +55,14 @@ return static function (Slim\App $app): void {
     $app -> group('/user', function($group){
         $group->get('/dashboard', [CustomerController::class, 'index']
         )->setName('user.dashboard');
+        $group->get('/home', [CustomerController::class, 'index']
+        )->setName('user.dashboard');
         $group->get('/products', [CustomerController::class, 'products']
         )->setName('user.products');
-        $group->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
+        $group->get('/logout', [AuthController::class, 'logout'])->setName('user.logout');
+         $group->get('/login', [CustomerController::class, 'index']);
+        $group->post('/add_item', [CustomerController::class, 'addItem']);
+        $group->post('/remove_item', [CustomerController::class, 'removeItem']);
 
     });
 

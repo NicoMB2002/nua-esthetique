@@ -32,10 +32,44 @@ class CustomerController extends BaseController
 
 
             $data = ['title'=> 'HomePage'];
-            $data['products'] = $this->products_model->getProductsWithImages();
+
+            if(isset($request->getQueryParams()['search'])){
+                 $data['products'] = $this->products_model->getProductsWithImagesSearch($request->getQueryParams()['search']);
+            }else {
+                 $data['products'] = $this->products_model->getProductsWithImages();
+            }
 
         // return $this->redirect($request, $response, 'products.index');
 
         return $this->render($response, 'user/products.php', $data);
+    }
+
+    public function addItem(Request $request, Response $response, array $args):Response{
+
+        $id = $request->getParsedBody()['id'];
+
+        $item = $this->products_model->getProductById($id);
+       $cart =  SessionManager::get('cart')?? [];
+        if(isset($cart[$item['name']])){
+            array_push($cart[$item['name']],$item);
+
+        }else{
+          $cart[$item['name']] = [$item];
+        }
+
+
+
+
+       SessionManager::set('cart',$cart);
+        return $this->redirect($request, $response, 'user.products');
+    }
+
+        public function removeItem(Request $request, Response $response, array $args):Response{
+
+        $name = $request->getParsedBody()['name'];
+        $cart =  SessionManager::get('cart')?? [];
+        unset($cart[$name]);
+        SessionManager::set('cart',$cart);
+        return $this->redirect($request, $response, 'user.products');
     }
 }
