@@ -92,7 +92,7 @@ class TwoFactorAuthModel extends BaseModel
         // HINT: Use $this->selectOne() and check the 'enabled' field
         $result = $this->selectOne('SELECT `enabled` FROM `two_factor_auth` WHERE user_id = ?', [$userId]);
 
-        return (bool) $result['enabled']; // Replace with your implementation
+        return (bool) $result['enabled']??false; // Replace with your implementation
     }
 
     /**

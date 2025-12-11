@@ -32,7 +32,7 @@ return static function (Slim\App $app): void {
     $app -> group('/admin', function ($group) {
         //add/ register admin routes
         $group->get('/dashboard', [DashboardController::class, 'index']
-        )->setName('admin.dashboard');
+        )->setName('dashboard.index');
         $group->get('/products', [ProductsController::class, 'index']
         )->setName('products.index');
 
@@ -125,10 +125,10 @@ return static function (Slim\App $app): void {
         ->add(TwoFactorMiddleware::class)
         ->add(AuthMiddleware::class); // checks if user is logged in
 
-    $app->get('/home', [HomeController::class, 'index'])
+    $app->get('/home', [CustomerController::class, 'products'])
         ->setName('home.index');
 
-    $app->get('/', [HomeController::class, 'index'])
+    $app->get('/', [CustomerController::class, 'products'])
         ->setName('home.index');
 
 

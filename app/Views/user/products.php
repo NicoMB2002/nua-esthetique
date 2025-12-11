@@ -38,7 +38,7 @@ ViewHelper::loadHeader($data['title']);
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <img
-                        src="<?= hs("../".$product['path'] ?? '/images/placeholder.jpg') ?>"
+                        src="<?= hs(APP_BASE_URL.'/'.$product['path'] ?? '/images/placeholder.jpg') ?>"
                         class="card-img-top"
                         alt="<?= hs($product['name']."") ?>"
                         style="height: 200px; object-fit: cover;"
