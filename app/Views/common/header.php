@@ -15,8 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
-    <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/login.css ?>">
-    <link rel="stylesheet" href="<?=APP_BASE_DIR_PATH?>/common/css/register.css ?>">
+    <link rel="stylesheet" href="<?= APP_BASE_DIR_PATH ?>/common/css/login.css ?>">
+    <link rel="stylesheet" href="<?= APP_BASE_DIR_PATH ?>/common/css/register.css ?>">
+    <link rel="stylesheet" href="<?= APP_BASE_DIR_PATH ?>/common/css/upload.css ?>">
 </head>
 
 
@@ -25,42 +26,42 @@
 
 
 
-<header class="navBar">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img src="./public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
-        </a>
+    <header class="navBar">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="./public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
+                </a>
 
-        <ul class="nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Lashes</a></li>
-            <li><a class="dropdown-item" href="#">Tweezers</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Book Appointment</a></li>
-            <li><a class="dropdown-item" href="#">Training</a></li>
-          </ul>
-        </li>
-      </ul>
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Lashes</a></li>
+                            <li><a class="dropdown-item" href="#">Tweezers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Book Appointment</a></li>
+                            <li><a class="dropdown-item" href="#">Training</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-    <div class="nav-icons">
-        <input type="text" placeholder="Search for..." />
+                <div class="nav-icons">
+                    <input type="text" placeholder="Search for..." />
 
-        <a href="login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
-        <a href="#"><button type="button" id="cartBtn" class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
+                    <a href="login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
+                    <a href="#"><button type="button" id="cartBtn" class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
 
-    </div>
+                </div>
 
-      </div>
-    </div>
-</header>
+            </div>
+        </div>
+    </header>
