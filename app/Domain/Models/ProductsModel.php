@@ -20,6 +20,25 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
+        public function getProductsWithImages(){
+        $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id";
+        $products = $this->selectAll($query);
+        return $products;
+    }
+
     public function getProductById(int $product_id) : mixed {
 
         $sql = "SELECT * FROM {$this->products_table} WHERE product_id = :product_id";
