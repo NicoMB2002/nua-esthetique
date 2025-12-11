@@ -19,7 +19,7 @@ class LoginController extends BaseController
     public function index(Request $request, Response $response ) : Response
     {
         $data = [];
-        return $this->render( $response,"loginView.php", $data);
+        return $this->render( $response,"login.php", $data);
     }
         public function logout(Request $request, Response $response ) : Response
     {

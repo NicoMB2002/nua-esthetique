@@ -17,8 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
-    <link rel="stylesheet" href="<?=APP_ASSETS_DIR_URL?>/css/login.css ?>">
-    <link rel="stylesheet" href="<?=APP_ASSETS_DIR_URL?>/css/register.css ?>">
 </head>
 
 

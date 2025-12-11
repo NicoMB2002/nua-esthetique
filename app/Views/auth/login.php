@@ -12,9 +12,7 @@ ViewHelper::loadHeader($page_title);
         <div class="col-5">
             <!-- TODO:put image from db -->
             <div id="login-image">
-                <!-- //TODO:add image instead of paragraph place holder -->
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, cupiditate quod enim nisi ipsa praesentium labore nihil alias consectetur consequuntur molestiae dolor esse accusantium provident necessitatibus error facilis nam quisquam in velit asperiores beatae ullam? Officiis hic blanditiis assumenda doloribus, molestiae totam amet, molestias magnam vitae repudiandae eaque necessitatibus illo.</p>
-
+                <img src="<?= APP_BASE_URL?>/public/assets/resources/images/nuaClient.jpg" alt="NuaClient" width="400" height="600">
             </div>
 
         </div>
@@ -54,7 +52,9 @@ ViewHelper::loadHeader($page_title);
 
 <style>
     body {
-        background-color: bisque;
+        font-family: "Raleway", sans-serif;
+        background-color: #F9F3EF;
+        font-weight: 400;
     }
 
     #input-row-identifier,
