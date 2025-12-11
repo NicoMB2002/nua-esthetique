@@ -245,7 +245,6 @@ class AuthController extends BaseController
         SessionManager::set('is_authenticated', true);
         SessionManager::set('requires_2fa', $has2FA);
         SessionManager::set('two_factor_verified', !$has2FA);  // Auto-verified if no 2FA
-        SessionManager::set('cart', []);
 
         if ($this->twoFactorAuth->isEnabled($user['id']) == true) {
             return $this->redirect($request, $response, '2fa.setup');
@@ -266,38 +265,11 @@ class AuthController extends BaseController
         } else {
             return $this->redirect($request, $response, 'user.dashboard');
         }
-
+    }
 
     /**
      * Logout the current user (GET request).
      */
-        $user = [];
-        if (empty($email) || empty($password)) {
-            $errors[] = "All fields must be filled out";
-        } else {
-            $user = $this->userModel->verifyCredentials($email, $password);
-            if ($user != null) {
-                SessionManager::set('user_id', $user['id']);
-                SessionManager::set('user_email', $user['email']);
-                SessionManager::set('user_name', $user['first_name'] . " " . $user['last_name']);
-                SessionManager::set('user_role', $user['role']);
-                SessionManager::set('cart', []);
-                SessionManager::set('is_authenticated', true);
-
-                FlashMessage::success("Welcome back, {$user['first_name']}!");
-                if ($user['role'] === 'admin') {
-                    return $this->redirect($request, $response, 'admin.dashboard');
-                } else {
-                    return $this->redirect($request, $response, 'user.dashboard');
-                }
-            } else {
-                FlashMessage::error("User not found or password does not match, please try again");
-                return $this->redirect($request, $response, 'auth.login');
-            }
-        }
-        return $this->redirect($request, $response, 'auth.login');
-  }
-
     public function logout(Request $request, Response $response, array $args): Response
     {
         // TODO: Destroy the session using SessionManager::destroy()
@@ -330,5 +302,4 @@ class AuthController extends BaseController
             'has2FA' => $has2FA
         ]);
     }
-
 }

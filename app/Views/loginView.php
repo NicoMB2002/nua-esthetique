@@ -30,7 +30,7 @@ ViewHelper::loadHeader($page_title);
                                 type="password"
                                 id="password"
                                 name="password"
-                                placeholder="email@example.com"
+                                placeholder="Password"
                                 required>
                     </div>
                     <button type="submit" id="login-btn">
