@@ -245,6 +245,7 @@ class AuthController extends BaseController
         SessionManager::set('is_authenticated', true);
         SessionManager::set('requires_2fa', $has2FA);
         SessionManager::set('two_factor_verified', !$has2FA);  // Auto-verified if no 2FA
+        SessionManager::set('cart', []);
 
         if ($this->twoFactorAuth->isEnabled($user['id']) == true) {
             return $this->redirect($request, $response, '2fa.setup');
@@ -265,7 +266,7 @@ class AuthController extends BaseController
         } else {
             return $this->redirect($request, $response, 'dashboard');
         }
-    }
+
 
     /**
      * Logout the current user (GET request).
@@ -295,7 +296,7 @@ class AuthController extends BaseController
             }
         }
         return $this->redirect($request, $response, 'auth.login');
-    }
+  }
 
     public function logout(Request $request, Response $response, array $args): Response
     {
@@ -329,4 +330,5 @@ class AuthController extends BaseController
             'has2FA' => $has2FA
         ]);
     }
+
 }
