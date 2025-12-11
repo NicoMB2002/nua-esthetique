@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Domain\Models\TrustedDeviceModel;
 use App\Domain\Models\TwoFactorAuthModel;
 use App\Domain\Models\User;
 use App\Domain\Models\UserModel;
@@ -24,25 +25,30 @@ class TwoFactorController extends BaseController
     public function __construct(
         ContainerInterface $container,
         private TwoFactorAuthModel $twoFactorModel,
-        private UserModel $userModel
+        private UserModel $userModel,
+        private TrustedDeviceModel $trustedDeviceModel
     ) {
         parent::__construct($container);
     }
+
     /**
      * Display the 2FA setup page with QR code.
      */
     public function showSetup(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $userId = $user['id'];
-        $userEmail = $user['email'];
+        $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
 
         // Check if user already has 2FA enabled
-        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        if ($this->twoFactorModel->isEnabled($userId)) {
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        if ($twoFactorModel->isEnabled($userId)) {
             FlashMessage::add('error', '2FA is already enabled.');
 
-            return $this->redirect($request, $response, 'dashboard');
+            if (SessionManager::get("user_role") == "admin") {
+                return $this->redirect($request, $response, 'dashboard.index');
+            }
+
+            return $this->redirect($request, $response, 'user.dashboard');
         }
 
         // TODO: Create a QR code provider instance
@@ -78,9 +84,8 @@ class TwoFactorController extends BaseController
      */
     public function verifyAndEnable(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $userId = $user['id'];
-        $userEmail = $user['email'];
+        $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
         $data = $request->getParsedBody();
         $code = $data['code'] ?? '';
 
@@ -119,15 +124,20 @@ class TwoFactorController extends BaseController
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Create a new 2FA record: $twoFactorModel->create($userId, $secret)
         // Step 3: Enable 2FA for the user: $twoFactorModel->enable($userId)
-        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        $this->twoFactorModel->create($userId, $secret);
-        $this->twoFactorModel->enable($userId);
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $twoFactorModel->create($userId, $secret);
+        $twoFactorModel->enable($userId);
 
         // Clear the setup secret from session
         SessionManager::remove('2fa_setup_secret');
 
         FlashMessage::add('success', '2FA has been enabled successfully!');
-        return $this->redirect($request, $response, 'dashboard');
+
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
@@ -152,8 +162,8 @@ class TwoFactorController extends BaseController
         // Get the user's TOTP secret from the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Use getSecret($userId) to retrieve the secret
-        // $twoFactorAuth = $this->container->get(TwoFactorAuthModel::class);
-        $secret = $this->twoFactorModel->getSecret($userId);; // Replace with your implementation
+        $twoFactorAuth = $this->container->get(TwoFactorAuthModel::class);
+        $secret = $twoFactorAuth->getSecret($userId);; // Replace with your implementation
 
         // Create a QR code provider and TFA instance
         $qrCode = new BaconQrCodeProvider(4, '#ffffff', '#000000', 'svg');
@@ -185,11 +195,57 @@ class TwoFactorController extends BaseController
         SessionManager::remove('2fa_attempts');
 
         // Regenerate session ID for security
-        SessionManager::clear();
-        SessionManager::start();
+        session_regenerate_id(true);
+
+        // Check if user wants to trust this device
+        $trustDevice = $data['trust_device'] ?? false;
+
+        if ($trustDevice) {
+            // TODO: Generate a unique device token (64-character hex string)
+            // HINT: Use bin2hex(random_bytes(32)) to generate a secure random token
+            $deviceToken = bin2hex(random_bytes(64)); // Replace with your implementation
+
+            // TODO: Calculate the expiration date (30 days from now)
+            // HINT: Use DateTime class: (new \DateTime())->modify('+30 days')->format('Y-m-d H:i:s')
+            $expiresAt = (new \DateTime())->modify('+30 days')->format('Y-m-d H:i:s'); // Replace with your implementation
+
+            // TODO: Build the device information array with the following keys:
+            // - 'device_name': Use $this->getDeviceName($request) helper method
+            // - 'user_agent': Use $request->getHeaderLine('User-Agent')
+            // - 'ip_address': Use $this->getClientIp($request) helper method
+            // - 'expires_at': Use the expiration date calculated above
+            $deviceInfo = [
+                'device_name' => $this->getDeviceName($request),
+                'user_agent' => $request->getHeaderLine('User-Agent'),
+                'ip_address' => $this->getClientIp($request),
+                'expires_at' => $expiresAt
+            ]; // Replace with your implementation
+
+            // TODO: Save the trusted device to the database
+            // HINT: Call $this->trustedDeviceModel->create($userId, $deviceToken, $deviceInfo)
+            $this->trustedDeviceModel->create($userId, $deviceToken, $deviceInfo);
+            // TODO: Set a secure cookie to remember this device
+            // HINT: Use setcookie() with an options array containing:
+            // - 'expires': strtotime('+30 days')
+            // - 'path': '/' . APP_ROOT_DIR_NAME
+            // - 'secure': false (set to true in production with HTTPS)
+            // - 'httponly': true (prevents JavaScript access)
+            // - 'samesite': 'Lax' (CSRF protection)
+        }
+        setcookie(bin2hex($deviceToken), "", [
+            'expires' => strtotime('+30 days'),
+            'path' => '/' . APP_ROOT_DIR_NAME,
+            'secure' => false,
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
 
         // Redirect to dashboard
-        return $this->redirect($request, $response, 'dashboard');
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
@@ -197,14 +253,14 @@ class TwoFactorController extends BaseController
      */
     public function disable(Request $request, Response $response): Response
     {
-        $user = $request->getAttribute('user');
-        $userId = $user['id'];
+        $userId = SessionManager::get('user_id');
+        $userEmail = SessionManager::get('user_email');
         $data = $request->getParsedBody();
         $password = $data['password'] ?? '';
 
         // Verify password before disabling 2FA
-        // $userModel = $this->container->get(UserModel::class);
-        $validUser = $this->userModel->verifyCredentials($user['email'], $password);
+        $userModel = $this->container->get(UserModel::class);
+        $validUser = $userModel->verifyCredentials($userEmail, $password);
 
         if (!$validUser) {
             return $this->render($response, 'auth/2fa-disable.php', [
@@ -216,11 +272,16 @@ class TwoFactorController extends BaseController
         // TODO: Disable 2FA in the database
         // Step 1: Get the TwoFactorAuth model from the container
         // Step 2: Call the disable($userId) method to disable 2FA
-        // $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
-        $this->twoFactorModel->disable($userId);
+        $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
+        $twoFactorModel->disable($userId);
 
         FlashMessage::add('success', '2FA has been disabled.');
-        return $this->redirect($request, $response, 'dashboard');
+
+        if (SessionManager::get("user_role") == "admin") {
+            return $this->redirect($request, $response, 'dashboard.index');
+        }
+
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 
     /**
@@ -231,5 +292,30 @@ class TwoFactorController extends BaseController
         return $this->render($response, 'auth/2fa-disable.php', [
             'title' => 'Disable 2FA'
         ]);
+    }
+
+    private function getDeviceName(Request $request): string
+    {
+        $userAgent = $request->getHeaderLine('User-Agent');
+
+        if (stripos($userAgent, 'Windows') !== false) return 'Windows PC';
+        if (stripos($userAgent, 'Mac') !== false) return 'Mac';
+        if (stripos($userAgent, 'iPhone') !== false) return 'iPhone';
+        if (stripos($userAgent, 'Android') !== false) return 'Android';
+        if (stripos($userAgent, 'Linux') !== false) return 'Linux PC';
+
+        return 'Unknown Device';
+    }
+
+    private function getClientIp(Request $request): string
+    {
+        $serverParams = $request->getServerParams();
+
+        if (!empty($serverParams['HTTP_X_FORWARDED_FOR'])) {
+            $ipList = explode(',', $serverParams['HTTP_X_FORWARDED_FOR']);
+            return trim($ipList[0]);
+        }
+
+        return $serverParams['REMOTE_ADDR'] ?? '0.0.0.0';
     }
 }
