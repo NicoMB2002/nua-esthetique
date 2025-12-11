@@ -5,7 +5,7 @@ use App\Helpers\ViewHelper;
 
 ViewHelper::loadHeader($data['title']);
 $products  = $data['products'];
-dd($products);
+// dd($products);
 ?>
 <br>
 <br>
@@ -51,10 +51,12 @@ dd($products);
 
 
             <tr>
-                <td><?= $product["image"] ?></td>
+                <!-- <td>< //$product["image"] ?></td> -->
+
+                <td><?= $product["quantity"] ?></td>
                 <td><?= $product["name"] ?></td>
                 <td><?= $product["description"] ?></td>
-                <td><?= $product["price"] ?>"$"</td>
+                <td><?= $product["price"] ?>$</td>
                 <td><a class="btn btn-primary " href="details.php?id=<?= $product["id"] ?>">View</a>
                     <button class="btn btn-success " onclick="confirmDeleteShop(<?= $product['id'] ?>)">Add to Cart</button>
                 </td>
