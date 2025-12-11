@@ -26,7 +26,7 @@ ViewHelper::loadHeader($page_title);
                     <input
                         type="text"
                         id="identifier"
-                        name="email"
+                        name="identifier"
                         placeholder="email@example.com"
                         required>
                 </div>
