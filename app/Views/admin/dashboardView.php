@@ -2,16 +2,18 @@
 
 use App\Helpers\FlashMessage;
 use App\Helpers\ViewHelper;
+use App\Helpers\SessionManager;
 
-ViewHelper::loadAdminHeader('Admin Dashboard') ?>
+ViewHelper::loadAdminHeader('Admin Dashboard');
+$user = SessionManager::get('user'); ?>
 
 <div class="container" style="max-width: 800px; margin: 50px auto;">
     <h1>Dashboard</h1>
     <div><?= FlashMessage::render(); ?></div>
 
     <div class="welcome-section">
-        <h2>Welcome, <?= htmlspecialchars($user['first_name'] ?? 'User') ?>!</h2>
-        <p>Email: <?= htmlspecialchars($user['email'] ?? '') ?></p>
+        <h2>Welcome, <?= htmlspecialchars(SessionManager::get('user_name') ?? 'User') ?>!</h2>
+        <p>Email: <?= htmlspecialchars(SessionManager::get('user_email') ?? '') ?></p>
     </div>
 
     <hr>
@@ -21,7 +23,7 @@ ViewHelper::loadAdminHeader('Admin Dashboard') ?>
 
         <div class="security-card">
             <h4>Two-Factor Authentication (2FA)</h4>
-            <?php if ($has2FA): ?>
+            <?php if ($has2FA??false): ?>
                 <p class="status status-enabled">✓ 2FA is <strong>enabled</strong></p>
                 <p>Your account is protected with two-factor authentication.</p>
 

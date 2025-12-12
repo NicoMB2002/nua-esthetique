@@ -20,7 +20,7 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
-        public function getProductsByID($id){
+        public function getProductByID($id){
         $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
         $products = $this->selectOne($query,['product_id'=>$id]);
         return $products;
@@ -98,12 +98,6 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
-    public function getProductById(int $product_id) : mixed {
-
-        $sql = "SELECT * FROM {$this->products_table} WHERE product_id = :product_id";
-        $product = $this->selectOne($sql, ["product_id" => $product_id]);
-        return $product;
-    }
 
     public function insertProduct($info = []){
     $query = "INSERT INTO products(

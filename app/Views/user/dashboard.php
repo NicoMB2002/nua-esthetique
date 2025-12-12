@@ -32,7 +32,7 @@ ViewHelper::loadHeader($data['title']);
                         <h5 class="card-title">Quick Actions</h5>
                         <div class="d-grid gap-2">
                             <a href="products" class="btn btn-primary">Browse Products</a>
-                            <a href="#" class="btn btn-secondary">My Orders</a>
+                            <a href="orders" class="btn btn-secondary">My Orders</a>
                             <a href="#" class="btn btn-info">Update Profile</a>
                             <a class="btn btn-danger btn-sm" href="logout">Logout</a>
                         </div>

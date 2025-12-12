@@ -11,8 +11,22 @@ class OrderModel extends BaseModel
     }
 
     public function getOrders(){
-        $query = "Select * from Orders";
+        $query = "Select * from Orders o left join users u on o.customer_id = u.id";
         $orders = $this->selectAll($query);
+        return $orders;
+    }
+
+     public function getOrdersById($id){
+        $query = "Select * from Orders o left join users u on o.customer_id = u.id where o.customer_id = :id";
+        $orders = $this->selectAll($query,['id'=>$id]);
+        return $orders;
+    }
+         public function getOrderProducts($id){
+        $query = "Select p.name as product_name, c.name as category_name, p.description as description, p.price as price, op.quantity as quantity  from Orders o left join orders_products op on o.order_id = op.order_id
+            left join products p  on p.product_id = op.product_id
+            left join categories c  on p.category_id = c.id
+            where op.order_id = :id";
+        $orders = $this->selectAll($query,['id'=>$id]);
         return $orders;
     }
 
@@ -24,16 +38,30 @@ class OrderModel extends BaseModel
 
     public function insertOrder($info = []){
     $query = "INSERT INTO orders(
-                order_id,
                 customer_id,
-                tracking_number,
-                order_date
+                tracking_number
             )
             VALUES(
-                :order_id,
                 :customer_id,
-                :tracking_number,
-                :order_date
+                :tracking_number
+            )";
+
+        $this->execute($query, $info);
+
+        return $this->lastInsertId();;
+
+    }
+
+        public function insertProducts_Order($info = []){
+    $query = "INSERT INTO orders_products(
+                product_id,
+                order_id,
+                quantity
+            )
+            VALUES(
+                :product_id,
+                :order_id,
+                :quantity
             )";
 
         $this->execute($query, $info);

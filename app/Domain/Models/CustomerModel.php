@@ -11,7 +11,7 @@ class CustomerModel extends BaseModel
     }
 
     public function getCustomers(){
-        $query = "Select * from Customers";
+        $query = "Select * from users where role = 'customer'";
         $customers = $this->selectAll($query);
         return $customers;
     }

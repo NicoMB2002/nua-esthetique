@@ -34,7 +34,7 @@
 
         <ul class="nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Products</a>
+          <a class="nav-link dropdown-toggle" href="<?= APP_BASE_URL?>/user/products" data-bs-toggle="dropdown">Products</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Lashes</a></li>
             <li><a class="dropdown-item" href="#">Tweezers</a></li>
@@ -55,7 +55,7 @@
 
     <div class="nav-icons">
 
-        <a href="login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
+        <a href="<?= APP_BASE_URL?>/user/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
         <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
 
     </div>
@@ -101,6 +101,7 @@ $cart = SessionManager::get('cart');
   </div>
   <footer>
     <h3> Total: <?= $total?> $</h3>
+    <a class="btn btn-primary btn-sm" href="checkout">Checkout</a>
   </footer>
 </div>
 

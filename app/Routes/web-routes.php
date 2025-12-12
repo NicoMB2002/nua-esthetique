@@ -8,12 +8,13 @@ declare(strict_types=1);
 
 use App\Controllers\AuthController;
 use App\Controllers\CategoriesController;
-use App\Controllers\CustomerController;
+use App\Controllers\CustomersController;
 use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
+use App\Controllers\OrdersController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controllers\UploadController;
@@ -47,7 +48,10 @@ return static function (Slim\App $app): void {
 
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
             ->setName('categories.index');
-
+        $group->get('/customers', [CustomersController::class, 'index'])
+            ->setName('customers.index');
+        $group->get('/orders', [OrdersController::class, 'index'])
+            ->setName('orders.index');
         $group->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
@@ -55,16 +59,20 @@ return static function (Slim\App $app): void {
     })->add(AdminAuthMiddleware::class);
 
     $app -> group('/user', function($group){
-        $group->get('/dashboard', [CustomerController::class, 'index']
+        $group->get('/dashboard', [HomeController::class, 'index']
         )->setName('user.dashboard');
-        $group->get('/home', [CustomerController::class, 'index']
+        $group->get('/home', [HomeController::class, 'index']
         )->setName('user.dashboard');
-        $group->get('/products', [CustomerController::class, 'products']
+        $group->get('/products', [HomeController::class, 'products']
         )->setName('user.products');
         $group->get('/logout', [AuthController::class, 'logout'])->setName('user.logout');
-         $group->get('/login', [CustomerController::class, 'index']);
-        $group->post('/add_item', [CustomerController::class, 'addItem']);
-        $group->post('/remove_item', [CustomerController::class, 'removeItem']);
+         $group->get('/login', [HomeController::class, 'index']);
+        $group->post('/add_item', [HomeController::class, 'addItem']);
+        $group->post('/remove_item', [HomeController::class, 'removeItem']);
+        $group->get('/checkout', [HomeController::class, 'checkout']);
+        $group->get('/confirmOrder', [HomeController::class, 'createOrder']);
+        $group->get('/orders', [HomeController::class, 'customerOrders']);
+        $group->get('/orders/{id}', [HomeController::class, 'customerOrderDetails']);
 
     });
 
@@ -124,11 +132,9 @@ return static function (Slim\App $app): void {
         ->setName('user.dashboard')
         ->add(TwoFactorMiddleware::class)
         ->add(AuthMiddleware::class); // checks if user is logged in
-
-    $app->get('/home', [CustomerController::class, 'products'])
+    $app->get('/home', [HomeController::class, 'products'])
         ->setName('home.index');
-
-    $app->get('/', [CustomerController::class, 'products'])
+    $app->get('/', [HomeController::class, 'products'])
         ->setName('home.index');
 
 
