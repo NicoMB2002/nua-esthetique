@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 10, 2025 at 11:51 PM
+-- Generation Time: Dec 12, 2025 at 03:20 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -20,15 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `nua-esthetique_db`
 --
+CREATE DATABASE IF NOT EXISTS `nua-esthetique_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `nua-esthetique_db`;
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `categories`
 --
-CREATE DATABASE IF NOT EXISTS `nua-esthetique_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `nua-esthetique_db`;
-
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
@@ -60,8 +59,20 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `tracking_number` varchar(50) NOT NULL,
-  `order_date` date NOT NULL
+  `order_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `customer_id`, `tracking_number`, `order_date`) VALUES
+(1, 2, '8211928', NULL),
+(2, 2, '3358430', NULL),
+(3, 2, '4467539', NULL),
+(4, 2, '3702401', NULL),
+(5, 2, '4603730', NULL),
+(6, 2, '6582169', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,8 +82,24 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `orders_products` (
   `product_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL
+  `order_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders_products`
+--
+
+INSERT INTO `orders_products` (`product_id`, `order_id`, `quantity`) VALUES
+(1, 2, 1),
+(1, 3, 1),
+(1, 4, 1),
+(1, 5, 1),
+(2, 5, 1),
+(5, 5, 1),
+(1, 6, 1),
+(2, 6, 1),
+(5, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -123,14 +150,30 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `is_primary`) VALUES
-(1, 7, 'public\\uploads\\images\\Brow Freeze Gel.png', 1),
-(2, 2, 'public\\uploads\\images\\Cocoa_Luxe.png', 1),
-(3, 5, 'public\\uploads\\images\\Growth_Serum.png', 1),
-(4, 4, 'public\\uploads\\images\\Lash_Adhesive.png', 1),
-(5, 1, 'public\\uploads\\images\\Midnight_Luxe.png', 1),
-(6, 6, 'public\\uploads\\images\\Mini_Fan.png', 1),
-(7, 8, 'public\\uploads\\images\\Precision_Volume_Tweezer.png', 1),
-(8, 3, 'public\\uploads\\images\\Tweezers.png', 1);
+(1, 7, 'public\\assets\\images\\Brow Freeze Gel.png', 1),
+(2, 2, 'public\\assets\\images\\Cocoa_Luxe.png', 1),
+(3, 5, 'public\\assets\\images\\Growth_Serum.png', 1),
+(4, 4, 'public\\assets\\images\\Lash_Adhesive.png', 1),
+(5, 1, 'public\\assets\\images\\Midnight_Luxe.png', 1),
+(6, 6, 'public\\assets\\images\\Mini_Fan.png', 1),
+(7, 8, 'public\\assets\\images\\Precision_Volume_Tweezer.png', 1),
+(8, 3, 'public\\assets\\images\\Tweezers.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `two_factor_auth`
+--
+
+CREATE TABLE `two_factor_auth` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `secret` varchar(255) NOT NULL,
+  `enabled` tinyint(1) DEFAULT 0,
+  `enabled_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -201,6 +244,13 @@ ALTER TABLE `product_images`
   ADD KEY `product_images_FK` (`product_id`);
 
 --
+-- Indexes for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -220,7 +270,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -233,6 +283,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -262,6 +318,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `two_factor_auth`
+--
+ALTER TABLE `two_factor_auth`
+  ADD CONSTRAINT `2FA_user_id_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
