@@ -40,7 +40,7 @@
             <li><a class="dropdown-item" href="#">Tweezers</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
         <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>

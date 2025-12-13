@@ -21,7 +21,7 @@ class ProductsController extends BaseController
     public function index(Request $request, Response $response, array $args): Response
     {
         //* 1) Fetch from the DB.
-        $products = $this->products_model->getProducts();
+        $products = $this->products_model->getProducts() ?? [];
 
         //* 2) Prepare the data to be passed to the view.
         //!NOTE: Must be a well-structured associative array.
@@ -59,7 +59,7 @@ class ProductsController extends BaseController
         $product = $this->products_model->getProductById($product_id);
 
         //* Step 2.b) Fetch the list of categories from the DB
-        $categories = $this->categories_model->getAll();
+        $categories = $this->categories_model->getAll() ?? [];
         // dd($product);
 
         //* Step 3) Pass it to the view where the update/editing form filled with item info will be rendered

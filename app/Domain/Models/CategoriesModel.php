@@ -22,7 +22,7 @@ class CategoriesModel extends BaseModel
     public function getCategories(): mixed
     {
         $sql = "SELECT * FROM {$this->categories_table} ";
-        $categories = $this->selectALl($sql);
+        $categories = $this->selectAll($sql);
         return $categories;
     }
 
