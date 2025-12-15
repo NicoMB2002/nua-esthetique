@@ -13,6 +13,7 @@ use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
 use App\Controllers\HomeController;
+use App\Controllers\ContactController;
 use App\Controllers\LoginController;
 use App\Controllers\OrdersController;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -136,6 +137,9 @@ return static function (Slim\App $app): void {
         ->setName('home.index');
     $app->get('/', [HomeController::class, 'products'])
         ->setName('home.index');
+
+        $app->get('/contact', [ContactController::class, 'index'])->setName('contact.index');
+
 
 
 

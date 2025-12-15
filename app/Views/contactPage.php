@@ -1,37 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../common/css/globals.css" />
-    <!-- <link rel="stylesheet" href="styleguide.css" /> -->
-    <link rel="stylesheet" href="../common/css/style.css" />
-  </head>
-  <body>
+<?php
+use App\Helpers\FlashMessage;
+use App\Helpers\ViewHelper;
+
+
+ViewHelper::loadHeader($data['title']);
+?>
     <div class="desktop">
-      <div class="announcement-bar">
-        <div class="container">
-          <div class="link">
-            <div class="SVG"><img class="vector" src="img/vector-13.svg" /></div>
-          </div>
-          <div class="SVG-wrapper">
-            <div class="SVG"><img class="img" src="img/image.svg" /></div>
-          </div>
-          <div class="div-wrapper">
-            <div class="SVG"><img class="vector-2" src="img/vector-6.svg" /></div>
-          </div>
-          <div class="div">
-            <div class="SVG"><img class="vector-3" src="img/vector-24.svg" /></div>
-          </div>
-          <div class="container-2"><div class="text-wrapper">Nationwide Shipping.</div></div>
-          <div class="form-localization">
-            <div class="text-wrapper-2">(CAD $)</div>
-            <div class="SVG-2">
-              <img class="vector-4" src="img/vector-26.svg" /> <img class="vector-5" src="img/vector-27.svg" />
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="text-wrapper-3">Contact Us</div>
       <div class="rectangle"></div>
       <div class="rectangle-2"></div>
@@ -233,3 +207,11 @@
     </div>
   </body>
 </html>
+
+<?= FlashMessage::render()?>
+
+<?php
+
+ViewHelper::loadJsScripts();
+ViewHelper::loadFooter();
+?>

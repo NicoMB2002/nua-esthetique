@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
+    <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/contact-css/style.css">
+
 </head>
 
 
@@ -34,24 +36,13 @@
         </a>
 
         <ul class="nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="<?= APP_BASE_URL?>/user/products" data-bs-toggle="dropdown">Products</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Lashes</a></li>
-            <li><a class="dropdown-item" href="#">Tweezers</a></li>
-          </ul>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/products">Products</a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
         <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Book Appointment</a></li>
-            <li><a class="dropdown-item" href="#">Training</a></li>
-          </ul>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
       </ul>
 
     <div class="nav-icons">
