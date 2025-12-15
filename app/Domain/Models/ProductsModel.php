@@ -21,7 +21,7 @@ class ProductsModel extends BaseModel
     }
 
         public function getProductByID($id){
-        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
+        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, c.id as category_id, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
         $products = $this->selectOne($query,['product_id'=>$id]);
         return $products;
     }

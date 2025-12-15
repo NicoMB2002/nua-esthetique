@@ -30,24 +30,37 @@ return static function (Slim\App $app): void {
 
     //*Base URI: localhost/OnlineStore_Assignment2/admin/dashboard
 
-    $app -> group('/admin', function ($group) {
+    $app->group('/admin', function ($group) {
         //add/ register admin routes
-        $group->get('/dashboard', [DashboardController::class, 'index']
+        $group->get(
+            '/dashboard',
+            [DashboardController::class, 'index']
         )->setName('dashboard.index');
-        $group->get('/products', [ProductsController::class, 'index']
+        $group->get(
+            '/products',
+            [ProductsController::class, 'index']
         )->setName('products.index');
 
-        $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']
+        $group->get(
+            '/products/edit/{product_id}',
+            [ProductsController::class, 'edit']
         )->setName('products.edit');
 
-        $group->post('/products/update/{product_id}', [ProductsController::class, 'update']
+        $group->post(
+            '/products/update/{product_id}',
+            [ProductsController::class, 'update']
         )->setName('products.update');
+
+        $group->get('/products/{product_id}/delete', [ProductsController::class, 'delete'])->setName('products.delete');
+
 
         $group->get('/categories', [CategoriesController::class, 'index'])
             ->setName('categories.index');
 
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
             ->setName('categories.index');
+        $group->get('/categories/delete/{category_id}', [ProductsController::class, 'delete']);
+
         $group->get('/customers', [CustomersController::class, 'index'])
             ->setName('customers.index');
         $group->get('/orders', [OrdersController::class, 'index'])
@@ -56,24 +69,32 @@ return static function (Slim\App $app): void {
         // $group->get('/logout', [LoginController::class, 'logout'])
         // ->setName('logout.admin');
 
-    })->add(AdminAuthMiddleware::class);
 
-    $app -> group('/user', function($group){
-        $group->get('/dashboard', [HomeController::class, 'index']
+
+    });
+    // ->add(AdminAuthMiddleware::class);
+
+    $app->group('/user', function ($group) {
+        $group->get(
+            '/dashboard',
+            [HomeController::class, 'index']
         )->setName('user.dashboard');
-        $group->get('/home', [HomeController::class, 'index']
+        $group->get(
+            '/home',
+            [HomeController::class, 'index']
         )->setName('user.dashboard');
-        $group->get('/products', [HomeController::class, 'products']
+        $group->get(
+            '/products',
+            [HomeController::class, 'products']
         )->setName('user.products');
         $group->get('/logout', [AuthController::class, 'logout'])->setName('user.logout');
-         $group->get('/login', [HomeController::class, 'index']);
+        $group->get('/login', [HomeController::class, 'index']);
         $group->post('/add_item', [HomeController::class, 'addItem']);
         $group->post('/remove_item', [HomeController::class, 'removeItem']);
         $group->get('/checkout', [HomeController::class, 'checkout']);
         $group->get('/confirmOrder', [HomeController::class, 'createOrder']);
         $group->get('/orders', [HomeController::class, 'customerOrders']);
         $group->get('/orders/{id}', [HomeController::class, 'customerOrderDetails']);
-
     });
 
     //* NOTE: Route naming pattern: [controller_name].[method_name]
@@ -84,7 +105,7 @@ return static function (Slim\App $app): void {
     //     ->setName('logout');
 
     // $app->post('/processing', [LoginController::class, 'processLogin'])
-        // ->setName('processLogin');
+    // ->setName('processLogin');
 
     $app->get('/upload', [UploadController::class, 'index'])->setName('upload.index'); // GET displays the form
 
@@ -129,9 +150,9 @@ return static function (Slim\App $app): void {
     $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
 
     $app->get('/dashboard', [AuthController::class, 'dashboard'])
-        ->setName('user.dashboard')
-        ->add(TwoFactorMiddleware::class)
-        ->add(AuthMiddleware::class); // checks if user is logged in
+        ->setName('user.dashboard');
+    // ->add(TwoFactorMiddleware::class)
+    // ->add(AuthMiddleware::class); // checks if user is logged in
     $app->get('/home', [HomeController::class, 'products'])
         ->setName('home.index');
     $app->get('/', [HomeController::class, 'products'])
@@ -145,7 +166,5 @@ return static function (Slim\App $app): void {
         throw new \Slim\Exception\HttpNotFoundException($request, "Something went wrong");
     });
 
-    $app->group('/user', function ($group){
-
-    });
+    $app->group('/user', function ($group) {});
 };
