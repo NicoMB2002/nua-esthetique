@@ -16,14 +16,14 @@ class CustomersController extends BaseController
         parent::__construct($container);
     }
 
-
-        public function index(Request $request, Response $response, array $args): Response {
+    /**
+     * Display customer page 
+     */
+    public function index(Request $request, Response $response, array $args): Response {
 
 
             $data = ['title'=> 'Customer Page'];
-
             $data['customers'] = $this->customer_model->getCustomers();
-
         return $this->render($response, 'admin/customers/customersIndexView.php', $data);
     }
 }

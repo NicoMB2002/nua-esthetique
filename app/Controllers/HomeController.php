@@ -21,109 +21,104 @@ class HomeController extends BaseController
     }
 
 
-        public function index(Request $request, Response $response, array $args): Response {
-
-
-            $data = ['title'=> 'HomePage'];
-
-        // return $this->redirect($request, $response, 'products.index');
-
+    /**
+     * Display customer Home page
+     */
+    public function index(Request $request, Response $response, array $args): Response {
+        $data = ['title'=> 'HomePage'];
         return $this->render($response, 'user/dashboard.php', $data);
     }
 
-
+    /**
+     * Display customer product page
+     */
     public function products(Request $request, Response $response, array $args): Response {
-
-
-            $data = ['title'=> 'HomePage'];
-
-            if(isset($request->getQueryParams()['search'])){
-                 $data['products'] = $this->products_model->getProductsWithImagesSearch($request->getQueryParams()['search']);
-            }else {
-                 $data['products'] = $this->products_model->getProductsWithImages();
-            }
-
-        // return $this->redirect($request, $response, 'products.index');
-
-        return $this->render($response, 'user/products.php', $data);
+        $data = ['title'=> 'HomePage'];
+        if(isset($request->getQueryParams()['search'])){
+            $data['products'] = $this->products_model->getProductsWithImagesSearch($request->getQueryParams()['search']);
+        }else {
+            $data['products'] = $this->products_model->getProductsWithImages();
+        }
+         return $this->render($response, 'user/products.php', $data);
     }
 
+    /**
+     * Add Item to cart
+     */
     public function addItem(Request $request, Response $response, array $args):Response{
-
         $id = $request->getParsedBody()['id'];
-
         $item = $this->products_model->getProductById((int) $id);
-
-         $cart =  SessionManager::get('cart')?? [];
+        $cart =  SessionManager::get('cart')?? [];
         if(isset($cart[$item['name']])){
             array_push($cart[$item['name']],$item);
-
         }else{
           $cart[$item['name']] = [$item];
         }
-
-
-
-
-       SessionManager::set('cart',$cart);
+        SessionManager::set('cart',$cart);
         return $this->redirect($request, $response, 'user.products');
     }
 
+    /**
+     * Remove item from cart
+     */
      public function removeItem(Request $request, Response $response, array $args):Response{
-
         $name = $request->getParsedBody()['name'];
         $cart =  SessionManager::get('cart')?? [];
         unset($cart[$name]);
         SessionManager::set('cart',$cart);
         return $this->redirect($request, $response, 'user.products');
     }
-       public function error(Request $request, Response $response, array $args): Response
-    {
 
+    /**
+     * Display error page
+     */
+    public function error(Request $request, Response $response, array $args): Response
+    {
         return $this->render($response, 'errorView.php');
     }
 
+    /**
+     * Display checkout page
+     */
     public function checkout(Request $request, Response $response, array $args): Response
     {
         $data = ['title'=>'Checkout'];
-
-       return $this->render($response, 'user/checkout.php',$data);
+        return $this->render($response, 'user/checkout.php',$data);
     }
 
+    /**
+     * Create order
+     */
     public function createOrder(Request $request, Response $response, array $args): Response{
         $cart = SessionManager::get('cart');
-
-       $orderID = $this->order_model->insertOrder([
-                'customer_id'=>SessionManager::get('user_id'),
-                'tracking_number'=> random_int(1000000,9999999)
+        $orderID = $this->order_model->insertOrder([
+            'customer_id'=>SessionManager::get('user_id'),
+            'tracking_number'=> random_int(1000000,9999999)
         ]);
-
         foreach ($cart as $item) {
         $this->order_model->insertProducts_Order([
-                'product_id' => $item[0]['product_id'],
-                'order_id' => $orderID,
-                'quantity' => count($item)
+            'product_id' => $item[0]['product_id'],
+            'order_id' => $orderID,
+            'quantity' => count($item)
         ]);
         }
-
-
-       return $this->redirect($request,$response,'user.products');
+        return $this->redirect($request,$response,'user.products');
     }
 
-     public function customerOrders(Request $request, Response $response, array $args): Response {
 
-
-            $data = ['title'=> 'Orders Page'];
-            $data['orders'] = $this->order_model->getOrdersById(SessionManager::get('user_id'));
+    public function customerOrders(Request $request, Response $response, array $args): Response {
+        $data = ['title'=> 'Orders Page'];
+        $data['orders'] = $this->order_model->getOrdersById(SessionManager::get('user_id'));
         return $this->render($response, 'user/orders.php', $data);
     }
 
-         public function customerOrderDetails(Request $request, Response $response, array $args): Response {
-
-
-            $data = ['title'=> 'Orders Page'];
-            $data['order_id'] = $args['id'];
-            $data['products'] = $this->order_model->getOrderProducts($args['id']);
+     /**
+     * Display order details
+     */
+    public function customerOrderDetails(Request $request, Response $response, array $args): Response {
+        $data = ['title'=> 'Orders Page'];
+        $data['order_id'] = $args['id'];
+        $data['products'] = $this->order_model->getOrderProducts($args['id']);
         return $this->render($response, 'user/orderDetails.php', $data);
     }
 }
