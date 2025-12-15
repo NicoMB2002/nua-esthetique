@@ -34,13 +34,11 @@ function parseLashes(lashes) {
         lashCard.classList.add(
             "col-8",
             "card",
-            "col-sm-6",
-            "col-md-4",
-            "col-lg-3",
+            "col-sm-10",
+            "col-md-6",
+            "col-lg-4",
             "m-2",
             "p-2",
-            "text-center",
-            "shadow-sm",
             "rounded"
         );
         lashCard.innerHTML = `
