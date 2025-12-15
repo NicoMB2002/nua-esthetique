@@ -15,6 +15,9 @@
     /* Font sizes */
     --font-size-base: 20px;
     --font-size-heading: 33px;
+
+    /* Font family */
+    --font-family-base: 'Raleway', sans-serif;
 }
 
 /* Nav */
@@ -64,12 +67,25 @@
     width: 110px;
 }
 
+.navBar .nav-link,
+.navBar .nav-link:hover,
+.navBar .nav-link:focus,
+.navBar .nav-link.active {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.navBar .nav-link:hover,
+.navBar .nav-link.active {
+    text-decoration: underline;
+}
+
 /* footer*/
 .footer {
   background-color: #000;
   color: #fff;
   padding: 40px 20px;
-  font-family: sans-serif;
+  font-family: var(--font-family-base);;
 }
 
 .footer a {
@@ -326,6 +342,12 @@
     margin-bottom: 20px;
 }
 
+/*Home Page Horizontal card*/
+.featured-card {
+  font-family: var(--font-family-base);
+}
+
+
 fieldset {
     border: 1px solid #ddd;
     padding: 15px 20px;
@@ -339,11 +361,12 @@ legend {
 
 
 body {
-    font-family: "Raleway", sans-serif;
+    font-family: var(--font-family-base);
     background-color: var(--color-light-beige);
     font-weight: 400;
 }
 
-h1 {
+h1, h2, h3 {
+    font-family: var(--font-family-base);
     font-weight: 700;
 }

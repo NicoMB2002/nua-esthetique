@@ -27,7 +27,8 @@
         "nyholm/psr7": "^1.8",
         "nyholm/psr7-server": "^1.1",
         "robthree/twofactorauth": "^3.0",
-        "bacon/bacon-qr-code": "^3.0"
+        "bacon/bacon-qr-code": "^3.0",
+        "symfony/translation": "^8.0"
     },
     "autoload": {
         "psr-4": {

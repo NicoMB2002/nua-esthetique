@@ -8,56 +8,147 @@ ViewHelper::loadHeader($data['title']);
 <br>
 <br>
 
+<form method="get" action="" class="form-inline my-2 my-lg-0">
+      <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Search">
+    </form>
+
 <!--Bootstrap carousel -->
-<div id="carouselExampleIndicators" class="carousel slide">
+<div id="productCarousel" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+  <div class="carousel-inner" role="listbox">
+
+
+
+    <?php for ($i = 0; $i < round(count($data['products'])/3); $i++): ?>
+            <?php if ($i == 0 ){?>
+                <div class="item active " data-bs-interval="4000">
+            <?php }else {?>
+                <div class="item " data-bs-interval="4000">
+            <?php } ?>
+    <?php for ($j = $i*3; $j < $i*3+3; $j++):
+    if (!isset($data['products'][$j])) {
+    break 2;
+    }
+        $product = $data['products'][$j] ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img
+                        src="<?= hs(APP_BASE_URL.'/'.$product['path'] ?? '/images/placeholder.jpg') ?>"
+                        class="card-img-top"
+                        alt="<?= hs($product['name']."") ?>"
+                        style="height: 200px; object-fit: cover;"
+                    >
+                    <div class="card-body">
+                        <h5 class="card-title"><?= hs($product['name']."") ?></h5>
+                        <p class="card-text"><?= hs(substr($product['description'], 0, 100)) ?>...</p>
+                        <p class="fw-bold text-success">$<?= hs(number_format($product['price'], 2)) ?></p>
+                        <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/products/<?= hs($product['product_id']."") ?>" class="btn btn-primary btn-sm">View Details</a>
+                        <form method="post" action="add_item" style="float:right;">
+                            <input type="hidden" name="id" value='<?=$product['product_id']?>' >
+                        <input type="submit" class="btn btn-success btn-sm" value="Add">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+    <?php endfor; ?>
+ </div>
+  <?php endfor; ?>
 </div>
 
-
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="4000">
-          <img src="assets/img/steaming-morning-tea-stockcake.jpg" class="d-block w-100" alt="" style="height: 50vh; width: 100vw;">
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <img src="assets/img/StockCake-Assorted tea collection_1743105401.jpg" class="d-block w-100" alt="" style="height: 50vh;">
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <img src="assets/img/StockCake-Matcha Tea Ceremony_1743105455.jpg" class="d-block w-100" alt="" style="height: 50vh;">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <button id="prevBtn" class="left carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <button id="nextBtn" class="right carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
 
+<script>
+
+    $('#productCarousel').carousel();
+
+    $('.left').click(function(){
+        $('#productCarousel').carousel("prev");
+    })
+
+    $('.right').click(function(){
+        $('#productCarousel').carousel("next");
+
+    })
+
+
+</script>
+
+<br><br><br><br>
+
+<?php
+$categories = $categories ?? [];
+?>
+<section class="container my-5">
+    <h2 class="mb-4"><?= trans('nav.collection'); ?></h2>
+
+    <div class="row g-4 justify-content-center">
+        <?php if (!empty($categories)): ?>
+            <?php foreach ($categories as $category): ?>
+                <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center">
+                    <div class="card h-100 shadow-sm border-0 bg-dark text-white" style="width: 18rem;">
+                        <a href="categories/<?= $category['id'] ?>">
+                            <img
+                                src="/uploads/products/<?= htmlspecialchars($category['file_path'] ?? 'default.jpg') ?>"
+                                class="card-img-top"
+                                alt="<?= htmlspecialchars($category['name']) ?>"
+                                style="height:220px; object-fit:cover;"
+                            >
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><?= htmlspecialchars($category['name']) ?></h5>
+                            <p class="card-text small">
+                                <?= htmlspecialchars($category['description']) ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="text-center"><?= trans('home.collection_not_found'); ?></p>
+        <?php endif; ?>
+    </div>
+</section>
+
+<br><br><br><br>
+
+<div class="d-flex justify-content-center my-5">
+  <div class="card mb-3 shadow-lg" style="width: 60%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="<?= APP_BASE_URL?>/public/assets/resources/images/LipBlush.png" class="img-fluid rounded-start" alt="Beauty Studio" style="height:400px; width: 600px; object-fit:cover;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title fw-bold" style="font-size: 40px;"><?= trans('home.card_title'); ?></h2>
+          <br><br>
+          <p class="card-text" style="font-size: 25px;">
+            <?= trans('home.card_description'); ?>
+          </p>
+          <br>
+          <p style="font-size: 15px;"><?= trans('home.appointment_msg'); ?> <a href=""><?= trans('home.appointment_link'); ?></a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <?= FlashMessage::render()?>

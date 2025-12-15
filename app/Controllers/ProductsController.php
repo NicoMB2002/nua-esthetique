@@ -23,6 +23,11 @@ class ProductsController extends BaseController
      */
     public function index(Request $request, Response $response, array $args): Response
     {
+        //* 1) Fetch from the DB.
+        $products = $this->products_model->getProducts() ?? [];
+
+        //* 2) Prepare the data to be passed to the view.
+        //!NOTE: Must be a well-structured associative array.
         $products = $this->products_model->getProducts();
         $data = [
             'title' => 'List of Products',
@@ -32,12 +37,18 @@ class ProductsController extends BaseController
         return $this->render($response, 'admin/products/productsIndexView.php', $data);
     }
 
-    public function show(Request $request, Response $response, array $args): Response {
+    public function show(Request $request, Response $response, array $args): Response
+    {
         return $response;
     }
-    public function create(Request $request, Response $response, array $args): Response {
+    public function create(Request $request, Response $response, array $args): Response
+    {
         return $response;
     }
+    public function edit(Request $request, Response $response, array $args): Response
+    {
+        //* Step 1) Get the item id to be edited from the query string params section of the URI
+        // dd("Editing the product: " . $product_id['id']);
 
     /**
      * Display edit product page
@@ -45,6 +56,13 @@ class ProductsController extends BaseController
     public function edit(Request $request, Response $response, array $args): Response {
         $product_id = $args['product_id'];
         $product = $this->products_model->getProductById($product_id);
+
+        //* Step 2.b) Fetch the list of categories from the DB
+        $categories = $this->categories_model->getAll() ?? [];
+        // dd($product);
+
+        //* Step 3) Pass it to the view where the update/editing form filled with item info will be rendered
+
         $categories = $this->categories_model->getAll();
         $data = [
             'page_title' => 'Edit Product Details',
@@ -53,6 +71,11 @@ class ProductsController extends BaseController
         ];
         return $this->render($response, 'admin/products/productsEditView.php', $data);
     }
+    public function update(Request $request, Response $response, array $args): Response
+    {
+        //! Handle the submission of the edit form
+        //? Save the edited product info.
+        //* 1) Get the received form data from the request
 
     /**
      * update product
@@ -63,6 +86,15 @@ class ProductsController extends BaseController
         FlashMessage::success('Update Successful');
         return $this->redirect($request, $response, 'products.index');
     }
+    public function delete(Request $request, Response $response, array $args): Response
+    {
+
+        $product_info = $request->getParsedBody();
+        $product_id = $product_info["product_id"];
+        // dd("Editing category:" .  $category_id);
+        $this->products_model->deleteProduct($product_id);
+        FlashMessage::success('Product has been successfully deleted');
+        return $this->redirect($request, $response, 'products.index');
 
     public function delete(Request $request, Response $response, array $args): Response {
         return $response;

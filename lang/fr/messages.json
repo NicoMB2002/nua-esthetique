@@ -1,0 +1,44 @@
+{
+    "locale": "en",
+    "link": "Anglais",
+    "app": {},
+    "contact": {
+        "contact-us": "Contactez Nous",
+        "message-us": "Ecrivez nous!",
+        "send-message": "N'hésitez pas à nous envoyer un message si vous avez des questions ou rencontrez des problèmes avec vos commandes. Nous vous répondrons dans les plus brefs délais.",
+        "text-box": "Écrivez ici...",
+        "send": "Envoyer"
+    },
+    "admin": {
+        "products": {}
+    },
+    "nav": {
+        "products": "Produits",
+        "contact": "Contact",
+        "faq": "FAQ",
+        "promotions": "Promotions",
+        "about": "À propos",
+        "services": "Services",
+        "account": "Compte",
+        "cart": "Panier"
+    },
+    "home": {
+        "collection": "Nos collections",
+        "collection_not_found": "No categories found.",
+        "card_title": "Lip Blush",
+        "card_description": "Mettez en valeur votre beauté naturelle avec notre service de Lip Blush - une technique de maquillage semi-permanent qui ajoute une couleur douce et naturelle à vos lèvres. Elle corrige l'asymétrie, définit la forme des lèvres et offre un look frais et rajeuni sans avoir besoin de rouge à lèvres quotidien.",
+        "appointment_msg": "Prendre rendez-vous",
+        "appointment_link": "ici !"
+    },
+    "footer": {
+        "contact": "Nous contacter",
+        "links": "Liens utiles",
+        "refund": "Politique de remboursement",
+        "services": "Services",
+        "shipping": "Expédition et livraison",
+        "return": "Politique de retour",
+        "newsletter": "Bulletin",
+        "enter_email": "Entrez votre adresse e-mail",
+        "subscribe": "S'abonner"
+    }
+}

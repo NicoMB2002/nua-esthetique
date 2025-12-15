@@ -8,6 +8,8 @@ use App\Helpers\Core\PDOService;
 use App\Middleware\ExceptionMiddleware;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
+use App\Helpers\TranslationHelper;
+use App\Middleware\LocaleMiddleware;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -81,6 +83,20 @@ $definitions = [
             $container->get(PhpRenderer::class),
             null,
             (bool) $settings['display_error_details'],
+        );
+    },
+
+    TranslationHelper::class => function (ContainerInterface $container): TranslationHelper {
+        return new TranslationHelper(
+            APP_LANG_PATH,      // Path to language files
+            'en',               // Default locale (fallback language)
+            ['en', 'fr']        // Available locales (languages your app supports)
+        );
+    },
+
+    LocaleMiddleware::class => function (ContainerInterface $container): LocaleMiddleware {
+        return new LocaleMiddleware(
+            $container->get(TranslationHelper::class)  // Inject TranslationHelper dependency
         );
     },
 ];

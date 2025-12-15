@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Domain\Models\CategoriesModel;
 use App\Domain\Models\OrderModel;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -15,7 +16,7 @@ class HomeController extends BaseController
     //NOTE: Passing the entire container violates the Dependency Inversion Principle and creates a service locator anti-pattern.
     // However, it is a simple and effective way to pass the container to the controller given the small scope of the application and the fact that this application is to be used in a classroom setting where students are not yet familiar with the Dependency Inversion Principle
 
-    public function __construct(Container $container, private ProductsModel $products_model,private OrderModel $order_model)
+    public function __construct(Container $container, private ProductsModel $products_model, private CategoriesModel $categories_model, private OrderModel $order_model)
     {
         parent::__construct($container);
     }
@@ -27,6 +28,20 @@ class HomeController extends BaseController
     public function index(Request $request, Response $response, array $args): Response {
         $data = ['title'=> 'HomePage'];
         return $this->render($response, 'user/dashboard.php', $data);
+    public function index(Request $request, Response $response, array $args): Response {
+
+        $categories = $this->categories_model->getCategories();
+        $products   = $this->products_model->getProducts();
+
+        $data = [
+            'title'      => 'Home',
+            'products'   => $products,
+            'categories' => $categories
+        ];
+
+        // return $this->redirect($request, $response, 'products.index');
+
+        return $this->render($response, 'homeView.php', $data);
     }
 
     /**
@@ -40,6 +55,25 @@ class HomeController extends BaseController
             $data['products'] = $this->products_model->getProductsWithImages();
         }
          return $this->render($response, 'user/products.php', $data);
+
+    public function products(Request $request, Response $response, array $args): Response
+    {
+        $categories = $this->categories_model->getCategories();
+
+        if (isset($request->getQueryParams()['search'])) {
+            $products = $this->products_model
+                ->getProductsWithImagesSearch($request->getQueryParams()['search']);
+        } else {
+            $products = $this->products_model->getProductsWithImages();
+        }
+
+        $data = [
+            'title'      => 'HomePage',
+            'products'   => $products,
+            'categories' => $categories
+        ];
+
+        return $this->render($response, 'homeView.php', $data);
     }
 
     /**

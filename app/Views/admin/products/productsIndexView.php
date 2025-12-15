@@ -32,43 +32,44 @@ ViewHelper::loadAdminHeader($page_title);
         </div>
     </div>
     <div class="table-responsive small">
-<!--TODO: render the list of products/categories using an HTML table -->
+        <!--TODO: render the list of products/categories using an HTML table -->
 
-<h1>Products Management</h1>
-<br>
-<div><?= FlashMessage::render(); ?></div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Stock Quantity</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($products as $key => $product) {
+        <h1>Products Management</h1>
+        <br>
+        <div><?= FlashMessage::render(); ?></div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($products as $key => $product) {
 
                 ?>
-                <tr>
-                    <td><?= $product["product_id"] ?></td>
-                    <td> <?= htmlspecialchars($product["name"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["category_name"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["description"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["price"]) ?> </td>
-                    <td> <?= htmlspecialchars($product["quantity"]) ?> </td>
-                    <td>
-                        <a href="products/edit/<?= $product['product_id'] ?>" class="btn btn-success">Edit</a>
-                    </td>
-                </tr>
-            <?php }
-            ?>
-        </tbody>
-    </table>
+                    <tr>
+                        <td><?= $product["product_id"] ?></td>
+                        <td> <?= htmlspecialchars($product["name"]) ?> </td>
+                        <td> <?= htmlspecialchars($product["category_name"]) ?> </td>
+                        <td> <?= htmlspecialchars($product["description"]) ?> </td>
+                        <td> <?= htmlspecialchars($product["price"]) ?> </td>
+                        <td> <?= htmlspecialchars($product["quantity"]) ?> </td>
+                        <td>
+                            <a href="products/edit/<?= $product['product_id'] ?>" class="btn btn-success">Edit</a>
+                        </td>
+                        <td> <a href="products/delete/<?= $product['product_id'] ?>" class="btn btn-danger"> Delete</a></td>
+                    </tr>
+                <?php }
+                ?>
+            </tbody>
+        </table>
 
 
     </div>

@@ -13,7 +13,10 @@ use App\Controllers\ProductsController;
 use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
 use App\Controllers\HomeController;
+use App\Controllers\ContactController;
+use App\Controllers\LoginController;
 use App\Controllers\OrdersController;
+use App\Controllers\ServicesController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controllers\UploadController;
@@ -69,24 +72,37 @@ return static function (Slim\App $app): void {
     $app->get('/confirmOrder', [HomeController::class, 'createOrder']);
 
 
-    $app -> group('/admin', function ($group) {
+    $app->group('/admin', function ($group) {
         //add/ register admin routes
-        $group->get('/dashboard', [DashboardController::class, 'index']
+        $group->get(
+            '/dashboard',
+            [DashboardController::class, 'index']
         )->setName('dashboard.index');
-        $group->get('/products', [ProductsController::class, 'index']
+        $group->get(
+            '/products',
+            [ProductsController::class, 'index']
         )->setName('products.index');
 
-        $group->get('/products/edit/{product_id}', [ProductsController::class, 'edit']
+        $group->get(
+            '/products/edit/{product_id}',
+            [ProductsController::class, 'edit']
         )->setName('products.edit');
 
-        $group->post('/products/update/{product_id}', [ProductsController::class, 'update']
+        $group->post(
+            '/products/update/{product_id}',
+            [ProductsController::class, 'update']
         )->setName('products.update');
+
+        $group->get('/products/{product_id}/delete', [ProductsController::class, 'delete'])->setName('products.delete');
+
 
         $group->get('/categories', [CategoriesController::class, 'index'])
             ->setName('categories.index');
 
         $group->get('/categories/edit/{category_id}', [CategoriesController::class, 'edit'])
             ->setName('categories.index');
+        $group->get('/categories/delete/{category_id}', [ProductsController::class, 'delete']);
+
         $group->get('/customers', [CustomersController::class, 'index'])
             ->setName('customers.index');
         $group->get('/orders', [OrdersController::class, 'index'])
@@ -95,8 +111,15 @@ return static function (Slim\App $app): void {
             ->setName('admin.logout');
 
 
-    })->add(AdminAuthMiddleware::class);
 
+
+    });
+    // ->add(AdminAuthMiddleware::class);
+
+    $app->group('/user', function ($group) {
+        $group->get(
+            '/dashboard',
+            [HomeController::class, 'index']
     $app -> group('/user', function($group){
 
         $group->get('/logout', [AuthController::class, 'logout'])
@@ -104,9 +127,18 @@ return static function (Slim\App $app): void {
 
         $group->get('/dashboard', [HomeController::class, 'index']
         )->setName('user.dashboard');
+        $group->get(
+            '/home',
+            [HomeController::class, 'index']
 
         $group->get('/home', [HomeController::class, 'index']
         )->setName('user.dashboard');
+        $group->get(
+            '/products',
+            [HomeController::class, 'products']
+        )->setName('user.products');
+        $group->get('/logout', [AuthController::class, 'logout'])->setName('user.logout');
+        $group->get('/login', [HomeController::class, 'index']);
 
         $group->post('/add_item', [HomeController::class, 'addItem']);
 
@@ -119,11 +151,12 @@ return static function (Slim\App $app): void {
         $group->get('/orders', [HomeController::class, 'customerOrders']);
 
         $group->get('/orders/{id}', [HomeController::class, 'customerOrderDetails']);
-
     });
 
 
 
+    // $app->post('/processing', [LoginController::class, 'processLogin'])
+    // ->setName('processLogin');
     $app->get('/upload', [UploadController::class, 'index'])
         ->setName('upload.index'); // GET displays the form
 
@@ -159,9 +192,36 @@ return static function (Slim\App $app): void {
         ->add(TwoFactorMiddleware::class)
         ->add(AuthMiddleware::class);
 
+    $app->get('/register', [AuthController::class, 'register'])->setName('auth.register');
+    $app->post('/registerEmail', [AuthController::class, 'registerEmail'])->setName('auth.registerEmail');
+    $app->post('/register', [AuthController::class, 'store'])->setName('auth.store');
+
+    $app->get('/login', [AuthController::class, 'login'])->setName('auth.login');
+    $app->post('/login', [AuthController::class, 'authenticate'])->setName('auth.authenticate');
+
+    $app->get('/logout', [AuthController::class, 'logout'])->setName('auth.logout');
+
+    $app->get('/dashboard', [AuthController::class, 'dashboard'])
+        ->setName('user.dashboard');
+    // ->add(TwoFactorMiddleware::class)
+    // ->add(AuthMiddleware::class); // checks if user is logged in
+    $app->get('/home', [HomeController::class, 'products'])
+        ->setName('home.index');
+    $app->get('/', [HomeController::class, 'products'])
+        ->setName('home.index');
+
+    $app->get('/contact', [ContactController::class, 'index'])->setName('contact.index');
+    $app->post('/contact', [ContactController::class, 'submit'])->setName('contact.submit');
+    $app->get('/services', [ServicesController::class, 'index'])->setName('services.index');
+
+
+
+
 
     // A route to test runtime error handling and custom exceptions.
     $app->get('/error', function (Request $request, Response $response, $args) {
         throw new \Slim\Exception\HttpNotFoundException($request, "Something went wrong");
     });
+
+    $app->group('/user', function ($group) {});
 };
