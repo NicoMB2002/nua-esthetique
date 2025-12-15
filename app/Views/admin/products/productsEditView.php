@@ -8,7 +8,8 @@ $page_title = 'Edit Product Details';
 ViewHelper::loadAdminHeader($page_title);
 $product = $data["product"];
 $categories = $data["categories"];
-// dd($product)
+// dd($product);
+// dd($categories);
 $options = ViewHelper::renderSelectOptions($categories, $product["category_id"], 'id', 'name');
 ?>
 
