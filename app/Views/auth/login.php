@@ -12,7 +12,7 @@ ViewHelper::loadHeader($page_title);
         <div class="col-5">
             <!-- TODO:put image from db -->
             <div id="login-image">
-                <img src="<?= APP_BASE_URL?>/public/assets/resources/images/nuaClient.jpg" alt="NuaClient" width="400" height="600">
+                <img src="<?= APP_BASE_URL?>/public/assets/resources/images/NuaLogin.png" alt="NuaClient" width="400" height="600">
             </div>
 
         </div>
@@ -41,8 +41,9 @@ ViewHelper::loadHeader($page_title);
                     Login
                 </button>
             </form>
+            <br>
             <div>
-                <p class="fs-6 text-decoration-underline text-center">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
+                <p class="fs-6 text-decoration-underline">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
             </div>
         </div>
         <!-- closes form(left side) -->

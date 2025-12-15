@@ -67,6 +67,19 @@
     width: 110px;
 }
 
+.navBar .nav-link,
+.navBar .nav-link:hover,
+.navBar .nav-link:focus,
+.navBar .nav-link.active {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.navBar .nav-link:hover,
+.navBar .nav-link.active {
+    text-decoration: underline;
+}
+
 /* footer*/
 .footer {
   background-color: #000;
