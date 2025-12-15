@@ -18,7 +18,7 @@ class UserModel extends BaseModel
     public function getUsers(): mixed
     {
         $sql = "SELECT * FROM {$this->users_table} ";
-        $users = $this->selectALl($sql);
+        $users = $this->selectAll($sql);
         return $users;
     }
 

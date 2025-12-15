@@ -91,6 +91,8 @@ ViewHelper::loadHeader($data['title']);
 
 </script>
 
+<br><br><br><br>
+
 <?php
 $categories = $categories ?? [];
 ?>
@@ -124,6 +126,31 @@ $categories = $categories ?? [];
         <?php endif; ?>
     </div>
 </section>
+
+<br><br><br><br>
+
+<div class="d-flex justify-content-center my-5">
+  <div class="card mb-3 shadow-lg" style="width: 60%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="<?= APP_BASE_URL?>/public/assets/resources/images/LipBlush.png" class="img-fluid rounded-start" alt="Beauty Studio" style="height:400px; width: 600px; object-fit:cover;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title fw-bold" style="font-size: 40px;">Lip Blush</h2>
+          <br><br>
+          <p class="card-text" style="font-size: 25px;">
+            Enhance your natural beauty with our <strong>Lip Blush</strong> service - a semi-permanent makeup technique
+            that adds soft, natural color to your lips. It corrects asymmetry, defines the lip shape, and gives a
+            youthful, fresh look without the need for daily lipstick.
+          </p>
+          <br>
+          <p style="font-size: 15px;">Book an appointment <a href="">here!</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <?= FlashMessage::render()?>
