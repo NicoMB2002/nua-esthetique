@@ -55,7 +55,7 @@
 
     <div class="nav-icons">
 
-        <a href="<?= APP_BASE_URL?>/user/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
+        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
         <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
 
     </div>

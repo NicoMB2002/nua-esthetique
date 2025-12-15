@@ -21,7 +21,8 @@ class TwoFactorAuthModel extends BaseModel
         // HINT: Use $this->selectOne() method from BaseModel
         // SQL: SELECT * FROM two_factor_auth WHERE user_id = ?
         // Return the result, or null if false
-        $result = $this->selectOne('SELECT 1 FROM `two_factor_auth WHERE user_id = ?`', [$userId]);
+        $sql = 'SELECT * FROM `two_factor_auth` WHERE `user_id` = ?';
+        $result = $this->selectOne($sql, [$userId]);
 
         return $result == false ? null : $result; // Replace with your implementation
     }
@@ -39,7 +40,7 @@ class TwoFactorAuthModel extends BaseModel
         // HINT: Use $this->execute() for INSERT
         // Fields: user_id, secret, enabled (default false)
         // Return $this->lastInsertId()
-        $sql = 'INSERT INTO `two_factor_auth` VALUES(NULL, ?, ?)';
+        $sql = 'INSERT INTO `two_factor_auth`(id, user_id, secret) VALUE (NULL, ?, ?)';
 
         $this->execute($sql, [$userId, $secret]);
 
@@ -56,7 +57,7 @@ class TwoFactorAuthModel extends BaseModel
     {
         // TODO: Update the record to set enabled = true and enabled_at = NOW()
         // HINT: Use $this->execute() and check rowCount() > 0
-        $sql = 'UPDATE `two_factor_auth SET `enabled`=?, `enabled_at`=NOW() WHERE user_id = ?';
+        $sql = 'UPDATE `two_factor_auth` SET `enabled`=?, `enabled_at`=NOW() WHERE user_id = ?';
 
         $rowCount = $this->execute($sql, [true, $userId]);
 
@@ -73,7 +74,7 @@ class TwoFactorAuthModel extends BaseModel
     {
         // TODO: Update the record to set enabled = false
         // HINT: Use $this->execute() and check rowCount() > 0
-        $sql = 'UPDATE `two_factor_auth SET `enabled`=?, WHERE user_id = ?';
+        $sql = 'UPDATE `two_factor_auth` SET enabled=?, WHERE user_id = ?';
 
         $rowCount = $this->execute($sql, [false, $userId]);
 
@@ -92,7 +93,10 @@ class TwoFactorAuthModel extends BaseModel
         // HINT: Use $this->selectOne() and check the 'enabled' field
         $result = $this->selectOne('SELECT `enabled` FROM `two_factor_auth` WHERE user_id = ?', [$userId]);
 
-        return (bool) $result['enabled']??false; // Replace with your implementation
+        if (empty($result)) {
+            return false;
+        }
+        return (bool) $result['enabled']; // Replace with your implementation
     }
 
     /**
