@@ -3,11 +3,12 @@
     "link": "French",
     "app": {},
     "contact": {
-        "contact-us": "Contactez-nous",
+        "contact-us": "Contactez Nous",
+         "message-us": "Ecrivez nous!",
         "send-message": "N'hésitez pas à nous envoyer un message si vous avez des questions ou rencontrez des problèmes avec vos commandes. Nous vous répondrons dans les plus brefs délais.",
-        "cart": "Cart",
-        "login": "Login",
-        "register": "Register"
+        "text-box": "Écrivez ici...",
+        "send": "Envoyer"
+
     },
     "admin" :{
         "products" : {

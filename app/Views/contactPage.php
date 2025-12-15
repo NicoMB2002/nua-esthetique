@@ -1,10 +1,12 @@
 <?php
 
 use App\Helpers\FlashMessage;
+use App\Helpers\TranslationHelper;
 use App\Helpers\ViewHelper;
 
 
 ViewHelper::loadHeader($data['title']);
+TranslationHelper::loadtranslations();
 ?>
 <div class="container">
     <div class="">
@@ -38,7 +40,7 @@ ViewHelper::loadHeader($data['title']);
             <br>
             <textarea name="message-box"
                 class="form-control" id="contact-message" rows="10" placeholder="Write here..." required></textarea>
-            <button type="submit" class="btn btn-info w-40">Send</button>
+            <button type="submit" class="btn btn-info w-40">hs(trans("contact.send"))</button>
         </form>
 
     </div>
