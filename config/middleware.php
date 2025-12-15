@@ -3,18 +3,13 @@
 declare(strict_types=1);
 
 use App\Middleware\ExceptionMiddleware;
+use App\Middleware\LocaleMiddleware;
 use App\Middleware\SessionMiddleware;
+use App\Middleware\TwoFactorMiddleware;
 use Slim\App;
 
 return function (App $app) {
     //TODO: Add your middleware here.
-
-    //Option 1:
-    $sessionMiddleware = new SessionMiddleware();
-    $app->add($sessionMiddleware);
-
-    //Option 2:
-    // $app->add(SessionMiddleware::class);
 
     $app->addBodyParsingMiddleware();
     $app->addRoutingMiddleware();
@@ -24,5 +19,11 @@ return function (App $app) {
     // Add your middleware here.
     // Start the session at the application level.
     //$app->add(SessionStartMiddleware::class);
+    $app->add(LocaleMiddleware::class);
+
+    $app->add(SessionMiddleware::class);
+
+    $app->add(TwoFactorMiddleware::class);
+
     $app->add(ExceptionMiddleware::class);
 };

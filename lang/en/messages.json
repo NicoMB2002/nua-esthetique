@@ -8,14 +8,10 @@
         "send-message": "Send us an message for any doubt or problems you have with your orders. We will reach back to you as soon as possible.",
         "cart": "Write here...",
         "send": "Send"
-
     },
-    "admin" :{
-        "products" : {
-
-        }
+    "admin": {
+        "products": {}
     },
-
     "nav": {
         "products": "Products",
         "contact": "Contact",
@@ -44,6 +40,5 @@
         "newsletter": "Newsletter",
         "enter_email": "Enter your email",
         "subscribe": "Subscribe"
-}
-
+    }
 }

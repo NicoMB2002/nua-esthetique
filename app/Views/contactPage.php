@@ -6,11 +6,11 @@ use App\Helpers\ViewHelper;
 
 
 ViewHelper::loadHeader($data['title']);
-TranslationHelper::loadtranslations();
+TranslationHelper::class;
 ?>
 <div class="container">
     <div class="">
-        <h1 class="text-center mb-4">Contact Us</h1>
+        <h1 class="text-center mb-4"><?= hs(trans('contact.contact-us')); ?></h1>
     </div>
     <!-- <div class="group">
         <div class="rectangle-3"></div>
@@ -28,26 +28,25 @@ TranslationHelper::loadtranslations();
         <img class="rectangle-5" src="img/rectangle-6.png" />
     </div>
     <div class="text-wrapper-5 col-lg-6">
-        <h2>Message Us!</h2>
+        <h2><?= hs(trans('contact.message-us')); ?></h2>
         <br>
         <p class="text-secondary">
-            Send us an message for any doubt or problems you have with your orders. We will reach back to you as soon as
-            possible.
+            <?= hs(trans('contact.send-message')); ?>
         </p>
         <br>
         <form action="contact" method="post" style="max-width: 500px;" class="">
             <label class="form-label"> To: info@nuaesthetique.com</label>
             <br>
             <textarea name="message-box"
-                class="form-control" id="contact-message" rows="10" placeholder="Write here..." required></textarea>
-            <button type="submit" class="btn btn-info w-40">hs(trans("contact.send"))</button>
+                class="form-control" id="contact-message" rows="10" placeholder=<?= hs(trans('contact.text-box')); ?> required></textarea>
+            <button type="submit" class="btn btn-info w-40"><?= hs(trans('contact.send')); ?></button>
         </form>
 
     </div>
 
 </div>
 
-<style>
+<!-- <style>
     .contact-page {
         max-width: 1200px;
         margin: 0 auto;
@@ -78,7 +77,7 @@ TranslationHelper::loadtranslations();
             padding: 10px;
         }
     }
-</style>
+</style> -->
 
 
 

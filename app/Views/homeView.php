@@ -97,7 +97,7 @@ ViewHelper::loadHeader($data['title']);
 $categories = $categories ?? [];
 ?>
 <section class="container my-5">
-    <h2 class="mb-4">Our collections</h2>
+    <h2 class="mb-4"><?= trans('nav.collection'); ?></h2>
 
     <div class="row g-4 justify-content-center">
         <?php if (!empty($categories)): ?>
@@ -122,7 +122,7 @@ $categories = $categories ?? [];
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p class="text-center">No categories found.</p>
+            <p class="text-center"><?= trans('home.collection_not_found'); ?></p>
         <?php endif; ?>
     </div>
 </section>
@@ -137,15 +137,13 @@ $categories = $categories ?? [];
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h2 class="card-title fw-bold" style="font-size: 40px;">Lip Blush</h2>
+          <h2 class="card-title fw-bold" style="font-size: 40px;"><?= trans('home.card_title'); ?></h2>
           <br><br>
           <p class="card-text" style="font-size: 25px;">
-            Enhance your natural beauty with our <strong>Lip Blush</strong> service - a semi-permanent makeup technique
-            that adds soft, natural color to your lips. It corrects asymmetry, defines the lip shape, and gives a
-            youthful, fresh look without the need for daily lipstick.
+            <?= trans('home.card_description'); ?>
           </p>
           <br>
-          <p style="font-size: 15px;">Book an appointment <a href="">here!</a></p>
+          <p style="font-size: 15px;"><?= trans('home.appointment_msg'); ?> <a href=""><?= trans('home.appointment_link'); ?></a></p>
         </div>
       </div>
     </div>
