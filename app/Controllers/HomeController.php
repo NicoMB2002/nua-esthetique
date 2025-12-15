@@ -26,9 +26,6 @@ class HomeController extends BaseController
      * Display customer Home page
      */
     public function index(Request $request, Response $response, array $args): Response {
-        $data = ['title'=> 'HomePage'];
-        return $this->render($response, 'user/dashboard.php', $data);
-    public function index(Request $request, Response $response, array $args): Response {
 
         $categories = $this->categories_model->getCategories();
         $products   = $this->products_model->getProducts();
@@ -47,14 +44,6 @@ class HomeController extends BaseController
     /**
      * Display customer product page
      */
-    public function products(Request $request, Response $response, array $args): Response {
-        $data = ['title'=> 'HomePage'];
-        if(isset($request->getQueryParams()['search'])){
-            $data['products'] = $this->products_model->getProductsWithImagesSearch($request->getQueryParams()['search']);
-        }else {
-            $data['products'] = $this->products_model->getProductsWithImages();
-        }
-         return $this->render($response, 'user/products.php', $data);
 
     public function products(Request $request, Response $response, array $args): Response
     {

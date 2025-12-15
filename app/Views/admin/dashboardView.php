@@ -9,7 +9,7 @@ $user = SessionManager::get('user'); ?>
 
 <div class="container" style="max-width: 800px; margin: 50px auto;">
     <h1>Dashboard</h1>
-    <div><?= FlashMessage::render(); ?></div>
+    <div > <?= FlashMessage::render(); ?></div>
 
     <div class="welcome-section">
         <h2>Welcome, <?= htmlspecialchars(SessionManager::get('user_name') ?? 'User') ?>!</h2>

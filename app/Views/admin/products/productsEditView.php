@@ -40,6 +40,10 @@ $options = ViewHelper::renderSelectOptions($categories, $product["category_id"],
     <label for="inputQuantity" class="form-label">Quantity:</label>
     <input required type="text" value="<?= $product["quantity"] ?>" name="quantity" class="form-control" id="inputQuantity">
   </div>
+    <div class="col-md-2">
+    <label for="inputPromotion" class="form-label">Promotion:</label>
+    <input required type="text" value="<?=$product["promotion"] ?? 0?>" name="promotion" class="form-control" id="inputPromotion">
+  </div>
   <div class="col-12">
     <button type="submit" class="btn btn-success">Save</button>
     <a class="btn btn-danger" href="<?= APP_ADMIN_URL ?>/products"> Cancel</a>
@@ -47,7 +51,6 @@ $options = ViewHelper::renderSelectOptions($categories, $product["category_id"],
 </form>
 
 <?php
-
 ViewHelper::loadJsScripts();
 //TODO: We need to load an admin-specific footer.
 ViewHelper::loadAdminFooter();

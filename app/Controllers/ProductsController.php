@@ -23,11 +23,6 @@ class ProductsController extends BaseController
      */
     public function index(Request $request, Response $response, array $args): Response
     {
-        //* 1) Fetch from the DB.
-        $products = $this->products_model->getProducts() ?? [];
-
-        //* 2) Prepare the data to be passed to the view.
-        //!NOTE: Must be a well-structured associative array.
         $products = $this->products_model->getProducts();
         $data = [
             'title' => 'List of Products',
@@ -45,10 +40,6 @@ class ProductsController extends BaseController
     {
         return $response;
     }
-    public function edit(Request $request, Response $response, array $args): Response
-    {
-        //* Step 1) Get the item id to be edited from the query string params section of the URI
-        // dd("Editing the product: " . $product_id['id']);
 
     /**
      * Display edit product page
@@ -71,11 +62,7 @@ class ProductsController extends BaseController
         ];
         return $this->render($response, 'admin/products/productsEditView.php', $data);
     }
-    public function update(Request $request, Response $response, array $args): Response
-    {
-        //! Handle the submission of the edit form
-        //? Save the edited product info.
-        //* 1) Get the received form data from the request
+
 
     /**
      * update product
@@ -95,9 +82,6 @@ class ProductsController extends BaseController
         $this->products_model->deleteProduct($product_id);
         FlashMessage::success('Product has been successfully deleted');
         return $this->redirect($request, $response, 'products.index');
-
-    public function delete(Request $request, Response $response, array $args): Response {
-        return $response;
     }
 
 }

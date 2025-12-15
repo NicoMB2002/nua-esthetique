@@ -46,7 +46,12 @@ ViewHelper::loadHeader($data['title']);
                     <div class="card-body">
                         <h5 class="card-title"><?= hs($product['name']."") ?></h5>
                         <p class="card-text"><?= hs(substr($product['description'], 0, 100)) ?>...</p>
-                        <p class="fw-bold text-success">$<?= hs(number_format($product['price'], 2)) ?></p>
+                        <?php if ($product['promotion']?? 0>0): ?>
+                            <p class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></p>
+                            <p class="fw-bold text-success">$<?= hs(number_format(($product['price'] * $product['promotion'] )/100, 2)) ?></p>
+                            <?php else: ?>
+                             <p class="fw-bold text-success">$<?= hs(number_format($product['price'], 2)) ?></p>
+                       <?php endif; ?>
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer">
@@ -106,7 +111,7 @@ $categories = $categories ?? [];
                     <div class="card h-100 shadow-sm border-0 bg-dark text-white" style="width: 18rem;">
                         <a href="categories/<?= $category['id'] ?>">
                             <img
-                                src="/uploads/products/<?= htmlspecialchars($category['file_path'] ?? 'default.jpg') ?>"
+                                src="<?= APP_BASE_URL ?>/<?= htmlspecialchars($category['file_path'] ?? 'default.jpg') ?>"
                                 class="card-img-top"
                                 alt="<?= htmlspecialchars($category['name']) ?>"
                                 style="height:220px; object-fit:cover;"
