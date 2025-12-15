@@ -36,19 +36,40 @@
         </a>
 
         <ul class="nav">
-        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/products">Products</a>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/products"><?= trans('nav.products'); ?></a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact"><?= trans('nav.contact'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.faq'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.promotions'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.services'); ?></a></li>
       </ul>
 
     <div class="nav-icons">
 
-        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
-        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
+        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> <?= trans('nav.account'); ?></button></a>
+        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> <?= trans('nav.cart'); ?></button></a>
+
+        <div class="language-switcher">
+            <?php
+            // Get current locale from global translator
+            global $translator;
+            $currentLocale = $translator->getLocale();
+            $availableLocales = $translator->getAvailableLocales();
+            ?>
+
+            <?php foreach ($availableLocales as $locale): ?>
+                <?php if ($locale !== $currentLocale): ?>
+                    <a href="?lang=<?= hs($locale) ?>" class="lang-link">
+                        <?= $locale === 'en' ? 'English' : 'Français' ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <span class="current-lang">
+                <?= $currentLocale === 'en' ? '🇬🇧 English' : '🇫🇷 Français' ?>
+            </span>
+        </div>
 
     </div>
 

@@ -1,0 +1,19 @@
+{
+    "nav": {
+        "products": "Products",
+        "contact": "Contact",
+        "faq": "FAQ",
+        "promotions": "Promotions",
+        "about": "About",
+        "services": "Services",
+        "account": "Account",
+        "cart": "Cart"
+    },
+    "home": {
+        "collection": "Our collections",
+        "card_title": "Lip Blush",
+        "card_description": "Enhance your natural beauty with our Lip Blush service - a semi-permanent makeup technique that adds soft, natural color to your lips. It corrects asymmetry, defines the lip shape, and gives a youthful, fresh look without the need for daily lipstick.",
+        "appointment_msg": "Book an appointment",
+        "appointment_link": "here!"
+    }
+}

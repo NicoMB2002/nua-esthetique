@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "products": "Produits",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "promotions": "Promotions",
+    "about": "À propos",
+    "services": "Services",
+    "account": "Compte",
+    "cart": "Panier"
+  },
+  "home": {
+    "collection": "Nos collections",
+    "card_title": "Lip Blush",
+    "card_description": "Mettez en valeur votre beauté naturelle avec notre service de Lip Blush - une technique de maquillage semi-permanent qui ajoute une couleur douce et naturelle à vos lèvres. Elle corrige l'asymétrie, définit la forme des lèvres et offre un look frais et rajeuni sans avoir besoin de rouge à lèvres quotidien.",
+    "appointment_msg": "Prendre rendez-vous",
+    "appointment_link": "ici !"
+  }
+}
