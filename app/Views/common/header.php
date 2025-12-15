@@ -42,7 +42,7 @@
         <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.faq'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.promotions'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.services'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="services"><?= trans('nav.services'); ?></a></li>
       </ul>
 
     <div class="nav-icons">

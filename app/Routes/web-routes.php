@@ -16,6 +16,7 @@ use App\Controllers\HomeController;
 use App\Controllers\ContactController;
 use App\Controllers\LoginController;
 use App\Controllers\OrdersController;
+use App\Controllers\ServicesController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Controllers\UploadController;
@@ -159,7 +160,9 @@ return static function (Slim\App $app): void {
     $app->get('/', [HomeController::class, 'products'])
         ->setName('home.index');
 
-        $app->get('/contact', [ContactController::class, 'index'])->setName('contact.index');
+    $app->get('/contact', [ContactController::class, 'index'])->setName('contact.index');
+    $app->post('/contact', [ContactController::class, 'submit'])->setName('contact.submit');
+    $app->get('/services', [ServicesController::class, 'index'])->setName('services.index');
 
 
 
