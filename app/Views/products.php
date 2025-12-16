@@ -46,9 +46,9 @@ ViewHelper::loadHeader($data['title']);
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer text-bg-dark">
+                        <a href="<?= APP_BASE_URL?>/product/<?=$product['product_id']?>" class="btn btn-primary "> View Details</a>
                         <form method="post" action="add_item " style="float:right;">
-                            <input type="hidden" name="id" value='<?=$product['product_id']?>' >
-
+                        <input type="hidden" name="id" value='<?=$product['product_id']?>' >
                          <input type="submit" class="btn btn-light " value="Add To Cart">
                         </form>
                     </div>

@@ -34,10 +34,9 @@ use App\Helpers\SessionManager;
 <header class="navBar">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <a href="<?= APP_BASE_URL?>/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <img src="<?= APP_BASE_URL?>/public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
         </a>
-
         <ul class="nav">
         <li class="nav-item">
           <a class="nav-link" href="<?= APP_BASE_URL?>/products"><?= trans('nav.products'); ?></a>
@@ -56,10 +55,8 @@ use App\Helpers\SessionManager;
             href="<?= APP_BASE_URL?>/dashboard"
         <?php else: ?>
             href="<?= APP_BASE_URL?>/login"
-        <?php endif; ?>><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
-        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
-        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> <?= trans('nav.account'); ?></button></a>
-        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> <?= trans('nav.cart'); ?></button></a>
+        <?php endif; ?>><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> <?= trans('nav.account'); ?></button></a>
+        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> <?= trans('nav.cart')?></button></a>
 
 
                 <div class="language-switcher">
@@ -101,7 +98,7 @@ use App\Helpers\SessionManager;
     <?php
  $total = 0.0;
 $cart = SessionManager::get('cart');
- foreach ($cart as $name => $item):
+ foreach ($cart ?? [] as $name => $item):
     $total += ($item['price'] ?? 1 * (int) $item['amount'])
  ?>
  <li class="list-group-item text-bg-dark">

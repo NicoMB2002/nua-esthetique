@@ -3,9 +3,9 @@ use App\Helpers\ViewHelper;
 
 $page_title = $data['title'];
 $product    = $data['product'];
-$image      = $data['image'] ?? null;
-
+$image      = $data['images'] ?? null;
 ViewHelper::loadHeader($data['title']);
+
 ?>
 
 <div class="container my-5">
@@ -13,8 +13,9 @@ ViewHelper::loadHeader($data['title']);
 
         <div class="col-md-6">
             <img
-                src="<?= htmlspecialchars($image ?? APP_BASE_URL . '/images/default-product.png') ?>"
-                class="img-fluid rounded shadow"
+                src="<?= htmlspecialchars(APP_BASE_URL.'/'.$image ?? APP_BASE_URL . '/images/default-product.png') ?>"
+                class="img-fluid rounded shadow w-75 mh-100"
+
                 alt="<?= htmlspecialchars($product['name']) ?>"
             >
         </div>
@@ -27,7 +28,12 @@ ViewHelper::loadHeader($data['title']);
             </p>
 
             <h3 class="text-success mt-3">
-                $<?= number_format($product['price'], 2) ?>
+                            <?php if ($product['promotion']?? 0>0): ?>
+                            <h3 class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></h3>
+                            <h3 class="fw-bold text-success">$<?= hs(number_format(($product['price'] * $product['promotion'] )/100, 2)) ?></h3>
+                            <?php else: ?>
+                             <h3 class="fw-bold text">$<?= hs(number_format($product['price'], 2)) ?></h3>
+                       <?php endif; ?>
             </h3>
 
             <p class="mt-3">
@@ -38,8 +44,8 @@ ViewHelper::loadHeader($data['title']);
                 <strong>Stock:</strong> <?= htmlspecialchars($product['quantity']) ?>
             </p>
 
-            <form method="POST" action="/cart/add" class="mt-4">
-                <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+            <form method="POST" action="<?= APP_BASE_URL?>/add_item" class="mt-4">
+                <input type="hidden" name="id" value="<?= $product['product_id'] ?>">
                 <button type="submit" class="btn btn-dark btn-lg">
                     Add to Cart
                 </button>
