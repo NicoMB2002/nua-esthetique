@@ -39,12 +39,8 @@ use App\Helpers\SessionManager;
         </a>
 
         <ul class="nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="<?= APP_BASE_URL?>/products" data-bs-toggle="dropdown">Products</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Lashes</a></li>
-            <li><a class="dropdown-item" href="#">Tweezers</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= APP_BASE_URL?>/products"><?= trans('nav.products'); ?></a>
         </li>
         <li class="nav-item"><a class="nav-link" href="contact"><?= trans('nav.contact'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.faq'); ?></a></li>
@@ -54,10 +50,7 @@ use App\Helpers\SessionManager;
       </ul>
 
     <div class="nav-icons">
-
         <a <?php
-
-
 
         if (SessionManager::has('user_id')): ?>
             href="<?= APP_BASE_URL?>/dashboard"
@@ -65,6 +58,8 @@ use App\Helpers\SessionManager;
             href="<?= APP_BASE_URL?>/login"
         <?php endif; ?>><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
         <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
+        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> <?= trans('nav.account'); ?></button></a>
+        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> <?= trans('nav.cart'); ?></button></a>
 
 
                 <div class="language-switcher">

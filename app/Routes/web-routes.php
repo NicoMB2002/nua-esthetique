@@ -60,6 +60,9 @@ return static function (Slim\App $app): void {
     $app->get('/products', [HomeController::class, 'products']
         )->setName('user.products');
 
+    $app->get('/product/{id}', [ProductsController::class, 'show'])
+    ->setName('product.show');
+    
     $app->post('/add_item', [HomeController::class, 'addItem']);
 
     $app->post('/remove_item', [HomeController::class, 'removeItem']);

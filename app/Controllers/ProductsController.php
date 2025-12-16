@@ -34,7 +34,22 @@ class ProductsController extends BaseController
 
     public function show(Request $request, Response $response, array $args): Response
     {
-        return $response;
+        $productId = (int) $args['id'];
+        $product = $this->products_model->getProductByID($productId);
+        $images = $this->products_model->getImageForProduct($productId);
+
+
+        if (!$product) {
+            FlashMessage::error("Product not found.");
+            return $this->redirect($request, $response, 'products.list');
+        }
+
+        return $this->render($response, 'productDetails.php', [
+            'title' => $product['name'],
+            'product' => $product,
+            'images'  => $images
+        ]);
+
     }
     public function create(Request $request, Response $response, array $args): Response
     {
