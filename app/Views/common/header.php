@@ -96,22 +96,24 @@
  use App\Helpers\SessionManager;
  $total = 0.0;
 $cart = SessionManager::get('cart');
- foreach ($cart as $item):
-    $total += ($item[0]['price'] *count($item))
+ foreach ($cart as $name => $item):
+    $total += ($item['price'] ?? 1 * (int) $item['amount'])
  ?>
  <li class="list-group-item text-bg-dark">
- <?= $item[0]['name']?>
+ <?= $name?>
  -
- <?= $item[0]['price']?> $
- X <?= count($item)?? 0?>
+ <?= $item['price']?> $
+ X <?= $item['amount']?? 0?>
  <br>
  <form method="post" action="remove_item">
-    <input type="hidden" name="name" value="<?=$item[0]['name']?>">
+    <input type="hidden" name="name" value="<?=$name?>">
           <input  type ='submit' class="btn btn-danger" value="Delete">
         </form>
     <form method="post" action="add_item">
-    <input type="hidden" name="id" value='<?=$item[0]['product_id']?>' >
+    <input type="hidden" name="name" value='<?=$name?>' >
+    <input type="hidden" name="id" value='<?=$item['id']?>' >
     <input type="submit" class="btn btn-success btn-sm" value="Add">
+    <input style="width: 50px; height: 30px; float: right;" type="number" value="<?= $item['amount']?>"  name="amount" class="form-range" min="0" max="20">
   </form>
  </li>
  <br>

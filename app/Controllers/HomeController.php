@@ -72,10 +72,15 @@ class HomeController extends BaseController
         $id = $request->getParsedBody()['id'];
         $item = $this->products_model->getProductById((int) $id);
         $cart =  SessionManager::get('cart')?? [];
+
         if(isset($cart[$item['name']])){
-            array_push($cart[$item['name']],$item);
+              $cart[$item['name']]['amount'] = $request->getParsedBody()['amount']?? $cart[$item['name']]['amount']+1;
         }else{
-          $cart[$item['name']] = [$item];
+          $cart[$item['name']]= [
+                                    'id'=> $item['product_id'],
+                                    'amount'=> 1,
+                                    'price'=> $item['price']
+          ];
         }
         SessionManager::set('cart',$cart);
         return $this->redirect($request, $response, 'user.products');

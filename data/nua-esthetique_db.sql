@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 12, 2025 at 03:20 AM
+-- Generation Time: Dec 16, 2025 at 12:02 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -72,7 +72,8 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `tracking_number`, `order_date`
 (3, 2, '4467539', NULL),
 (4, 2, '3702401', NULL),
 (5, 2, '4603730', NULL),
-(6, 2, '6582169', NULL);
+(6, 2, '6582169', NULL),
+(7, 2, '5932015', NULL);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,9 @@ INSERT INTO `orders_products` (`product_id`, `order_id`, `quantity`) VALUES
 (5, 5, 1),
 (1, 6, 1),
 (2, 6, 1),
-(5, 6, 1);
+(5, 6, 1),
+(8, 7, 2),
+(1, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -115,6 +118,7 @@ CREATE TABLE `products` (
   `quantity` int(11) NOT NULL,
   `InStock` tinyint(1) NOT NULL DEFAULT 1,
   `description` text NOT NULL,
+  `promotion_percentage` int(11) DEFAULT NULL,
   `isBulk` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -122,15 +126,15 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `isBulk`) VALUES
-(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 0),
-(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 0),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0),
-(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 0),
-(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', 0),
-(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', 0),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', 0),
-(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', 0);
+INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `promotion_percentage`, `isBulk`) VALUES
+(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 40, 0),
+(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', NULL, 0),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', NULL, 0),
+(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', NULL, 0),
+(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', NULL, 0),
+(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', NULL, 0),
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', NULL, 0),
+(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -158,6 +162,18 @@ INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `is_primary`) VAL
 (6, 6, 'public\\assets\\images\\Mini_Fan.png', 1),
 (7, 8, 'public\\assets\\images\\Precision_Volume_Tweezer.png', 1),
 (8, 3, 'public\\assets\\images\\Tweezers.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promotions`
+--
+
+CREATE TABLE `promotions` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `percentage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -244,6 +260,13 @@ ALTER TABLE `product_images`
   ADD KEY `product_images_FK` (`product_id`);
 
 --
+-- Indexes for table `promotions`
+--
+ALTER TABLE `promotions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `promotions_product_id_FK` (`product_id`);
+
+--
 -- Indexes for table `two_factor_auth`
 --
 ALTER TABLE `two_factor_auth`
@@ -270,7 +293,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -283,6 +306,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `promotions`
+--
+ALTER TABLE `promotions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `two_factor_auth`
@@ -318,6 +347,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `promotions`
+--
+ALTER TABLE `promotions`
+  ADD CONSTRAINT `promotions_product_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `two_factor_auth`

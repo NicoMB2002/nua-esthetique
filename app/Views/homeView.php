@@ -50,7 +50,7 @@ ViewHelper::loadHeader($data['title']);
                         <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
                     </div>
                     <div class="card-footer text-bg-dark">
-                        <form method="post" action="add_item" style="float:right;">
+                        <form method="post" action="add_item " style="float:right;">
                             <input type="hidden" name="id" value='<?=$product['product_id']?>' >
 
                          <input type="submit" class="btn btn-light " value="Add To Cart">
