@@ -46,6 +46,21 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
+    public function getImageForProduct(int $productId): ?string
+    {
+        $query = "SELECT file_path
+            FROM product_images
+            WHERE product_id = :product_id
+            AND is_primary = 1
+            LIMIT 1";
+
+        $result = $this->selectOne($query, ['product_id' => $productId]);
+
+        return $result['file_path'] ?? null;
+    }
+
+
+
             public function getProductsWithImagesSearch(string $search){
         $query = "SELECT
                     p.product_id AS product_id,
