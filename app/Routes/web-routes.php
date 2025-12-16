@@ -104,7 +104,13 @@ return static function (Slim\App $app): void {
             [ProductsController::class, 'update']
         )->setName('products.update');
 
-        $group->get('/products/{product_id}/delete', [ProductsController::class, 'delete'])->setName('products.delete');
+        $group->get('/products/delete/{product_id}', [ProductsController::class, 'delete'])
+                ->setName('products.delete');
+
+        $group->get('/products/create',[ProductsController::class, 'create'])
+                ->setName('user.create');
+
+        $group->post('/products/store',[ProductsController::class, 'store']);
 
 
         $group->get('/categories', [CategoriesController::class, 'index'])
@@ -120,6 +126,10 @@ return static function (Slim\App $app): void {
 
         $group->get('/orders', [OrdersController::class, 'index'])
             ->setName('orders.index');
+
+        $group->get('/orders/delete/{id}', [OrdersController::class, 'delete'])
+            ->setName('orders.delete');
+
 
         $group->get('/promotions', [OrdersController::class, 'index'])
             ->setName('orders.index');
@@ -160,7 +170,7 @@ return static function (Slim\App $app): void {
 
         $group->get('/orders', [HomeController::class, 'customerOrders']);
 
-        $group->get('/orders/{id}', [HomeController::class, 'customerOrderDetails']);
+        $group->get('/orders/{order_id}', [HomeController::class, 'customerOrderDetails']);
     });
 
 

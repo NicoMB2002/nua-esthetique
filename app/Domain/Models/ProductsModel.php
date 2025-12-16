@@ -72,7 +72,6 @@ class ProductsModel extends BaseModel
         $query = "SELECT file_path
             FROM product_images
             WHERE product_id = :product_id
-            AND is_primary = 1
             LIMIT 1";
 
         $result = $this->selectOne($query, ['product_id' => $productId]);
@@ -136,23 +135,35 @@ class ProductsModel extends BaseModel
     }
 
 
-    public function insertProduct($info = []){
+    public function insertProduct(array $info,$filename){
     $query = "INSERT INTO products(
+            name,
+            category_id,
             price,
             quantity,
-            InStock,
-            description,
-            isBulk
+            description
         )
         VALUES(
+            :name,
+            :category,
             :price,
             :quantity,
-            :InStock,
-            :description,
-            :isBulk
+            :description
         )";
 
         $this->execute($query, $info);
+
+        $query = "INSERT INTO product_images(
+            product_id,
+            file_path
+        )
+        VALUES(
+            :product_id,
+            :file_path
+        )";
+
+        $this->execute($query, [ 'product_id'=> $this->lastInsertId(),
+                                'file_path' => 'public/assets/images/'.$filename]);
 
     }
 

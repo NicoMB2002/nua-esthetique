@@ -25,4 +25,11 @@ class OrdersController extends BaseController
         return $this->render($response, 'admin/orders/ordersIndexView.php', $data);
     }
 
+
+    public function delete(Request $request, Response $response, array $args): Response {
+
+         $this->order_model->deleteOrder($args['order_id']);
+
+        return $this->redirect($request, $response,"orders.index");
+    }
 }

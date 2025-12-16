@@ -15,13 +15,9 @@ ViewHelper::loadHeader($data['title']);
 
 <div style="margin-top: 60px;">
 
-  <?php for ($i = 0; $i < round(count($data['products'])/6); $i++): ?>
-            <?php if ($i == 0 ){?>
-                <div class="item active " data-bs-interval="4000">
-            <?php }else {?>
-                <div class="item " data-bs-interval="4000">
-            <?php } ?>
-    <?php for ($j = $i*6; $j < $i*6+6; $j++):
+  <?php for ($i = 0; $i < round(count($data['products'])/5); $i++): ?>
+            <div class=" mb-4">
+    <?php for ($j = $i*5; $j < $i*5+5; $j++):
     if (!isset($data['products'][$j])) {
     break 2;
     }
@@ -59,7 +55,7 @@ ViewHelper::loadHeader($data['title']);
     <?php endfor; ?>
  </div>
   <?php endfor; ?>
-</div>
+
 
 
 </div>
@@ -84,7 +80,7 @@ ViewHelper::loadHeader($data['title']);
 <?php
 $categories = $categories ?? [];
 ?>
-<section class="container my-5">
+<!--<section class="container my-5">
     <h2 class="mb-4"><?= trans('nav.collection'); ?></h2>
 
     <div class="row g-4 justify-content-center">
@@ -113,7 +109,7 @@ $categories = $categories ?? [];
             <p class="text-center"><?= trans('home.collection_not_found'); ?></p>
         <?php endif; ?>
     </div>
-</section>
+</section>-->
 
 <br><br><br><br>
 

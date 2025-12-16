@@ -9,7 +9,7 @@ use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Helpers\FlashMessage;
-
+use App\Helpers\FileUploadHelper;
 
 class ProductsController extends BaseController
 {
@@ -37,7 +37,7 @@ class ProductsController extends BaseController
         $productId = (int) $args['id'];
         $product = $this->products_model->getProductByID($productId);
         $images = $this->products_model->getImageForProduct($productId);
-
+        
 
         if (!$product) {
             FlashMessage::error("Product not found.");
@@ -51,9 +51,45 @@ class ProductsController extends BaseController
         ]);
 
     }
+
+    /**
+     * Display create product page
+     */
     public function create(Request $request, Response $response, array $args): Response
     {
-        return $response;
+            $data = ['title'=> 'Create Product'];
+            $data['categories'] = $this->categories_model->getAll() ?? [];
+        return $this->render($response, 'admin/products/productsCreateView.php', $data);
+    }
+
+        public function store(Request $request, Response $response, array $args): Response
+    {
+
+        $uploadedFiles = $request->getUploadedFiles();
+        $uploadedFile = $uploadedFiles['myfile'];
+        $config = [
+            'directory' => __DIR__ . '/../../public/assets/images',
+            'allowedTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+            'maxSize' => 2 * 1024 * 1024, // 2MB in bytes
+            'filenamePrefix' => 'upload_'
+        ];
+        $result = FileUploadHelper::upload($uploadedFile, $config);
+        if ($result->isSuccess()) {
+
+            $filename = $result->getData()['filename'];
+            if (!isset($_SESSION['uploaded_files'])) {
+                $_SESSION['uploaded_files'] = [];
+            }
+            $_SESSION['uploaded_files'][] = $filename;
+            FlashMessage::success($result->getMessage() . ": {$filename}");
+        } else {
+            FlashMessage::error($result->getMessage());
+        }
+
+
+        $this->products_model->insertProduct($request->getParsedBody(),$result->getData()['filename']);
+
+        return $this->redirect($request, $response, 'products.index');
     }
 
     /**
@@ -91,8 +127,7 @@ class ProductsController extends BaseController
     public function delete(Request $request, Response $response, array $args): Response
     {
 
-        $product_info = $request->getParsedBody();
-        $product_id = $product_info["product_id"];
+        $product_id = $args["product_id"];
         // dd("Editing category:" .  $category_id);
         $this->products_model->deleteProduct($product_id);
         FlashMessage::success('Product has been successfully deleted');
