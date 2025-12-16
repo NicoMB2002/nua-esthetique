@@ -127,22 +127,15 @@ class AuthController extends BaseController
         }
 
         // If validation passes, create the user
-        try {
+      try {
             // TODO: Create $userData array with keys:
             //       'first_name', 'last_name', 'username', 'email', 'password', 'role'
 
-            $userData = [
-                'first_name' => $firstName,
-                'last_name' => $lastName,
-                'username' => $username,
-                'email' => $email,
-                'password' => $password,
-                'role' => $role
-            ];
+
 
             // TODO: Call $this->userModel->createUser($userData)
             //       Store the returned user ID in $userId
-            $userId = $this->userModel->createUser($userData);
+            $userId = $this->userModel->createUser($formData);
 
             // TODO: Display success message using FlashMessage::success()
             //       Message: "Registration successful! Please log in."
@@ -151,14 +144,14 @@ class AuthController extends BaseController
 
             FlashMessage::success("Registration successful! Please log in.");
             return $this->redirect($request, $response, 'auth.login');
-        } catch (\Exception $e) {
+       } catch (\Exception $e) {
             // TODO: Display error message using FlashMessage::error()
             //       Message: "Registration failed. Please try again."
 
             // TODO: Redirect back to 'auth.register' route
             FlashMessage::error("Registration failed. Please try again.");
-            return $this->redirect($request, $response, 'auth.register');
-        }
+           return $this->redirect($request, $response, 'auth.register');
+}
     }
 
     /**

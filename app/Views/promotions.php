@@ -13,56 +13,78 @@ ViewHelper::loadHeader($data['title']);
       <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Search">
     </form>
 
-<div style="margin-top: 60px;">
+<!--Bootstrap carousel -->
+<div id="productCarousel" class="carousel slide" style="margin-top: 50px; margin-bottom: 100px;">
+  <div class="carousel-inner" role="listbox">
 
-  <?php for ($i = 0; $i < round(count($data['products'])/6); $i++): ?>
+    <?php for ($i = 0; $i < round(count($data['products'])); $i++): ?>
             <?php if ($i == 0 ){?>
                 <div class="item active " data-bs-interval="4000">
             <?php }else {?>
                 <div class="item " data-bs-interval="4000">
             <?php } ?>
-    <?php for ($j = $i*6; $j < $i*6+6; $j++):
+    <?php for ($j = $i; $j < $i+1; $j++):
     if (!isset($data['products'][$j])) {
     break 2;
     }
-        $product = $data['products'][$j] ?>
-            <div class="col-md-2 mb-4">
-                <div class="card h-100" style="width: 250px;">
-                    <img
-                        src="<?= hs(APP_BASE_URL.'/'.$product['path'] ?? '/images/placeholder.jpg') ?>"
-                        class="card-img-top"
-                        alt="<?= hs($product['name']."") ?>"
-                        style="height: 200px; object-fit: cover;"
-                    >
-                    <div class="card-body" style="height: 225px;">
-                        <h5 class="card-title"><?= hs($product['name']."") ?></h5>
-                        <p class="card-text"><?= hs(substr($product['description'], 0, 100)) ?>...</p>
-                        <?php if ($product['promotion']?? 0>0): ?>
-                            <p class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></p>
-                            <p class="fw-bold text-success">$<?= hs(number_format(($product['price'] -($product['price'] * $product['promotion'] )/100), 2)) ?></p>
-                            <?php else: ?>
-                             <p class="fw-bold text">$<?= hs(number_format($product['price'], 2)) ?></p>
-                       <?php endif; ?>
-                        <span class="badge bg-secondary"><?= hs($product['category_name'] ?? 'Uncategorized') ?></span>
-                    </div>
-                    <div class="card-footer text-bg-dark">
-                        <a href="<?= APP_BASE_URL?>/product/<?=$product['product_id']?>" class="btn btn-primary "> View Details</a>
-                        <form method="post" action="add_item " style="float:right;">
-                        <input type="hidden" name="id" value='<?=$product['product_id']?>' >
-                         <input type="submit" class="btn btn-light " value="Add To Cart">
-                        </form>
-                    </div>
-                </div>
-            </div>
+        $product = $data['products'][$j];
+        ?>
 
+
+<div class="card mx-auto  p-3 w-50 rounded-4"  style="background-color: var( --color-dark-beige);" style="height:450px;" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+                          <img
+                        src="<?= hs(APP_BASE_URL.'/'.$product['path'] ?? '/images/placeholder.jpg') ?>"
+                        class="rounded-5"
+                        alt="<?= hs($product['name']."") ?>"
+                        style=" height:430px; width: 300px; object-fit: cover;"
+                    >
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" >
+        <h2 class="card-title"><?= $product['name']?></h2>
+                    <h4 class="text-success mt-3">
+                            <?php if ($product['promotion']?? 0>0): ?>
+                            <h4 class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></h4>
+                            <h4 class="fw-bold text-success">$<?= hs(number_format(($product['price'] -($product['price'] * $product['promotion'] )/100), 2)) ?></h4>
+                            <?php else: ?>
+                             <h4 class="fw-bold text">$<?= hs(number_format($product['price'], 2)) ?></h4>
+                       <?php endif; ?>
+            </h4>
+        <p class="card-text"><?= $product['description']?></p>
+        <p class="card-text"><small class="text-body-secondary"></small></p>
+                    <form method="POST" action="<?= APP_BASE_URL?>/add_item" class="mt-4">
+                <input type="hidden" name="id" value="<?= $product['product_id'] ?>">
+                <button type="submit" class="btn btn-dark btn-lg">
+                    Add to Cart
+                </button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
 
     <?php endfor; ?>
  </div>
   <?php endfor; ?>
 </div>
 
-
 </div>
+</div>
+
+
+      <button id="prevBtn" class="left carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button id="nextBtn" class="right carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
 <script>
 
     $('#productCarousel').carousel();
@@ -128,7 +150,9 @@ $categories = $categories ?? [];
           <h2 class="card-title fw-bold" style="font-size: 40px;"><?= trans('home.card_title'); ?></h2>
           <br><br>
           <p class="card-text" style="font-size: 25px;">
+
             <?= trans('home.card_description'); ?>
+
           </p>
           <br>
           <p style="font-size: 15px;"><?= trans('home.appointment_msg'); ?> <a href=""><?= trans('home.appointment_link'); ?></a></p>

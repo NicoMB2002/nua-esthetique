@@ -64,6 +64,23 @@ class HomeController extends BaseController
         return $this->render($response, 'products.php', $data);
     }
 
+        public function promotions(Request $request, Response $response, array $args): Response
+    {
+             $categories = $this->categories_model->getCategories();
+
+
+            $products = $this->products_model->getPromotionsWithImages();
+
+
+        $data = [
+            'title'      => 'HomePage',
+            'products'   => $products,
+            'categories' => $categories
+        ];
+
+        return $this->render($response, 'promotions.php', $data);
+    }
+
     /**
      * Add Item to cart
      */
@@ -78,7 +95,9 @@ class HomeController extends BaseController
           $cart[$item['name']]= [
                                     'id'=> $item['product_id'],
                                     'amount'=> 1,
-                                    'price'=> $item['price']
+                                    'price'=> $item['price'],
+                                     'description'=> $item['description'],
+                                      'category_name'=> $item['category_name']
           ];
         }
         SessionManager::set('cart',$cart);
@@ -124,11 +143,12 @@ class HomeController extends BaseController
         ]);
         foreach ($cart as $item) {
         $this->order_model->insertProducts_Order([
-            'product_id' => $item[0]['product_id'],
+            'product_id' => $item['id'],
             'order_id' => $orderID,
-            'quantity' => count($item)
+            'quantity' => $item['amount']
         ]);
         }
+       SessionManager::set('cart',[]);
         return $this->redirect($request,$response,'user.products');
     }
 

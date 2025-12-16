@@ -30,7 +30,7 @@ ViewHelper::loadHeader($data['title']);
             <h3 class="text-success mt-3">
                             <?php if ($product['promotion']?? 0>0): ?>
                             <h3 class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></h3>
-                            <h3 class="fw-bold text-success">$<?= hs(number_format(($product['price'] * $product['promotion'] )/100, 2)) ?></h3>
+                            <h3 class="fw-bold text-success">$<?= hs(number_format(($product['price'] -($product['price'] * $product['promotion'] )/100), 2)) ?></h3>
                             <?php else: ?>
                              <h3 class="fw-bold text">$<?= hs(number_format($product['price'], 2)) ?></h3>
                        <?php endif; ?>

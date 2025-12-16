@@ -46,6 +46,27 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
+        public function getPromotionsWithImages(){
+        $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    p.promotion_percentage as promotion,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id
+                WHERE p.promotion_percentage > 0";
+        $products = $this->selectAll($query);
+        return $products;
+    }
+
     public function getImageForProduct(int $productId): ?string
     {
         $query = "SELECT file_path
