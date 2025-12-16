@@ -51,10 +51,10 @@ return static function (Slim\App $app): void {
         ->add(TwoFactorMiddleware::class)
         ->add(AuthMiddleware::class);
 
-    $app->get('/home', [HomeController::class, 'products'])
+    $app->get('/home', [HomeController::class, 'index'])
         ->setName('home.index');
 
-    $app->get('/', [HomeController::class, 'products'])
+    $app->get('/', [HomeController::class, 'index'])
         ->setName('home.index');
 
     $app->get('/products', [HomeController::class, 'products']

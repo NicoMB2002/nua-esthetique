@@ -14,12 +14,53 @@ ViewHelper::loadHeader($data['title']);
     </form>
 
 <!--Bootstrap carousel -->
-<div id="productCarousel" class="carousel slide" style="margin-top: 50px;">
+<div id="productCarousel" class="carousel slide" style="margin-top: 50px; margin-bottom: 100px;">
   <div class="carousel-inner" role="listbox">
 
+    <?php for ($i = 0; $i < round(count($data['products'])); $i++): ?>
+            <?php if ($i == 0 ){?>
+                <div class="item active " data-bs-interval="4000">
+            <?php }else {?>
+                <div class="item " data-bs-interval="4000">
+            <?php } ?>
+    <?php for ($j = $i; $j < $i+1; $j++):
+    if (!isset($data['products'][$j])) {
+    break 2;
+    }
+        $product = $data['products'][$j];
+        ?>
 
 
-    <?php for ($i = 0; $i < round(count($data['products'])/6); $i++): ?>
+<div class="card mx-auto  p-3 w-50 rounded-4"  style="background-color: var( --color-dark-beige);" style="height:450px;" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+                          <img
+                        src="<?= hs(APP_BASE_URL.'/'.$product['path'] ?? '/images/placeholder.jpg') ?>"
+                        class="rounded-5"
+                        alt="<?= hs($product['name']."") ?>"
+                        style=" height:430px; width: 300px; object-fit: cover;"
+                    >
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" >
+        <h5 class="card-title"><?= $product['name']?></h5>
+        <p class="card-text"><?= $product['description']?></p>
+        <p class="card-text"><small class="text-body-secondary"></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <?php endfor; ?>
+ </div>
+  <?php endfor; ?>
+</div>
+
+</div>
+</div>
+
+   <!--  <?php for ($i = 0; $i < round(count($data['products'])/6); $i++): ?>
             <?php if ($i == 0 ){?>
                 <div class="item active " data-bs-interval="4000">
             <?php }else {?>
@@ -64,7 +105,7 @@ ViewHelper::loadHeader($data['title']);
  </div>
   <?php endfor; ?>
 </div>
-
+                            -->
 
  <!-- <div class="carousel-indicators" >
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

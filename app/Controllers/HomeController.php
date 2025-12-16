@@ -28,8 +28,7 @@ class HomeController extends BaseController
     public function index(Request $request, Response $response, array $args): Response {
 
         $categories = $this->categories_model->getCategories();
-        $products   = $this->products_model->getProducts();
-
+        $products = $this->products_model->getProductsWithImages();
         $data = [
             'title'      => 'Home',
             'products'   => $products,
@@ -38,7 +37,7 @@ class HomeController extends BaseController
 
         // return $this->redirect($request, $response, 'products.index');
 
-        return $this->render($response, 'homeView.php', $data);
+        return $this->render($response, 'home.php', $data);
     }
 
     /**
@@ -62,7 +61,7 @@ class HomeController extends BaseController
             'categories' => $categories
         ];
 
-        return $this->render($response, 'homeView.php', $data);
+        return $this->render($response, 'products.php', $data);
     }
 
     /**

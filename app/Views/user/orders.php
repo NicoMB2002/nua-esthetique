@@ -26,7 +26,7 @@ ViewHelper::loadHeader($data['title']);
                     <td> <?= htmlspecialchars($order["order_id"]) ?> </td>
                     <td> <?= htmlspecialchars($order["tracking_number"]) ?> </td>
                     <td> <?= htmlspecialchars($order["order_date"]??'N/A') ?> </td>
-                    <td> <a href="orders\<?= htmlspecialchars($order["order_id"])?>" class="btn btn-primary">Details</a> </td>
+                    <td> <a href="<?= APP_BASE_URL?>/user/orders\<?= htmlspecialchars($order["order_id"])?>" class="btn btn-primary">Details</a> </td>
                 </tr>
             <?php }
             ?>
