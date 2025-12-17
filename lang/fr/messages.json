@@ -34,6 +34,21 @@
         "addToCartBtn": "Ajouter au Panier",
         "searchBtn": "Rechercher"
     },
+    "faq": {
+        "faq": "Foire aux questions",
+        "place_order_q": "Comment puis-je passer une commande ?",
+        "place_order_a": "La création d’un compte est requise pour passer une commande. Cela vous permet de suivre vos achats, de recevoir des promotions et de gérer vos informations en toute sécurité.",
+        "where_products_q": "D’où viennent vos produits ?",
+        "where_products_a": "Nos produits sont importés de l’étranger et soigneusement sélectionnés pour répondre aux normes professionnelles de beauté.",
+        "where_ship_q": "Où expédiez-vous vos produits ?",
+        "where_ship_a": "Nous expédions partout au Canada.",
+        "contact_q": "Comment puis-je vous contacter si j’ai une question ?",
+        "contact_a": "Vous pouvez nous contacter via la page Contactez-nous ou par courriel. Un représentant du service clientèle vous répondra dès que possible.",
+        "payments_q": "Quels modes de paiement acceptez-vous ?",
+        "payments_a": "Nous acceptons PayPal, une méthode de paiement en ligne sécurisée."
+    },
+
+
     "login": {
         "loginBtn": "Connexion",
         "password": "Mot de passe",

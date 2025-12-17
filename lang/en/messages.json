@@ -34,6 +34,19 @@
         "addToCartBtn": "Add to Cart",
         "searchBtn": "Search"
     },
+    "faq" :{
+        "faq": "Frequently Asked Questions",
+        "place_order_q": "How can I place an order?",
+        "place_order_a": "Creating an account is required to place an order. This allows you to track your purchases, receive promotions, and manage your information securely.",
+        "where_products_q": "Where do your products come from?",
+        "where_products_a": "Our products are imported from overseas and carefully selected to meet professional beauty standards.",
+        "where_ship_q": "Where do you ship?",
+        "where_ship_a": "We ship nationwide across Canada.",
+        "contact_q": "How can I contact you if I have a question?",
+        "contact_a": "You can contact us through the Contact Us page or by email. A support representative will respond as soon as possible.",
+        "payments_q": "What payment methods do you accept?",
+        "payments_a": "We accept PayPal, a secure online payment method."
+    },
     "login": {
         "loginBtn": "Login",
         "password": "Password",

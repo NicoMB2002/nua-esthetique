@@ -11,7 +11,7 @@ ViewHelper::loadHeader($data['title']);
 <div class="accordion-wrapper" style="max-width: 600px; margin: 0 auto;">
   <div class="text-center my-4">
     <h1>FAQ</h1>
-    <h3>Frequently Asked Questions</h3>
+    <h3><?= trans('faq.faq'); ?></h3>
   </div>
 
   <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -20,13 +20,13 @@ ViewHelper::loadHeader($data['title']);
         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                 aria-controls="panelsStayOpen-collapseOne">
-          How can I place an order ?
+          <?= trans('faq.place_order_q'); ?>
         </button>
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
            aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body">
-          <strong>Creating an account is required to place an order.</strong> This allows you to track your purchases, receive promotions, and manage your information securely.
+          <?= trans('faq.place_order_a'); ?>
         </div>
       </div>
     </div>
@@ -36,13 +36,13 @@ ViewHelper::loadHeader($data['title']);
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseTwo">
-          Where do your products come from?
+          <?= trans('faq.where_products_q'); ?>
         </button>
       </h2>
       <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
            aria-labelledby="panelsStayOpen-headingTwo">
         <div class="accordion-body">
-          Our products are imported from overseas and carefully selected to meet professional beauty standards.
+          <?= trans('faq.where_products_a'); ?>
         </div>
       </div>
     </div>
@@ -52,13 +52,13 @@ ViewHelper::loadHeader($data['title']);
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseThree">
-          Where do you ship?
+          <?= trans('faq.where_ship_q'); ?>
         </button>
       </h2>
       <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
            aria-labelledby="panelsStayOpen-headingThree">
         <div class="accordion-body">
-          We ship nationwide across Canada.
+          <?= trans('faq.where_products_a'); ?>
         </div>
       </div>
     </div>
@@ -68,13 +68,13 @@ ViewHelper::loadHeader($data['title']);
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseFour">
-          How can I contact you if I have a question?
+          <?= trans('faq.contact_q'); ?>
         </button>
       </h2>
       <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
            aria-labelledby="panelsStayOpen-headingFour">
         <div class="accordion-body">
-          You can contact us through the Contact Us page or by email. A support representative will respond as soon as possible.
+          <?= trans('faq.contact_a'); ?>
         </div>
       </div>
     </div>
@@ -84,13 +84,13 @@ ViewHelper::loadHeader($data['title']);
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseFive">
-          What payment methods do you accept?
+          <?= trans('faq.payments_q'); ?>
         </button>
       </h2>
       <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
            aria-labelledby="panelsStayOpen-headingFive">
         <div class="accordion-body">
-          We accept PayPal, a secure online payment method.
+          <?= trans('faq.payments_a'); ?>
         </div>
       </div>
     </div>
