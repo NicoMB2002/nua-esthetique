@@ -13,11 +13,11 @@ ViewHelper::loadHeader($data['title']);
    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th><?= hs(trans('checkOut.name')); ?></th>
+                <th><?= hs(trans('checkOut.category')); ?></th>
+                <th><?= hs(trans('checkOut.description')); ?></th>
+                <th><?= hs(trans('checkOut.price')); ?></th>
+                <th><?= hs(trans('checkOut.quantity')); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@ ViewHelper::loadHeader($data['title']);
             ?>
         </tbody>
     </table>
-<a class="btn btn-primary" style="float: right;" href="confirmOrder">Confirm Order</a>
+<a class="btn btn-primary" style="float: right;" href="confirmOrder"><?= hs(trans('checkOut.confirmOrderBtn')); ?></a>
 <?php
 ViewHelper::loadJsScripts();
 ViewHelper::loadFooter();

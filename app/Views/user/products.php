@@ -6,7 +6,7 @@ use App\Helpers\ViewHelper;
 
 ViewHelper::loadHeader($data['title']);
 
-//dd($data);
+// dd($data);
 ?>
 
 <form style="float: right;" method="get" action="" class="form-inline my-2 my-lg-0">

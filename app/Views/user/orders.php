@@ -7,14 +7,14 @@ ViewHelper::loadHeader($data['title']);
 
 //dd($data);
 ?>
-<h2>Your Orders</h2>
+<h2><?= hs(trans('orders.yourOrders')); ?></h2>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Tracking Number</th>
-            <th>Order Date</th>
-            <th>Actions</th>
+            <th><?= hs(trans('orders.trackingNumber')); ?></th>
+            <th><?= hs(trans('orders.orderDate')); ?></th>
+            <th><?= hs(trans('orders.actions')); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@ ViewHelper::loadHeader($data['title']);
                 <td> <?= htmlspecialchars($order["order_id"]) ?> </td>
                 <td> <?= htmlspecialchars($order["tracking_number"]) ?> </td>
                 <td> <?= htmlspecialchars($order["order_date"] ?? 'N/A') ?> </td>
-                <td> <a href="<?= APP_BASE_URL ?>/user/orders/<?= htmlspecialchars($order["order_id"]) ?>" class="btn btn-primary">Details</a> </td>
+                <td> <a href="<?= APP_BASE_URL ?>/user/orders/<?= htmlspecialchars($order["order_id"]) ?>" class="btn btn-primary"><?= hs(trans('orders.detailBtn')); ?></a> </td>
             </tr>
         <?php }
         ?>

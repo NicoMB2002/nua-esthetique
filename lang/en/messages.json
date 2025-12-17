@@ -30,13 +30,72 @@
         "appointment_msg": "Book an appointment",
         "appointment_link": "here!"
     },
-    "account":{
-        "myProfile" : "My Profile",
+    "products": {
+        "addToCartBtn": "Add to Cart",
+        "searchBtn": "Search"
+    },
+    "login": {
+        "loginBtn": "Login",
+        "password": "Password",
+        "noAccount": "Don't have an account?",
+        "registerLink": "Register here"
+    },
+    "register": {
+        "fName": "First Name",
+        "lName": "Last Name",
+        "phone": "Phone Number",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "city": "City",
+        "provinceSelect": "Select Province/Territory",
+        "userName": "Username",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "startShoppingBtn": "Start Shopping Now!",
+        "alreadyRegistered": "Already Registered? ",
+        "loginLink": "Login here"
+    },
+    "account": {
+        "welcome": "Welcome",
+        "myProfile": "My Profile",
         "name": "Name:",
         "email": "Email:",
-        "role" : "Role",
-        "quickActions" : "Quick Actions",
-        "browse" : ""
+        "role": "Role",
+        "quickActions": "Quick Actions",
+        "browse": "Browse Products",
+        "myOrders": "My Orders",
+        "updateProfile": "Update Profile",
+        "logout": "Logout"
+    },
+    "cart": {
+        "add": "Add",
+        "delete": "Delete",
+        "checkOut": "Check Out"
+    },
+    "checkOut": {
+        "name": "Name",
+        "category": "Category",
+        "description": "Description",
+        "price": "Price",
+        "quantity": "Quantity",
+        "confirmOrderBtn": "Confirm Order"
+    },
+    "orders": {
+        "yourOrders": "Your Orders",
+        "trackingNumber": "Tracking Number",
+        "orderDate": "Order Date",
+        "actions": "Actions",
+        "detailBtn": "Details"
+    },
+    "orderDetails": {
+        "order": "Order",
+        "details": "Details",
+        "name": "Name",
+        "category": "Category",
+        "description": "Description",
+        "price": "Price",
+        "quantity": "Quantity",
+        "backBtn": "Back"
     },
     "footer": {
         "contact": "Contact Us",

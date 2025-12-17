@@ -30,6 +30,73 @@
         "appointment_msg": "Prendre rendez-vous",
         "appointment_link": "ici !"
     },
+    "products": {
+        "addToCartBtn": "Ajouter au Panier",
+        "searchBtn": "Rechercher"
+    },
+    "login": {
+        "loginBtn": "Connexion",
+        "password": "Mot de passe",
+        "noAccount": "Vous n'avez pas de compte ?",
+        "registerLink": "Inscrivez-vous ici"
+    },
+    "register": {
+        "fName": "Prénom",
+        "lName": "Nom de famille",
+        "phone": "Numéro de téléphone",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "provinceSelect": "Sélectionner Province/Territoire",
+        "userName": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "startShoppingBtn": "Commencer vos achats maintenant !",
+        "alreadyRegistered": "Déjà inscrit ? ",
+        "loginLink" :"Connectez-vous ici"
+    },
+    "account": {
+        "welcome": "Bienvenu/e",
+        "myProfile": "Mon Profil",
+        "name": "Nom :",
+        "email": "E-mail :",
+        "role": "Rôle",
+        "quickActions": "Actions Rapides",
+        "browse": "Parcourir les Produits",
+        "myOrders": "Mes Commandes",
+        "updateProfile": "Mettre à Jour le Profil",
+        "logout": "Déconnexion"
+    },
+    "cart": {
+        "add": "Ajouter",
+        "delete": "Supprimer",
+        "checkOut": "Passer la Commande"
+    },
+    "checkOut": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "description": "Description",
+        "price": "Prix",
+        "quantity": "Quantité",
+        "confirmOrderBtn": "Confirmer la Commande"
+    },
+    "orders": {
+        "yourOrders": "Vos Commandes",
+        "trackingNumber": "Numéro de Suivi",
+        "orderDate": "Date de Commande",
+        "actions": "Actions",
+        "detailBtn": "Détails"
+    },
+    "orderDetails": {
+        "order": "Commande",
+        "details": "Détails",
+        "name": "Nom",
+        "category": "Catégorie",
+        "description": "Description",
+        "price": "Prix",
+        "quantity": "Quantité",
+        "backBtn": "Retour"
+    },
     "footer": {
         "contact": "Nous contacter",
         "links": "Liens utiles",

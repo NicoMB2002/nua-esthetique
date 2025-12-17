@@ -9,15 +9,15 @@ ViewHelper::loadHeader($page_title);
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-5">
+        <div class="col-lg-6">
             <!-- TODO:put image from db -->
             <div id="login-image">
-                <img src="<?= APP_BASE_URL?>/public/assets/resources/images/NuaLogin.png" alt="NuaClient" width="400" height="600">
+                <img src="<?= APP_BASE_URL ?>/public/assets/resources/images/NuaLogin.png" alt="NuaClient" width="400" height="600">
             </div>
 
         </div>
 
-        <div class="col-7">
+        <div class="col-lg-6">
             <form action="login" method="POST">
                 <div id="input-row-identifier">
                     <label id="identifier-label"><i class="bi bi-envelope-at icon-color"></i></label>
@@ -34,16 +34,16 @@ ViewHelper::loadHeader($page_title);
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="<?= hs(trans('login.password')); ?>"
                         required>
                 </div>
                 <button type="submit" id="login-btn">
-                    Login
+                    <?= hs(trans('login.loginBtn')); ?>
                 </button>
             </form>
             <br>
             <div>
-                <p class="fs-6 text-decoration-underline">Don't have an account? <a href="register" class="fw-bold" id="register-link">Register here</a></p>
+                <p class="fs-6 text-decoration-underline"><?= hs(trans('login.noAccount')); ?><a href="register" class="fw-bold" id="register-link"><?= hs(trans('login.registerLink')); ?></a></p>
             </div>
         </div>
         <!-- closes form(left side) -->
