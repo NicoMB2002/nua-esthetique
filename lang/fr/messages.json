@@ -31,6 +31,7 @@
         "appointment_link": "ici !"
     },
     "account": {
+        "welcome": "Bienvenu/e",
         "myProfile": "Mon Profil",
         "name": "Nom :",
         "email": "E-mail :",
@@ -40,6 +41,23 @@
         "myOrders": "Mes Commandes",
         "updateProfile": "Mettre à Jour le Profil",
         "logout": "Déconnexion"
+    },
+    "orders": {
+        "yourOrders": "Vos Commandes",
+        "trackingNumber": "Numéro de Suivi",
+        "orderDate": "Date de Commande",
+        "actions": "Actions",
+        "detailBtn": "Détails"
+    },
+    "orderDetails": {
+        "order": "Commande",
+        "details": "Détails",
+        "name": "Nom",
+        "category": "Catégorie",
+        "description": "Description",
+        "price": "Prix",
+        "quantity": "Quantité",
+        "backBtn": "Retour"
     },
     "footer": {
         "contact": "Nous contacter",

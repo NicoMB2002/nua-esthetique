@@ -30,16 +30,34 @@
         "appointment_msg": "Book an appointment",
         "appointment_link": "here!"
     },
-    "account":{
-        "myProfile" : "My Profile",
+    "account": {
+        "welcome": "Welcome",
+        "myProfile": "My Profile",
         "name": "Name:",
         "email": "Email:",
-        "role" : "Role",
-        "quickActions" : "Quick Actions",
-        "browse" : "Browse Products",
+        "role": "Role",
+        "quickActions": "Quick Actions",
+        "browse": "Browse Products",
         "myOrders": "My Orders",
-        "updateProfile" : "Update Profile",
+        "updateProfile": "Update Profile",
         "logout": "Logout"
+    },
+    "orders" :{
+        "yourOrders" : "Your Orders",
+        "trackingNumber" : "Tracking Number",
+        "orderDate" : "Order Date",
+        "actions" : "Actions",
+        "detailBtn" : "Details"
+    },
+    "orderDetails" : {
+        "order": "Order",
+        "details" : "Details",
+        "name" : "Name",
+        "category" : "Category",
+        "description" : "Description",
+        "price" : "Price",
+        "quantity" : "Quantity",
+        "backBtn" : "Back"
     },
     "footer": {
         "contact": "Contact Us",
