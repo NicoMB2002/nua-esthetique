@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Domain\Models\CustomerModel;
 use App\Domain\Models\UserModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
@@ -127,7 +128,7 @@ class AuthController extends BaseController
         }
 
         // If validation passes, create the user
-      try {
+        try {
             // TODO: Create $userData array with keys:
             //       'first_name', 'last_name', 'username', 'email', 'password', 'role'
 
@@ -144,14 +145,14 @@ class AuthController extends BaseController
 
             FlashMessage::success("Registration successful! Please log in.");
             return $this->redirect($request, $response, 'auth.login');
-       } catch (\Exception $e) {
+        } catch (\Exception $e) {
             // TODO: Display error message using FlashMessage::error()
             //       Message: "Registration failed. Please try again."
 
             // TODO: Redirect back to 'auth.register' route
             FlashMessage::error("Registration failed. Please try again.");
-           return $this->redirect($request, $response, 'auth.register');
-}
+            return $this->redirect($request, $response, 'auth.register');
+        }
     }
 
     /**
@@ -285,6 +286,7 @@ class AuthController extends BaseController
         // TODO: Create a $data array with 'title' => 'Dashboard'
 
         $userId = SessionManager::get('user_id');
+        $user = $this->userModel->getUserById($userId);
         $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
         $has2FA = $twoFactorModel->isEnabled($userId);
 
@@ -292,7 +294,8 @@ class AuthController extends BaseController
         // TODO: Render 'user/dashboard.php' view and pass $data
         return $this->render($response, 'user/dashboard.php', [
             'title' => 'Dashboard',
-            'has2FA' => $has2FA
+            'has2FA' => $has2FA,
+            'userInfo' => $user
         ]);
     }
 }

@@ -57,15 +57,19 @@ return static function (Slim\App $app): void {
     $app->get('/', [HomeController::class, 'index'])
         ->setName('home.index');
 
-    $app->get('/products', [HomeController::class, 'products']
-        )->setName('user.products');
+    $app->get(
+        '/products',
+        [HomeController::class, 'products']
+    )->setName('user.products');
 
-    $app->get('/promotions', [HomeController::class, 'promotions']
-        )->setName('user.promotions');
+    $app->get(
+        '/promotions',
+        [HomeController::class, 'promotions']
+    )->setName('user.promotions');
 
 
     $app->get('/product/{id}', [ProductsController::class, 'show'])
-    ->setName('product.show');
+        ->setName('product.show');
 
     $app->post('/add_item', [HomeController::class, 'addItem']);
 
@@ -87,7 +91,7 @@ return static function (Slim\App $app): void {
 
     $app->group('/admin', function ($group) {
         //add/ register admin routes
-        $group->get('/dashboard',[DashboardController::class, 'index'])
+        $group->get('/dashboard', [DashboardController::class, 'index'])
             ->setName('dashboard.index');
         $group->get(
             '/products',
@@ -105,12 +109,12 @@ return static function (Slim\App $app): void {
         )->setName('products.update');
 
         $group->get('/products/delete/{product_id}', [ProductsController::class, 'delete'])
-                ->setName('products.delete');
+            ->setName('products.delete');
 
-        $group->get('/products/create',[ProductsController::class, 'create'])
-                ->setName('user.create');
+        $group->get('/products/create', [ProductsController::class, 'create'])
+            ->setName('user.create');
 
-        $group->post('/products/store',[ProductsController::class, 'store']);
+        $group->post('/products/store', [ProductsController::class, 'store']);
 
 
         $group->get('/categories', [CategoriesController::class, 'index'])
@@ -120,6 +124,7 @@ return static function (Slim\App $app): void {
             ->setName('categories.index');
 
         $group->get('/categories/delete/{category_id}', [ProductsController::class, 'delete']);
+
 
         $group->get('/customers', [CustomersController::class, 'index'])
             ->setName('customers.index');
@@ -136,27 +141,23 @@ return static function (Slim\App $app): void {
 
         $group->get('/logout', [AuthController::class, 'logout'])
             ->setName('admin.logout');
-
-
-
-
     });
     // ->add(AdminAuthMiddleware::class);
 
 
-    $app->group('/user', function($group){
+    $app->group('/user', function ($group) {
 
         $group->get('/logout', [AuthController::class, 'logout'])
             ->setName('user.logout');
 
         $group->get('/dashboard', [HomeController::class, 'index'])
-                ->setName('user.dashboard');
+            ->setName('user.dashboard');
 
         $group->get('/home', [HomeController::class, 'index'])
             ->setName('user.dashboard');
 
-        $group->get('/products',[HomeController::class, 'products'])
-                ->setName('user.products');
+        $group->get('/products', [HomeController::class, 'products'])
+            ->setName('user.products');
 
         $group->get('/login', [HomeController::class, 'index']);
 
@@ -171,6 +172,12 @@ return static function (Slim\App $app): void {
         $group->get('/orders', [HomeController::class, 'customerOrders']);
 
         $group->get('/orders/{order_id}', [HomeController::class, 'customerOrderDetails']);
+        //REtrieve form to edit
+        $group->get('/userEdit/{user_id}', [CustomersController::class, 'edit'])
+            ->setName('customer.edit');
+        //Update the new information on the form
+        $group->post('/update/{user_id}', [CustomersController::class, 'update'])
+            ->setName('customer.update');
     });
 
 
@@ -217,5 +224,4 @@ return static function (Slim\App $app): void {
     $app->get('/error', function (Request $request, Response $response, $args) {
         throw new \Slim\Exception\HttpNotFoundException($request, "Something went wrong");
     });
-
 };
