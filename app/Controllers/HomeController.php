@@ -145,18 +145,20 @@ class HomeController extends BaseController
             'tracking_number'=> random_int(1000000,9999999)
         ]);
         foreach ($cart as $item) {
+
             // dd($item);
             $productBought = $this->products_model->getProductByID($item['id']);
             // dd($productBought);
-            $this->order_model->insertProducts_Order([
-                'product_id' => $item['id'],
-                'order_id' => $orderID,
-                'quantity' => $item['amount']
-            ]);
+        $this->order_model->insertProducts_Order([
+            'product_id' => $item['product_id'],
+            'order_id' => $orderID,
+            'quantity' => $item['amount']
+        ]);
             $this->products_model->updateProductQuantity($item['id'], $productBought['quantity'], $item['amount']);
+
         }
        SessionManager::set('cart',[]);
-        return $this->redirect($request,$response,'user.products');
+        return $this->redirect($request,$response,'user.orders');
     }
 
 
@@ -171,8 +173,14 @@ class HomeController extends BaseController
      */
     public function customerOrderDetails(Request $request, Response $response, array $args): Response {
         $data = ['title'=> 'Orders Page'];
-        $data['order_id'] = $args['id'];
-        $data['products'] = $this->order_model->getOrderProducts($args['id']);
+        $data['order_id'] = $args['order_id'] ?? null;
+        $data['products'] = $this->order_model->getOrderProducts($data['order_id']) ?? null;
         return $this->render($response, 'user/orderDetails.php', $data);
+    }
+
+        public function deleteOrder(Request $request, Response $response, array $args): Response {
+
+        $rows =  $this->order_model->deleteOrder($args['order_id']);
+        return $this->redirect($request, $response,"user.orders");
     }
 }

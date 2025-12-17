@@ -96,38 +96,31 @@ use App\Helpers\SessionManager;
 
                 <ul class="list-group">
 
-                    <?php
-                    $total = 0.0;
-                    $cart = SessionManager::get('cart');
-                    foreach ($cart ?? [] as $name => $item):
-                        $total += ($item['price'] ?? 1 * (int) $item['amount'])
-                    ?>
-                        <li class="list-group-item text-bg-dark">
-                            <?= $name ?>
-                            -
-                            <?= $item['price'] ?> $
-                            X <?= $item['amount'] ?? 0 ?>
-                            <br>
-                            <form method="post" action="remove_item">
-                                <input type="hidden" name="name" value="<?= $name ?>">
-                                <input type='submit' class="btn btn-danger" value="<?= trans('cart.delete'); ?>">
-                            </form>
-                            <form method="post" action="add_item">
-                                <input type="hidden" name="name" value='<?= $name ?>'>
-                                <input type="hidden" name="id" value='<?= $item['id'] ?>'>
-                                <input type="submit" class="btn btn-success btn-sm" value="<?= trans('cart.add'); ?>">
-                                <input style="width: 50px; height: 30px; float: right;" type="number" value="<?= $item['amount'] ?>" name="amount" class="form-range" min="0" max="20">
-                            </form>
-                        </li>
-                        <br>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <footer style="margin-left:20px;">
-                <h3> Total: <?= $total ?> $</h3>
-                <a class="btn btn-primary btn-sm" href="checkout"><?= trans('cart.checkOut'); ?></a>
-            </footer>
-        </div>
+    <?php
+ $total = 0.0;
+$cart = SessionManager::get('cart');
+ foreach ($cart ?? [] as $name => $item):
+    $total += ($item['price'] ?? 1 * (int) $item['amount'])
+ ?>
+ <li class="list-group-item text-bg-dark">
+ <?= $name?>
+ <div class="ml-1">
+<input  class="text-bg-dark" type="number" name="<?= $item['product_id']?>" value="<?= $item['amount']?>" >
+</div>
+<a href="remove_item/<?= $name?>" class="btn btn-danger"> Delete</a>
+
+ </li>
+ <br>
+    <?php endforeach; ?>
+ </ul>
+     <input type="submit" class="btn btn-success btn-sm" value="Confirm Changes">
+</form>
+  </div>
+  <footer style="margin-left:20px;">
+    <h3 > Total: <?= $total?> $</h3>
+    <a class="btn btn-primary btn-sm" href="checkout">Checkout</a>
+  </footer>
+</div>
 
         <script>
             $('#cartBtn').click(function() {

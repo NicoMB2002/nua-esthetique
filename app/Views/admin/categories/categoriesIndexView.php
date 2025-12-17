@@ -11,33 +11,31 @@ ViewHelper::loadAdminHeader($page_title);
 
     <br>
     <h2>Categories Listing</h2>
-    <div>
-        <?= FlashMessage::render() ?>
-    </div>
-    <hr>
+            <div>
+                <?= FlashMessage::render() ?>
+            </div>
     <div class="table-responsive small">
-        <h4>The list of Categories will be rendered here.</h4>
-    </div>
+
     <?php $categories = $data['categories'] ?>
     <table class="table table-stripped">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created At</th>
-                <th>Actions</th>
+            <tr style="background-color:var(--color-dark-beige);">
+                <th style="background-color:var(--color-dark-beige);">ID</th>
+                <th style="background-color:var(--color-dark-beige);">Name</th>
+                <th style="background-color:var(--color-dark-beige);">Description</th>
+                <th style="background-color:var(--color-dark-beige);">Created At</th>
+                <th style="background-color:var(--color-dark-beige);">Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($categories as $key => $category) { ?>
                 <tr>
-                    <td> <?= $category['id'] ?></td>
-                    <td> <?= $category['name'] ?></td>
-                    <td> <?= $category['description'] ?></td>
-                    <td> <?= $category['created_at'] ?></td>
-                    <td> <a href="categories/edit/<?= $category['id'] ?>" class="btn btn-success"> Edit</a>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $category['id'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $category['name'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $category['description'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $category['created_at'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <a href="categories/edit/<?= $category['id'] ?>" class="btn btn-success"> Edit</a>
                         <a href="categories/delete/<?= $category['id'] ?>" class="btn btn-danger"> Delete</a>
                     </td>
                 </tr>
@@ -45,7 +43,7 @@ ViewHelper::loadAdminHeader($page_title);
             } ?>
         </tbody>
     </table>
-
+ </div>
     <div>
         <a href="categories/create/<?= $category['id'] ?>" class="btn btn-primary"> Add a new Category</a>
     </div>

@@ -139,7 +139,7 @@ return static function (Slim\App $app): void {
         $group->get('/orders', [OrdersController::class, 'index'])
             ->setName('orders.index');
 
-        $group->get('/orders/delete/{id}', [OrdersController::class, 'delete'])
+        $group->get('/orders/delete/{order_id}', [OrdersController::class, 'delete'])
             ->setName('orders.delete');
 
 
@@ -176,7 +176,11 @@ return static function (Slim\App $app): void {
 
         $group->get('/confirmOrder', [HomeController::class, 'createOrder']);
 
-        $group->get('/orders', [HomeController::class, 'customerOrders']);
+        $group->get('/orders', [HomeController::class, 'customerOrders'])
+                ->setName('user.orders');
+
+        $group->get('/orders/delete/{order_id}', [HomeController::class, 'deleteOrder'])
+            ->setName('orders.delete');
 
         $group->get('/orders/{order_id}', [HomeController::class, 'customerOrderDetails']);
         // $group->get('/orderDetails/{order_id}', [HomeController::class, 'customerOrderDetails']);
