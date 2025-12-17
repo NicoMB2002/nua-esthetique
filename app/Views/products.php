@@ -33,7 +33,7 @@ ViewHelper::loadHeader($data['title']);
                         >
                     </a>
                     <div class="card-body" style="height: 225px;">
-                        <h5 class="card-title"><?= hs($product['name']."") ?></h5>
+                        <h5 class="card-title fw-bold fs-3"><?= hs($product['name']."") ?></h5>
                         <p class="card-text"><?= hs(substr($product['description'], 0, 100)) ?>...</p>
                         <?php if ($product['promotion']?? 0>0): ?>
                             <p class="fw-bold text-decoration-line-through text-danger">$<?= hs(number_format($product['price'], 2)) ?></p>

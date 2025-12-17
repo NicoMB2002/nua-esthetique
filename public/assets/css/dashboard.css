@@ -24,12 +24,47 @@
   font-weight: 500;
 }
 
-.sidebar .nav-link.active {
-  color: #2470dc;
+
+sidebar .nav-link:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
 }
 
 .sidebar-heading {
   font-size: .75rem;
+  color: #a49696;
+  padding: 10px 15px;
+}
+
+.sidebar .bi {
+  fill: currentColor;
+  color: #ffffff;
+}
+
+[data-bs-theme="light"] .sidebar .bi {
+  fill: currentColor;
+  color: #000000;
+}
+.sidebar {
+  background-color: #202020; /* lighter black than pure #000 */
+  color: #ffffff; /* white text */
+}
+
+.sidebar .nav-link {
+  color: #ffffff;
+  padding: 10px 15px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.sidebar .nav-link.active {
+  background-color: #444444;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /*

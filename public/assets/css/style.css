@@ -355,6 +355,46 @@
   transform: scale(1.1);
 }
 
+/*FAQ*/
+
+.accordion-collapse {
+  transition: height 0.35s ease;
+  overflow: hidden;
+}
+
+
+.accordion-collapse.show {
+  display: block;
+}
+
+
+.accordion-button {
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e9ecef;
+  color: #000;
+  font-size: 25px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+.accordion-body {
+  font-size: 18px;
+  padding:12px;
+}
+
+
+.accordion-button:hover {
+  background-color: #ddd;
+  color: #000;
+}
+
+
+
 
 
 fieldset {
