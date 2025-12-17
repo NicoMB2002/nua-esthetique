@@ -92,7 +92,7 @@ use App\Helpers\SessionManager;
     <button id="cartClose" type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-
+<form method="post" action="update_item">
   <ul class="list-group">
 
     <?php
@@ -103,24 +103,17 @@ $cart = SessionManager::get('cart');
  ?>
  <li class="list-group-item text-bg-dark">
  <?= $name?>
- -
- <?= $item['price']?> $
- X <?= $item['amount']?? 0?>
- <br>
- <form method="post" action="remove_item">
-    <input type="hidden" name="name" value="<?=$name?>">
-          <input  type ='submit' class="btn btn-danger" value="Delete">
-        </form>
-    <form method="post" action="add_item">
-    <input type="hidden" name="name" value='<?=$name?>' >
-    <input type="hidden" name="id" value='<?=$item['id']?>' >
-    <input type="submit" class="btn btn-success btn-sm" value="Add">
-    <input style="width: 50px; height: 30px; float: right;" type="number" value="<?= $item['amount']?>"  name="amount" class="form-range" min="0" max="20">
-  </form>
+ <div class="ml-1">
+<input  class="text-bg-dark" type="number" name="<?= $item['product_id']?>" value="<?= $item['amount']?>" >
+</div>
+<a href="remove_item/<?= $name?>" class="btn btn-danger"> Delete</a>
+
  </li>
  <br>
     <?php endforeach; ?>
  </ul>
+     <input type="submit" class="btn btn-success btn-sm" value="Confirm Changes">
+</form>
   </div>
   <footer style="margin-left:20px;">
     <h3 > Total: <?= $total?> $</h3>
