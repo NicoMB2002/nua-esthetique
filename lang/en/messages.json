@@ -30,6 +30,10 @@
         "appointment_msg": "Book an appointment",
         "appointment_link": "here!"
     },
+    "products": {
+        "addToCartBtn": "Add to Cart",
+        "searchBtn": "Search"
+    },
     "account": {
         "welcome": "Welcome",
         "myProfile": "My Profile",
@@ -42,22 +46,35 @@
         "updateProfile": "Update Profile",
         "logout": "Logout"
     },
-    "orders" :{
-        "yourOrders" : "Your Orders",
-        "trackingNumber" : "Tracking Number",
-        "orderDate" : "Order Date",
-        "actions" : "Actions",
-        "detailBtn" : "Details"
+    "cart": {
+        "add": "Add",
+        "delete": "Delete",
+        "checkOut": "Check Out"
     },
-    "orderDetails" : {
+    "checkOut": {
+        "name": "Name",
+        "category": "Category",
+        "description": "Description",
+        "price": "Price",
+        "quantity": "Quantity",
+        "confirmOrderBtn": "Confirm Order"
+    },
+    "orders": {
+        "yourOrders": "Your Orders",
+        "trackingNumber": "Tracking Number",
+        "orderDate": "Order Date",
+        "actions": "Actions",
+        "detailBtn": "Details"
+    },
+    "orderDetails": {
         "order": "Order",
-        "details" : "Details",
-        "name" : "Name",
-        "category" : "Category",
-        "description" : "Description",
-        "price" : "Price",
-        "quantity" : "Quantity",
-        "backBtn" : "Back"
+        "details": "Details",
+        "name": "Name",
+        "category": "Category",
+        "description": "Description",
+        "price": "Price",
+        "quantity": "Quantity",
+        "backBtn": "Back"
     },
     "footer": {
         "contact": "Contact Us",

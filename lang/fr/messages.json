@@ -30,6 +30,10 @@
         "appointment_msg": "Prendre rendez-vous",
         "appointment_link": "ici !"
     },
+    "products": {
+        "addToCartBtn": "Ajouter au Panier",
+        "searchBtn": "Rechercher"
+    },
     "account": {
         "welcome": "Bienvenu/e",
         "myProfile": "Mon Profil",
@@ -41,6 +45,19 @@
         "myOrders": "Mes Commandes",
         "updateProfile": "Mettre à Jour le Profil",
         "logout": "Déconnexion"
+    },
+    "cart": {
+        "add": "Ajouter",
+        "delete": "Supprimer",
+        "checkOut": "Passer la Commande"
+    },
+    "checkOut": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "description": "Description",
+        "price": "Prix",
+        "quantity": "Quantité",
+        "confirmOrderBtn": "Confirmer la Commande"
     },
     "orders": {
         "yourOrders": "Vos Commandes",
