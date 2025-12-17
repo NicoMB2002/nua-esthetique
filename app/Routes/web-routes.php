@@ -14,6 +14,7 @@ use App\Controllers\DashboardController;
 use App\Middleware\SessionMiddleware;
 use App\Controllers\HomeController;
 use App\Controllers\ContactController;
+use App\Controllers\FAQController;
 use App\Controllers\LoginController;
 use App\Controllers\OrdersController;
 use App\Controllers\ServicesController;
@@ -84,6 +85,10 @@ return static function (Slim\App $app): void {
 
     $app->post('/contact', [ContactController::class, 'submit'])
         ->setName('contact.submit');
+
+    $app->get('/faq', [FAQController::class, 'index'])
+    ->setName('faq.index');
+
 
     $app->get('/services', [ServicesController::class, 'index'])
         ->setName('services.index');

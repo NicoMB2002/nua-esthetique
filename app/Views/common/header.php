@@ -32,22 +32,22 @@ use App\Helpers\SessionManager;
 
 
 
-    <header class="navBar">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="<?= APP_BASE_URL ?>/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="<?= APP_BASE_URL ?>/public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
-                </a>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= APP_BASE_URL ?>/products"><?= trans('nav.products'); ?></a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL ?>/contact"><?= trans('nav.contact'); ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.faq'); ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL ?>/promotions"><?= trans('nav.promotions'); ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="services"><?= trans('nav.services'); ?></a></li>
-                </ul>
+<header class="navBar">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="<?= APP_BASE_URL?>/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="<?= APP_BASE_URL?>/public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
+        </a>
+        <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="<?= APP_BASE_URL?>/products"><?= trans('nav.products'); ?></a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/contact"><?= trans('nav.contact'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/faq"><?= trans('nav.faq'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/promotions"><?= trans('nav.promotions'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="services"><?= trans('nav.services'); ?></a></li>
+      </ul>
 
                 <div class="nav-icons">
                     <a <?php

@@ -1,0 +1,71 @@
+:root {
+
+    /* Color palette */
+    --color-light-black: #262222; /*Nav Bar color */
+    --color-black: #000000; /*Footer Color */
+    --color-light-beige: #F9F3EF; /*Body color */
+    --color-dark-beige: #E0C4A7; /*beige color Buttons */
+
+    /* Text colors */
+    --color-text: #332a20;
+    --color-heading: #060503;
+
+    /* Font sizes */
+    --font-size-base: 20px;
+    --font-size-heading: 33px;
+
+    /* Font family */
+    --font-family-base: 'Raleway', sans-serif;
+
+    color-scheme: dark;
+}
+
+
+body {
+  background-color: var(--color-light-beige);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--color-heading);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-heading);
+}
+
+header.navbar {
+  background-color: #000000 !important;
+}
+
+footer {
+  background-color: var(--color-black);
+  color: var(--color-light-beige);
+  padding: 20px;
+  text-align: center;
+}
+
+[data-bs-theme="light"] .sidebar {
+  background-color: #adb3b9;
+  color: #000000;
+}
+
+[data-bs-theme="light"] .sidebar .nav-link {
+  color: #333333;
+}
+
+[data-bs-theme="light"] .sidebar .nav-link:hover {
+  background-color: #afb4b9;
+  color: #000000;
+}
+
+[data-bs-theme="light"] .sidebar .nav-link.active {
+  background-color: #d6d6d6;
+  color: #000000;
+  font-weight: bold;
+}
+
+[data-bs-theme="light"] .sidebar-heading {
+  color: #333333;
+}
+

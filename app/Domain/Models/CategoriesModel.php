@@ -26,6 +26,14 @@ class CategoriesModel extends BaseModel
         return $categories;
     }
 
+    public function getCategoriesWithImages(): mixed{
+        $sql = "Select * from categories c
+            left join category_images ci on c.id = ci.category_id ";
+
+       return $this->selectAll($sql);
+
+    }
+
     /**
      * Fetches single category information
      * @return array

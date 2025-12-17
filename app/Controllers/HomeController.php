@@ -29,7 +29,7 @@ class HomeController extends BaseController
     public function index(Request $request, Response $response, array $args): Response
     {
 
-        $categories = $this->categories_model->getCategories();
+        $categories = $this->categories_model->getCategoriesWithImages();
         $products = $this->products_model->getProductsWithImages();
         $data = [
             'title'      => 'Home',
