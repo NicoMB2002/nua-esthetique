@@ -172,6 +172,7 @@ return static function (Slim\App $app): void {
         $group->get('/orders', [HomeController::class, 'customerOrders']);
 
         $group->get('/orders/{order_id}', [HomeController::class, 'customerOrderDetails']);
+        // $group->get('/orderDetails/{order_id}', [HomeController::class, 'customerOrderDetails']);
         //REtrieve form to edit
         $group->get('/userEdit/{user_id}', [CustomersController::class, 'edit'])
             ->setName('customer.edit');
