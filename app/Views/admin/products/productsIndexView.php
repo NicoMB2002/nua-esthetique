@@ -41,14 +41,14 @@ ViewHelper::loadAdminHeader($page_title);
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Stock Quantity</th>
-                    <th>Promotion</th>
-                    <th>Actions</th>
+                    <th style="background-color:var(--color-dark-beige);">Id</th>
+                    <th style="background-color:var(--color-dark-beige);">Name</th>
+                    <th style="background-color:var(--color-dark-beige);">Category</th>
+                    <th style="background-color:var(--color-dark-beige);">Description</th>
+                    <th style="background-color:var(--color-dark-beige);">Price</th>
+                    <th style="background-color:var(--color-dark-beige);">Stock Quantity</th>
+                    <th style="background-color:var(--color-dark-beige);">Promotion</th>
+                    <th style="background-color:var(--color-dark-beige);">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,14 +57,14 @@ ViewHelper::loadAdminHeader($page_title);
 
                 ?>
                     <tr>
-                        <td><?= $product["product_id"] ?></td>
-                        <td> <?= htmlspecialchars($product["name"]) ?> </td>
-                        <td> <?= htmlspecialchars($product["category_name"]) ?> </td>
-                        <td> <?= htmlspecialchars($product["description"]) ?> </td>
-                        <td> <?= htmlspecialchars($product["price"]) ?> </td>
-                        <td> <?= htmlspecialchars($product["quantity"]) ?> </td>
-                        <td> <?= htmlspecialchars($product["promotion"] ?? 0) ?>% </td>
-                        <td>
+                        <td style="background-color:var(--color-dark-beige);"><?= $product["product_id"] ?></td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["name"]) ?> </td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["category_name"]) ?> </td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["description"]) ?> </td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["price"]) ?> </td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["quantity"]) ?> </td>
+                        <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["promotion"] ?? 0) ?>% </td>
+                        <td style="background-color:var(--color-dark-beige);">
                             <a href="products/edit/<?= $product['product_id'] ?>" class="btn btn-success">Edit</a>
                             <a href="products/delete/<?= $product['product_id'] ?>" class="btn btn-danger"> Delete</a></td>
                     </tr>

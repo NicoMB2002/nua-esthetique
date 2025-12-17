@@ -22,7 +22,7 @@ class OrderModel extends BaseModel
         return $orders;
     }
          public function getOrderProducts($id){
-        $query = "Select p.name as product_name, c.name as category_name, p.description as description, p.price as price, op.quantity as quantity  from Orders o left join orders_products op on o.order_id = op.order_id
+        $query = "Select p.name as product_name,p.promotion_percentage as promotion, c.name as category_name, p.description as description, p.price as price, op.quantity as quantity  from Orders o left join orders_products op on o.order_id = op.order_id
             left join products p  on p.product_id = op.product_id
             left join categories c  on p.category_id = c.id
             where op.order_id = :id";
@@ -70,8 +70,8 @@ class OrderModel extends BaseModel
 
     public function deleteOrder($id){
 
-        $query = " DELETE FROM orders o WHERE o.order_id = ? ";
-        return $this->execute($query,[ $id]);
+        $query = " DELETE FROM orders  WHERE order_id = :order_id ";
+        return $this->execute($query,['order_id'=>$id ]);
     }
 
 }

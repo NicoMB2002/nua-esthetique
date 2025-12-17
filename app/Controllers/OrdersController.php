@@ -28,8 +28,7 @@ class OrdersController extends BaseController
 
     public function delete(Request $request, Response $response, array $args): Response {
 
-         $this->order_model->deleteOrder($args['order_id']);
-
+        $rows =  $this->order_model->deleteOrder($args['order_id']);
         return $this->redirect($request, $response,"orders.index");
     }
 }

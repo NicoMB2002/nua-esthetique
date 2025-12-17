@@ -20,25 +20,25 @@ ViewHelper::loadAdminHeader($data['title']);
     <table class="table table-stripped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Customer Id</th>
-                <th>Customer Name</th>
-                <th>Tracking Number</th>
-                <th>Order Date</th>
-                <th>Actions</th>
+                <th style="background-color:var(--color-dark-beige);">Id</th>
+                <th style="background-color:var(--color-dark-beige);">Customer Id</th>
+                <th style="background-color:var(--color-dark-beige);">Customer Name</th>
+                <th style="background-color:var(--color-dark-beige);">Tracking Number</th>
+                <th style="background-color:var(--color-dark-beige);">Order Date</th>
+                <th style="background-color:var(--color-dark-beige);">Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($data['orders'] as $key => $order) { ?>
                 <tr>
-                    <td> <?= $order['order_id'] ?></td>
-                    <td> <?= $order['customer_id'] ?></td>
-                    <td> <?= $order['first_name'] ?></td>
-                    <td> <?= $order['tracking_number'] ?></td>
-                    <td> <?= $order['order_date'] ?></td>
-                    <td>
-                        <a href="orders/delete/<?= $order['id']?>" class="btn btn-danger"> Delete</a>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $order['order_id'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $order['customer_id'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $order['first_name'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $order['tracking_number'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $order['order_date'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);">
+                        <a href="orders/delete/<?= $order['order_id']?>" class="btn btn-danger"> Delete</a>
                     </td>
                 </tr>
             <?php

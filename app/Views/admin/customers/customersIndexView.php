@@ -19,27 +19,27 @@ ViewHelper::loadAdminHeader($data['title']);
     </div>
     <table class="table table-stripped">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Address</th>
-                <th>Actions</th>
+            <tr style="background-color:var(--color-dark-beige);">
+                <th style="background-color:var(--color-dark-beige);">Id</th>
+                <th style="background-color:var(--color-dark-beige);">First Name</th>
+                <th style="background-color:var(--color-dark-beige);">Last Name</th>
+                <th style="background-color:var(--color-dark-beige);">Email</th>
+                <th style="background-color:var(--color-dark-beige);">Phone Number</th>
+                <th style="background-color:var(--color-dark-beige);">Address</th>
+                <th style="background-color:var(--color-dark-beige);">Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($data['customers'] as $key => $customer) { ?>
                 <tr>
-                    <td> <?= $customer['id'] ?></td>
-                    <td> <?= $customer['first_name'] ?></td>
-                    <td> <?= $customer['last_name'] ?></td>
-                    <td> <?= $customer['email'] ?></td>
-                    <td> <?= $customer['phone_number'] ?></td></td>
-                    <td> <?= $customer['address'] ?></td></td>
-                    <td> <a href="customer/edit/<?= $customer['id'] ?>" class="btn btn-success"> Edit</a>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['id'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['first_name'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['last_name'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['email'] ?></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['phone_number'] ?></td></td>
+                    <td style="background-color:var(--color-dark-beige);"> <?= $customer['address'] ?></td></td>
+                    <td style="background-color:var(--color-dark-beige);"> <a href="customer/edit/<?= $customer['id'] ?>" class="btn btn-success"> Edit</a>
                         <a href="customer/delete/<?= $customer['id'] ?>" class="btn btn-danger"> Delete</a>
                     </td>
                 </tr>
