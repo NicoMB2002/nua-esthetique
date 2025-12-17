@@ -34,6 +34,27 @@
         "addToCartBtn": "Add to Cart",
         "searchBtn": "Search"
     },
+    "login": {
+        "loginBtn": "Login",
+        "password": "Password",
+        "noAccount": "Don't have an account?",
+        "registerLink": "Register here"
+    },
+    "register": {
+        "fName": "First Name",
+        "lName": "Last Name",
+        "phone": "Phone Number",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "city": "City",
+        "provinceSelect": "Select Province/Territory",
+        "userName": "Username",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "startShoppingBtn": "Start Shopping Now!",
+        "alreadyRegistered": "Already Registered? ",
+        "loginLink": "Login here"
+    },
     "account": {
         "welcome": "Welcome",
         "myProfile": "My Profile",
