@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Domain\Models;
+
 use App\Helpers\Core\PDOService;
 
 class ProductsModel extends BaseModel
@@ -8,25 +9,29 @@ class ProductsModel extends BaseModel
 
     private $products_table = "products";
 
-    public function __construct(PDOService $pdo_service) {
+    public function __construct(PDOService $pdo_service)
+    {
         parent::__construct($pdo_service);
     }
 
 
 
-    public function getProducts(){
+    public function getProducts()
+    {
         $query = "Select p.product_id as product_id, p.promotion_percentage as promotion, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id";
         $products = $this->selectAll($query);
         return $products;
     }
 
-        public function getProductByID($id){
+    public function getProductByID($id)
+    {
         $query = "Select p.product_id as product_id, p.promotion_percentage as promotion, p.name as name, p.price as price, p.description as description, c.name as category_name, c.id as category_id, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
-        $products = $this->selectOne($query,['product_id'=>$id]);
+        $products = $this->selectOne($query, ['product_id' => $id]);
         return $products;
     }
 
-        public function getProductsWithImages(){
+    public function getProductsWithImages()
+    {
         $query = "SELECT
                     p.product_id AS product_id,
                     p.name AS name,
@@ -46,7 +51,8 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
-        public function getPromotionsWithImages(){
+    public function getPromotionsWithImages()
+    {
         $query = "SELECT
                     p.product_id AS product_id,
                     p.name AS name,
@@ -81,7 +87,8 @@ class ProductsModel extends BaseModel
 
 
 
-            public function getProductsWithImagesSearch(string $search){
+    public function getProductsWithImagesSearch(string $search)
+    {
         $query = "SELECT
                     p.product_id AS product_id,
                     p.name AS name,
@@ -97,8 +104,8 @@ class ProductsModel extends BaseModel
                 LEFT JOIN product_images pi ON
                     p.product_id = pi.product_id where p.name like CONCAT('%', :search ,'%')";
 
-        $products = $this->selectAll($query, ['search'=>$search]);
-                $query = "SELECT
+        $products = $this->selectAll($query, ['search' => $search]);
+        $query = "SELECT
                     p.product_id AS product_id,
                     p.name AS name,
                     p.price AS price,
@@ -113,8 +120,8 @@ class ProductsModel extends BaseModel
                 LEFT JOIN product_images pi ON
                     p.product_id = pi.product_id where p.description like CONCAT('%', :search ,'%')";
 
-        $products = $products + $this->selectAll($query, ['search'=>$search]);
-                $query = "SELECT
+        $products = $products + $this->selectAll($query, ['search' => $search]);
+        $query = "SELECT
                     p.product_id AS product_id,
                     p.name AS name,
                     p.price AS price,
@@ -129,14 +136,15 @@ class ProductsModel extends BaseModel
                 LEFT JOIN product_images pi ON
                     p.product_id = pi.product_id where c.name like CONCAT('%', :search ,'%')";
 
-        $products = $products + $this->selectAll($query, ['search'=>$search]);
+        $products = $products + $this->selectAll($query, ['search' => $search]);
 
         return $products;
     }
 
 
-    public function insertProduct(array $info,$filename){
-    $query = "INSERT INTO products(
+    public function insertProduct(array $info, $filename)
+    {
+        $query = "INSERT INTO products(
             name,
             category_id,
             price,
@@ -162,14 +170,16 @@ class ProductsModel extends BaseModel
             :file_path
         )";
 
-        $this->execute($query, [ 'product_id'=> $this->lastInsertId(),
-                                'file_path' => 'public/assets/images/'.$filename]);
-
+        $this->execute($query, [
+            'product_id' => $this->lastInsertId(),
+            'file_path' => 'public/assets/images/' . $filename
+        ]);
     }
 
 
-        public function updateProduct($info = []){
-    $query = "UPDATE  products SET
+    public function updateProduct($info = [])
+    {
+        $query = "UPDATE  products SET
             `category_id` = :category,
             `name` = :name,
             `price` = :price,
@@ -180,14 +190,23 @@ class ProductsModel extends BaseModel
         ";
 
         $this->execute($query, $info);
+    }
+    public function updateProductQuantity($product_id, $previous_quantity, $quantity_bought)
+    {
+        // dd("helloooo reaches here");
+        $updatedQuantity = $previous_quantity - $quantity_bought;
+        // dd($product_id);
+        $query = "UPDATE  products SET
+            quantity = :quantity
+            where product_id = :product_id";
 
+        $this->execute($query, ["quantity" => $updatedQuantity, "product_id" => $product_id]);
     }
 
-    public function deleteProduct($id){
+    public function deleteProduct($id)
+    {
         $query = "Delete from Products where product_id = :product_id";
 
-        $this->execute($query,['product_id'=>$id]);
+        $this->execute($query, ['product_id' => $id]);
     }
-
-
 }
