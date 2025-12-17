@@ -7,30 +7,26 @@
     </div>
 
     <div class="footer-contact">
-      <h4>Contact Us</h4>
+      <h4><?= trans('footer.contact'); ?></h4>
       <p>2114 Rue Jean Talon<br>Montreal, QC, H2E 1V3</p>
       <p>438-922-1682<br><a href="mailto:info@nuaesthetique.com">info@nuaesthetique.com</a></p>
     </div>
 
     <div class="footer-links">
-      <h4>Useful Links</h4>
+      <h4><?= trans('footer.links'); ?></h4>
       <ul>
-        <li><a href="#">Refund Policy</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Find a distributor</a></li>
-        <li><a href="#">Shipping and Delivery</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Return Policy</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#"><?= trans('footer.refund'); ?></a></li>
+        <li><a href="#"><?= trans('footer.services'); ?></a></li>
+        <li><a href="#"><?= trans('footer.shipping'); ?></a></li>
+        <li><a href="#"><?= trans('footer.return'); ?></a></li>
       </ul>
     </div>
 
     <div class="footer-newsletter">
-      <h4>Newsletter</h4>
+      <h4><?= trans('footer.newsletter'); ?></h4>
       <form>
-        <input type="email" placeholder="Enter your email">
-        <button type="submit">Subscribe</button>
+        <input type="email" placeholder="<?= trans('footer.enter_email'); ?>">
+        <button type="submit"><?= trans('footer.subscribe'); ?></button>
       </form>
     </div>
 

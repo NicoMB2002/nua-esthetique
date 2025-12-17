@@ -22,14 +22,14 @@ ViewHelper::loadHeader($data['title']);
         </thead>
         <tbody>
             <?php
-            foreach ($cart as $item) {
+            foreach ($cart as $name => $item) {
                 ?>
                 <tr>
-                    <td> <?= htmlspecialchars($item[0]["name"]) ?> </td>
-                    <td> <?= htmlspecialchars($item[0]["category_name"]) ?> </td>
-                    <td> <?= htmlspecialchars($item[0]["description"]) ?> </td>
-                    <td> <?= htmlspecialchars($item[0]["price"]) ?> </td>
-                    <td> <?= htmlspecialchars(count($item)) ?> </td>
+                    <td> <?= htmlspecialchars($name) ?> </td>
+                    <td> <?= htmlspecialchars($item["category_name"]) ?> </td>
+                    <td> <?= htmlspecialchars($item["description"]) ?> </td>
+                    <td> <?= htmlspecialchars($item["price"]) ?> </td>
+                    <td> <?= htmlspecialchars($item['amount']) ?> </td>
 
                 </tr>
             <?php }

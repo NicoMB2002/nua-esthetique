@@ -1,3 +1,6 @@
+<?php
+use App\Helpers\SessionManager;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +21,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/style.css">
+    <link rel="stylesheet" href="<?= APP_ASSETS_DIR_URL ?>/css/contact-css/style.css">
+
 </head>
 
 
@@ -29,36 +34,51 @@
 <header class="navBar">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <a href="<?= APP_BASE_URL?>/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <img src="<?= APP_BASE_URL?>/public/assets/resources/images/NuaLogo.png" width="200" height="200" class="me-2" />
         </a>
-
         <ul class="nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="<?= APP_BASE_URL?>/user/products" data-bs-toggle="dropdown">Products</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Lashes</a></li>
-            <li><a class="dropdown-item" href="#">Tweezers</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= APP_BASE_URL?>/products"><?= trans('nav.products'); ?></a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Promotions</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Services</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Book Appointment</a></li>
-            <li><a class="dropdown-item" href="#">Training</a></li>
-          </ul>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/contact"><?= trans('nav.contact'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.faq'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/promotions"><?= trans('nav.promotions'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="services"><?= trans('nav.services'); ?></a></li>
       </ul>
 
     <div class="nav-icons">
+        <a <?php
 
-        <a href="<?= APP_BASE_URL?>/login"><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> Account</button></a>
-        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> Cart</button></a>
+        if (SessionManager::has('user_id')): ?>
+            href="<?= APP_BASE_URL?>/dashboard"
+        <?php else: ?>
+            href="<?= APP_BASE_URL?>/login"
+        <?php endif; ?>><button type="button" id="accountBtn" class="btn btn-outline-dark me-2"><i class="bi bi-person-fill"></i> <?= trans('nav.account'); ?></button></a>
+        <a href="#"><button type="button" id="cartBtn"  class="btn btn-outline-dark me-2"><i class="bi bi-cart" style="color: black;"></i> <?= trans('nav.cart')?></button></a>
 
+
+                <div class="language-switcher">
+            <?php
+            // Get current locale from global translator
+            global $translator;
+            $currentLocale = $translator->getLocale();
+            $availableLocales = $translator->getAvailableLocales();
+            ?>
+
+            <?php foreach ($availableLocales as $locale): ?>
+                <?php if ($locale !== $currentLocale): ?>
+                    <a href="?lang=<?= hs($locale) ?>" class="lang-link">
+                        <?= $locale === 'en' ? 'English' : 'Français' ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <span class="current-lang">
+                <?= $currentLocale === 'en' ? '🇬🇧 English' : '🇫🇷 Français' ?>
+            </span>
+        </div>
     </div>
 
       </div>
@@ -76,32 +96,34 @@
   <ul class="list-group">
 
     <?php
- use App\Helpers\SessionManager;
  $total = 0.0;
 $cart = SessionManager::get('cart');
- foreach ($cart as $item):
-    $total += ($item[0]['price'] *count($item))
+ foreach ($cart ?? [] as $name => $item):
+    $total += ($item['price'] ?? 1 * (int) $item['amount'])
  ?>
  <li class="list-group-item text-bg-dark">
- <?= $item[0]['name']?>
+ <?= $name?>
  -
- <?= $item[0]['price']?> $
- X <?= count($item)?? 0?>
+ <?= $item['price']?> $
+ X <?= $item['amount']?? 0?>
  <br>
  <form method="post" action="remove_item">
-    <input type="hidden" name="name" value="<?=$item[0]['name']?>">
+    <input type="hidden" name="name" value="<?=$name?>">
           <input  type ='submit' class="btn btn-danger" value="Delete">
         </form>
     <form method="post" action="add_item">
-    <input type="hidden" name="id" value='<?=$item[0]['product_id']?>' >
+    <input type="hidden" name="name" value='<?=$name?>' >
+    <input type="hidden" name="id" value='<?=$item['id']?>' >
     <input type="submit" class="btn btn-success btn-sm" value="Add">
+    <input style="width: 50px; height: 30px; float: right;" type="number" value="<?= $item['amount']?>"  name="amount" class="form-range" min="0" max="20">
   </form>
  </li>
+ <br>
     <?php endforeach; ?>
  </ul>
   </div>
-  <footer>
-    <h3> Total: <?= $total?> $</h3>
+  <footer style="margin-left:20px;">
+    <h3 > Total: <?= $total?> $</h3>
     <a class="btn btn-primary btn-sm" href="checkout">Checkout</a>
   </footer>
 </div>

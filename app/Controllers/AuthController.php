@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Domain\Models\CustomerModel;
 use App\Domain\Models\UserModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
@@ -131,18 +132,11 @@ class AuthController extends BaseController
             // TODO: Create $userData array with keys:
             //       'first_name', 'last_name', 'username', 'email', 'password', 'role'
 
-            $userData = [
-                'first_name' => $firstName,
-                'last_name' => $lastName,
-                'username' => $username,
-                'email' => $email,
-                'password' => $password,
-                'role' => $role
-            ];
+
 
             // TODO: Call $this->userModel->createUser($userData)
             //       Store the returned user ID in $userId
-            $userId = $this->userModel->createUser($userData);
+            $userId = $this->userModel->createUser($formData);
 
             // TODO: Display success message using FlashMessage::success()
             //       Message: "Registration successful! Please log in."
@@ -292,6 +286,7 @@ class AuthController extends BaseController
         // TODO: Create a $data array with 'title' => 'Dashboard'
 
         $userId = SessionManager::get('user_id');
+        $user = $this->userModel->getUserById($userId);
         $twoFactorModel = $this->container->get(TwoFactorAuthModel::class);
         $has2FA = $twoFactorModel->isEnabled($userId);
 
@@ -299,7 +294,8 @@ class AuthController extends BaseController
         // TODO: Render 'user/dashboard.php' view and pass $data
         return $this->render($response, 'user/dashboard.php', [
             'title' => 'Dashboard',
-            'has2FA' => $has2FA
+            'has2FA' => $has2FA,
+            'userInfo' => $user
         ]);
     }
 }

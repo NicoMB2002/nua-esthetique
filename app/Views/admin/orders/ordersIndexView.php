@@ -25,6 +25,7 @@ ViewHelper::loadAdminHeader($data['title']);
                 <th>Customer Name</th>
                 <th>Tracking Number</th>
                 <th>Order Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +37,9 @@ ViewHelper::loadAdminHeader($data['title']);
                     <td> <?= $order['first_name'] ?></td>
                     <td> <?= $order['tracking_number'] ?></td>
                     <td> <?= $order['order_date'] ?></td>
-
+                    <td>
+                        <a href="orders/delete/<?= $order['id']?>" class="btn btn-danger"> Delete</a>
+                    </td>
                 </tr>
             <?php
             } ?>

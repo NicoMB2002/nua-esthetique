@@ -37,8 +37,9 @@ ViewHelper::loadAdminHeader($page_title);
                     <td> <?= $category['name'] ?></td>
                     <td> <?= $category['description'] ?></td>
                     <td> <?= $category['created_at'] ?></td>
-                    <td> <a href="categories/edit/<?= $category['id'] ?>" class="btn btn-success"> Edit</a></td>
-                    <td> <a href="categories/delete/<?= $category['id'] ?>" class="btn btn-danger"> Delete</a></td>
+                    <td> <a href="categories/edit/<?= $category['id'] ?>" class="btn btn-success"> Edit</a>
+                        <a href="categories/delete/<?= $category['id'] ?>" class="btn btn-danger"> Delete</a>
+                    </td>
                 </tr>
             <?php
             } ?>
@@ -46,7 +47,7 @@ ViewHelper::loadAdminHeader($page_title);
     </table>
 
     <div>
-        <a href="categories/create<?= $category['id'] ?>" class="btn btn-primary"> Add a new Category</a>
+        <a href="categories/create/<?= $category['id'] ?>" class="btn btn-primary"> Add a new Category</a>
     </div>
 </main>
 

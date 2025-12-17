@@ -53,7 +53,7 @@ class OrderModel extends BaseModel
     }
 
         public function insertProducts_Order($info = []){
-    $query = "INSERT INTO orders_products(
+        $query = "INSERT INTO orders_products(
                 product_id,
                 order_id,
                 quantity
@@ -69,9 +69,9 @@ class OrderModel extends BaseModel
     }
 
     public function deleteOrder($id){
-        $query = "Delete from Orders where order_id = :order_id";
 
-        $this->execute($query,['order_id'=>$id]);
+        $query = " DELETE FROM orders o WHERE o.order_id = ? ";
+        return $this->execute($query,[ $id]);
     }
 
 }

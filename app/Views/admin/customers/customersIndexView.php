@@ -26,6 +26,7 @@ ViewHelper::loadAdminHeader($data['title']);
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Address</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,9 @@ ViewHelper::loadAdminHeader($data['title']);
                     <td> <?= $customer['email'] ?></td>
                     <td> <?= $customer['phone_number'] ?></td></td>
                     <td> <?= $customer['address'] ?></td></td>
+                    <td> <a href="customer/edit/<?= $customer['id'] ?>" class="btn btn-success"> Edit</a>
+                        <a href="customer/delete/<?= $customer['id'] ?>" class="btn btn-danger"> Delete</a>
+                    </td>
                 </tr>
             <?php
             } ?>

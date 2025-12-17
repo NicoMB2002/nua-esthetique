@@ -15,13 +15,13 @@ class ProductsModel extends BaseModel
 
 
     public function getProducts(){
-        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id";
+        $query = "Select p.product_id as product_id, p.promotion_percentage as promotion, p.name as name, p.price as price, p.description as description, c.name as category_name, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id";
         $products = $this->selectAll($query);
         return $products;
     }
 
         public function getProductByID($id){
-        $query = "Select p.product_id as product_id, p.name as name, p.price as price, p.description as description, c.name as category_name, c.id as category_id, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
+        $query = "Select p.product_id as product_id, p.promotion_percentage as promotion, p.name as name, p.price as price, p.description as description, c.name as category_name, c.id as category_id, p.quantity as quantity from Products p  left join Categories c on p.category_id = c.id where p.product_id = :product_id";
         $products = $this->selectOne($query,['product_id'=>$id]);
         return $products;
     }
@@ -34,6 +34,7 @@ class ProductsModel extends BaseModel
                     p.description AS description,
                     c.name AS category_name,
                     p.quantity AS quantity,
+                    p.promotion_percentage as promotion,
                     pi.file_path AS path
                 FROM
                     Products p
@@ -44,6 +45,41 @@ class ProductsModel extends BaseModel
         $products = $this->selectAll($query);
         return $products;
     }
+
+        public function getPromotionsWithImages(){
+        $query = "SELECT
+                    p.product_id AS product_id,
+                    p.name AS name,
+                    p.price AS price,
+                    p.description AS description,
+                    c.name AS category_name,
+                    p.quantity AS quantity,
+                    p.promotion_percentage as promotion,
+                    pi.file_path AS path
+                FROM
+                    Products p
+                LEFT JOIN Categories c ON
+                    p.category_id = c.id
+                LEFT JOIN product_images pi ON
+                    p.product_id = pi.product_id
+                WHERE p.promotion_percentage > 0";
+        $products = $this->selectAll($query);
+        return $products;
+    }
+
+    public function getImageForProduct(int $productId): ?string
+    {
+        $query = "SELECT file_path
+            FROM product_images
+            WHERE product_id = :product_id
+            LIMIT 1";
+
+        $result = $this->selectOne($query, ['product_id' => $productId]);
+
+        return $result['file_path'] ?? null;
+    }
+
+
 
             public function getProductsWithImagesSearch(string $search){
         $query = "SELECT
@@ -99,23 +135,35 @@ class ProductsModel extends BaseModel
     }
 
 
-    public function insertProduct($info = []){
+    public function insertProduct(array $info,$filename){
     $query = "INSERT INTO products(
+            name,
+            category_id,
             price,
             quantity,
-            InStock,
-            description,
-            isBulk
+            description
         )
         VALUES(
+            :name,
+            :category,
             :price,
             :quantity,
-            :InStock,
-            :description,
-            :isBulk
+            :description
         )";
 
         $this->execute($query, $info);
+
+        $query = "INSERT INTO product_images(
+            product_id,
+            file_path
+        )
+        VALUES(
+            :product_id,
+            :file_path
+        )";
+
+        $this->execute($query, [ 'product_id'=> $this->lastInsertId(),
+                                'file_path' => 'public/assets/images/'.$filename]);
 
     }
 
@@ -126,7 +174,8 @@ class ProductsModel extends BaseModel
             `name` = :name,
             `price` = :price,
             `quantity` = :quantity,
-            `description` = :description
+            `description` = :description,
+            `promotion_percentage` = :promotion
             where product_id = :product_id
         ";
 

@@ -347,6 +347,15 @@
   font-family: var(--font-family-base);
 }
 
+.card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.card-img-top:hover {
+  transform: scale(1.1);
+}
+
+
 
 fieldset {
     border: 1px solid #ddd;

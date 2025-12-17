@@ -14,15 +14,12 @@ class DashboardController extends BaseController
         parent::__construct($container);
     }
 
-    //*step1 add route handler/request handler (controller) method aka a callback method
+    /**
+     * Display admin dashboard page
+     */
     public function index(Request $request, Response $response, array $args): Response {
-
-        
         $data = [];
-
-
         // return $this->redirect($request, $response, 'products.index');
-
         return $this->render($response, 'admin/dashboardView.php', $data);
     }
 

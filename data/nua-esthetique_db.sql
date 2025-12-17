@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 12, 2025 at 03:20 AM
+-- Generation Time: Dec 17, 2025 at 12:56 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -67,12 +67,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `tracking_number`, `order_date`) VALUES
-(1, 2, '8211928', NULL),
-(2, 2, '3358430', NULL),
-(3, 2, '4467539', NULL),
-(4, 2, '3702401', NULL),
-(5, 2, '4603730', NULL),
-(6, 2, '6582169', NULL);
+(13, 2, '6254057', NULL),
+(14, 2, '5911357', NULL),
+(15, 2, '6451143', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,15 +88,18 @@ CREATE TABLE `orders_products` (
 --
 
 INSERT INTO `orders_products` (`product_id`, `order_id`, `quantity`) VALUES
-(1, 2, 1),
-(1, 3, 1),
-(1, 4, 1),
-(1, 5, 1),
-(2, 5, 1),
-(5, 5, 1),
-(1, 6, 1),
-(2, 6, 1),
-(5, 6, 1);
+(2, 13, 1),
+(1, 13, 1),
+(3, 13, 1),
+(4, 13, 1),
+(5, 13, 1),
+(6, 13, 1),
+(3, 14, 1),
+(2, 14, 1),
+(2, 15, 1),
+(1, 15, 1),
+(4, 15, 1),
+(5, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -115,6 +115,7 @@ CREATE TABLE `products` (
   `quantity` int(11) NOT NULL,
   `InStock` tinyint(1) NOT NULL DEFAULT 1,
   `description` text NOT NULL,
+  `promotion_percentage` int(11) DEFAULT NULL,
   `isBulk` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -122,15 +123,16 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `isBulk`) VALUES
-(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 0),
-(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 0),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0),
-(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 0),
-(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', 0),
-(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', 0),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', 0),
-(8, 2, 'NUA Precision Volume Tweezer – Silver', 25, 50, 1, 'Ultra-sharp curved tip tweezer with diamond grip.', 0);
+INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `promotion_percentage`, `isBulk`) VALUES
+(1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 40, 0),
+(2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 15, 0),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', NULL, 0),
+(4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 20, 0),
+(5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', NULL, 0),
+(6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', NULL, 0),
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', NULL, 0),
+(11, 1, 'Test', 20, 50, 1, 'Test', NULL, 0),
+(14, 1, 'Test', 20, 50, 1, 'Laptops for students on sale', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -141,23 +143,35 @@ INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`
 CREATE TABLE `product_images` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `file_path` varchar(255) NOT NULL,
-  `is_primary` tinyint(1) NOT NULL DEFAULT 0
+  `file_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product_images`
 --
 
-INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `is_primary`) VALUES
-(1, 7, 'public\\assets\\images\\Brow Freeze Gel.png', 1),
-(2, 2, 'public\\assets\\images\\Cocoa_Luxe.png', 1),
-(3, 5, 'public\\assets\\images\\Growth_Serum.png', 1),
-(4, 4, 'public\\assets\\images\\Lash_Adhesive.png', 1),
-(5, 1, 'public\\assets\\images\\Midnight_Luxe.png', 1),
-(6, 6, 'public\\assets\\images\\Mini_Fan.png', 1),
-(7, 8, 'public\\assets\\images\\Precision_Volume_Tweezer.png', 1),
-(8, 3, 'public\\assets\\images\\Tweezers.png', 1);
+INSERT INTO `product_images` (`id`, `product_id`, `file_path`) VALUES
+(1, 7, 'public\\assets\\images\\Brow Freeze Gel.png'),
+(2, 2, 'public\\assets\\images\\Cocoa_Luxe.png'),
+(3, 5, 'public\\assets\\images\\Growth_Serum.png'),
+(4, 4, 'public\\assets\\images\\Lash_Adhesive.png'),
+(5, 1, 'public\\assets\\images\\Midnight_Luxe.png'),
+(6, 6, 'public\\assets\\images\\Mini_Fan.png'),
+(8, 3, 'public\\assets\\images\\Tweezers.png'),
+(11, 11, 'public/assets/images/upload_6941ac602c1d4.png'),
+(14, 14, 'public/assets/images/upload_6941b96b991a8.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promotions`
+--
+
+CREATE TABLE `promotions` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `percentage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -203,7 +217,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `username`, `password_hash`, `role`, `address`, `created_at`, `updated_ at`, `date_of_birth`, `postal_code`, `phone_number`) VALUES
 (1, 'Luke Ryan', 'Nwantoly', 'NwantolyLuke@gmail.com', 'Luke', '$2y$12$xs5xdIx7aN2vhDHU9DIzIORudu0n4//KKkhMZ.a8kklLdAJk4fSAa', 'admin', '5975 Rue Croissant Précourt Laval QC', '2025-12-02', '2025-12-02', '2025-12-15', 'H7H 2W2', '4383785400'),
-(2, 'Luke Ryan', 'Nwantoly', 'NwantolyRyan@gmail.com', 'Ryan', '$2y$12$pyUT5Ip0Vo9Xa6nq3B4w9OFaKKoiPTjPFoJWisCfl.SEP9kzB4R3y', 'customer', '5975 Rue Croissant Précourt Laval QC', '2025-12-03', '2025-12-03', '2025-12-24', 'H7H 2W2', '4383785406');
+(2, 'Luke Ryan', 'Nwantoly', 'NwantolyRyan@gmail.com', 'Ryan', '$2y$12$pyUT5Ip0Vo9Xa6nq3B4w9OFaKKoiPTjPFoJWisCfl.SEP9kzB4R3y', 'customer', '5975 Rue Croissant Précourt Laval QC', '2025-12-03', '2025-12-03', '2025-12-24', 'H7H 2W2', '4383785406'),
+(7, 'Luke Ryan', 'Nwantoly', 'Mike@gmail.com', 'Mike', '$2y$12$UuCMW3BMcNYJlWCICjC5Z.Nql7Qz9GEOtS1N4Qde6Z4ZzmNDUmtAq', 'customer', '5975 Rue Croissant Précourt', '2025-12-16', '2025-12-16', '2025-12-10', 'H7H 2W2', '4383785400'),
+(8, 'Customer', 'Generic', 'Generic@gmail.com', 'Generic', '$2y$12$1mAszTn9cAcRrw5vWHcKRu26R9r0/EXpxDTeSluJxmUQ.i83XRFuO', 'customer', '1234 Rue Generic', '2025-12-16', '2025-12-16', '2025-12-01', 'A1A 2B2', '514-123-1234');
 
 --
 -- Indexes for dumped tables
@@ -244,6 +260,13 @@ ALTER TABLE `product_images`
   ADD KEY `product_images_FK` (`product_id`);
 
 --
+-- Indexes for table `promotions`
+--
+ALTER TABLE `promotions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `promotions_product_id_FK` (`product_id`);
+
+--
 -- Indexes for table `two_factor_auth`
 --
 ALTER TABLE `two_factor_auth`
@@ -270,19 +293,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `promotions`
+--
+ALTER TABLE `promotions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `two_factor_auth`
@@ -294,11 +323,17 @@ ALTER TABLE `two_factor_auth`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `customer_id_FK` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders_products`
@@ -318,6 +353,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `promotions`
+--
+ALTER TABLE `promotions`
+  ADD CONSTRAINT `promotions_product_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `two_factor_auth`

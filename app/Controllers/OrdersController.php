@@ -10,17 +10,26 @@ use App\Domain\Models\ProductsModel;
 class OrdersController extends BaseController
 {
 
-        public function __construct(Container $container, private ProductsModel $products_model,private OrderModel $order_model)
+    public function __construct(Container $container, private ProductsModel $products_model,private OrderModel $order_model)
     {
         parent::__construct($container);
     }
 
- public function index(Request $request, Response $response, array $args): Response {
+    /**
+     * Display Admin orders page
+     */
+    public function index(Request $request, Response $response, array $args): Response {
 
-
-            $data = ['title'=> 'Orders Page'];
-            $data['orders'] = $this->order_model->getOrders();
+        $data = ['title'=> 'Orders Page'];
+        $data['orders'] = $this->order_model->getOrders();
         return $this->render($response, 'admin/orders/ordersIndexView.php', $data);
     }
 
+
+    public function delete(Request $request, Response $response, array $args): Response {
+
+         $this->order_model->deleteOrder($args['order_id']);
+
+        return $this->redirect($request, $response,"orders.index");
+    }
 }

@@ -9,6 +9,7 @@ $page_title = 'Products list';
 ViewHelper::loadAdminHeader($page_title);
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <?= FlashMessage::render()?>
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
@@ -46,6 +47,7 @@ ViewHelper::loadAdminHeader($page_title);
                     <th>Description</th>
                     <th>Price</th>
                     <th>Stock Quantity</th>
+                    <th>Promotion</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -61,10 +63,10 @@ ViewHelper::loadAdminHeader($page_title);
                         <td> <?= htmlspecialchars($product["description"]) ?> </td>
                         <td> <?= htmlspecialchars($product["price"]) ?> </td>
                         <td> <?= htmlspecialchars($product["quantity"]) ?> </td>
+                        <td> <?= htmlspecialchars($product["promotion"] ?? 0) ?>% </td>
                         <td>
                             <a href="products/edit/<?= $product['product_id'] ?>" class="btn btn-success">Edit</a>
-                        </td>
-                        <td> <a href="products/delete/<?= $product['product_id'] ?>" class="btn btn-danger"> Delete</a></td>
+                            <a href="products/delete/<?= $product['product_id'] ?>" class="btn btn-danger"> Delete</a></td>
                     </tr>
                 <?php }
                 ?>
@@ -72,6 +74,10 @@ ViewHelper::loadAdminHeader($page_title);
         </table>
 
 
+    </div>
+
+    <div>
+        <a href="products/create" class="btn btn-primary"> Add a new Products</a>
     </div>
 </main>
 

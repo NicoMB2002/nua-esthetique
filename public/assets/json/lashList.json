@@ -1,0 +1,29 @@
+{
+    "lashes": [
+        {
+            "lashSetID": 1,
+            "lashName": "Mega Volume",
+            "lashImage": "/nua-esthetique/public/assets/resources/images/MegaVolume.png"
+        },
+        {
+            "lashSetID": 2,
+            "lashName": "Hybrid",
+            "lashImage": ""
+        },
+        {
+            "lashSetID": 3,
+            "lashName": "Natural Set",
+            "lashImage": ""
+        },
+        {
+            "lashSetID": 4,
+            "lashName": "Cat Eye",
+            "lashImage": "/nua-esthetique/public/assets/resources/images/CatEye.png"
+        },
+        {
+            "lashSetID": 5,
+            "lashName": "Extra Volume",
+            "lashImage": "/nua-esthetique/public/assets/resources/images/ExtraVolume.png"
+        }
+    ]
+}

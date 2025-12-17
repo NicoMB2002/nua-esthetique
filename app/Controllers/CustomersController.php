@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Domain\Models\CustomerModel;
+use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
 use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -16,14 +17,45 @@ class CustomersController extends BaseController
         parent::__construct($container);
     }
 
+    /**
+     * Display customer page
+     */
+    public function index(Request $request, Response $response, array $args): Response
+    {
 
-        public function index(Request $request, Response $response, array $args): Response {
 
-
-            $data = ['title'=> 'Customer Page'];
-
-            $data['customers'] = $this->customer_model->getCustomers();
-
+        $data = ['title' => 'Customer Page'];
+        $data['customers'] = $this->customer_model->getCustomers();
         return $this->render($response, 'admin/customers/customersIndexView.php', $data);
+    }
+
+    public function edit(Request $request, Response $response, array $args): Response
+    {
+        $userID = $args["user_id"];
+        // dd($userID);
+        $user = $this->customer_model->getOneCustomer($userID);
+        // dd($user); //Works
+        $data = [
+            'user' => $user
+        ];
+        return $this->render($response, 'user/userEdit.php', $data);
+    }
+
+    /**
+     * Delete user
+     */
+    public function update(Request $request, Response $response, array $args): Response
+    {
+        $userInfo = $request->getParsedBody();
+        // dd($userInfo); //is good
+        $user_id = $userInfo["user_id"];
+        $this->customer_model->updateCustomer($user_id, $userInfo);
+        FlashMessage::success('Customer information updated successfully!');
+        $updatedUser = $this->customer_model->getOneCustomer($user_id);
+
+        //Reset the session info after update
+        SessionManager::set('user_email', $updatedUser['email']);
+        SessionManager::set('user_name', $updatedUser['first_name'] . ' ' . $updatedUser['last_name']);
+        return $this->redirect($request, $response, 'user.dashboard');
     }
 }
