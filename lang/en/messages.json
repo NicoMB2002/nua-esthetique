@@ -30,6 +30,14 @@
         "appointment_msg": "Book an appointment",
         "appointment_link": "here!"
     },
+    "account":{
+        "myProfile" : "My Profile",
+        "name": "Name:",
+        "email": "Email:",
+        "role" : "Role",
+        "quickActions" : "Quick Actions",
+        "browse" : ""
+    },
     "footer": {
         "contact": "Contact Us",
         "links": "Useful Links",

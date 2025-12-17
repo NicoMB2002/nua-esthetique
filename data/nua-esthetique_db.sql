@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 17, 2025 at 03:52 AM
+-- Generation Time: Dec 17, 2025 at 12:56 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -372,7 +372,7 @@ ALTER TABLE `users`
 ALTER TABLE `category_images`
   ADD CONSTRAINT `category_images_category_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
---
+
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`

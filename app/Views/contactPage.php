@@ -14,7 +14,7 @@ TranslationHelper::class;
     </div>
 
     <div class="col-lg-6 col-md-3">
-        <img class="rectangle-5" src="<?= APP_BASE_URL ?>/public/assets/resources/images/ContactUs.png" />
+        <img class="rectangle-5" src="<?= APP_BASE_URL ?>/public/assets/resources/images/ContactUs.png" style="height:700px; width: 400px; object-fit:cover;"/>
     </div>
     <div class="text-wrapper-5 col-lg-6">
         <h2><?= hs(trans('contact.message-us')); ?></h2>
@@ -34,6 +34,7 @@ TranslationHelper::class;
     </div>
 
 </div>
+<br><br>
 <?= FlashMessage::render() ?>
 
 <?php

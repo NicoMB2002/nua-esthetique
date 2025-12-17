@@ -6,7 +6,7 @@ use App\Helpers\SessionManager;
 ;
 ViewHelper::loadHeader($data['title']);
 
-//dd($data);
+// dd($data);//good now
 ?>
     <h2> Order <?= $data['order_id']?> Details </h2>
    <table class="table table-striped">

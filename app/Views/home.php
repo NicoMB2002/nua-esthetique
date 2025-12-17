@@ -145,7 +145,7 @@ ViewHelper::loadHeader($data['title']);
 $categories = $categories ?? [];
 ?>
 <section class="container my-5">
-    <h2 class="mb-4"><?= trans('nav.collection'); ?></h2>
+    <h2 class="mb-4"><?= trans('home.collection'); ?></h2>
 
     <div class="row g-4 justify-content-center">
         <?php if (!empty($categories)): ?>
