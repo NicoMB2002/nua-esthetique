@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 17, 2025 at 12:56 AM
+-- Generation Time: Dec 17, 2025 at 03:52 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -48,6 +48,30 @@ INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `deleted_at
 (4, 'Serum', '', '2025-11-27', '2025-11-27'),
 (5, 'Accessories', '', '2025-11-27', '2025-11-27'),
 (6, 'Brow Products', '', '2025-11-27', '2025-11-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_images`
+--
+
+CREATE TABLE `category_images` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category_images`
+--
+
+INSERT INTO `category_images` (`id`, `category_id`, `file_path`) VALUES
+(1, 1, 'public\\assets\\images\\categories\\9ec245bada190233d930c3bd820c43481b17544d.jpg'),
+(2, 2, 'public\\assets\\images\\categories\\a5bfc96be871c77101fd2fa549e89717062c6b82.jpg'),
+(3, 3, 'public\\assets\\images\\categories\\48fa2a45ec8656c94fc5f413f390feb7ad44bbbb.jpg'),
+(4, 4, 'public\\assets\\images\\categories\\c4e06d217990880e5b11db738af412202bcfa134.jpg'),
+(5, 5, 'public\\assets\\images\\categories\\18d47ab94bb1ef9e1abe8097b98ba30e0218c78e.jpg'),
+(6, 6, 'public\\assets\\images\\categories\\919d041c362f482df58bd29f39c7f989b73439cc.jpg');
 
 -- --------------------------------------------------------
 
@@ -232,6 +256,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `category_images`
+--
+ALTER TABLE `category_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_images_category_FK` (`category_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -290,6 +321,12 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `category_images`
+--
+ALTER TABLE `category_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
@@ -328,6 +365,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `category_images`
+--
+ALTER TABLE `category_images`
+  ADD CONSTRAINT `category_images_category_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `orders`

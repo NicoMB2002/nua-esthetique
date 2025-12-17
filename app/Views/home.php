@@ -4,6 +4,7 @@ use App\Helpers\ViewHelper;
 
 
 ViewHelper::loadHeader($data['title']);
+
 ?>
 <br>
 <br>
