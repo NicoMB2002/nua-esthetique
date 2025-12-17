@@ -74,7 +74,9 @@ return static function (Slim\App $app): void {
 
     $app->post('/add_item', [HomeController::class, 'addItem']);
 
-    $app->post('/remove_item', [HomeController::class, 'removeItem']);
+        $app->post('/update_item', [HomeController::class, 'updateItems']);
+
+    $app->get('/remove_item/{name}', [HomeController::class, 'removeItem']);
 
     $app->get('/checkout', [HomeController::class, 'checkout']);
 

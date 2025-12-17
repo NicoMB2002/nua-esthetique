@@ -11,7 +11,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Helpers\SessionManager;
 use App\Domain\Models\ProductsModel;
-
 class HomeController extends BaseController
 {
     //NOTE: Passing the entire container violates the Dependency Inversion Principle and creates a service locator anti-pattern.
@@ -26,10 +25,10 @@ class HomeController extends BaseController
     /**
      * Display customer Home page
      */
-    public function index(Request $request, Response $response, array $args): Response
-    {
+    public function index(Request $request, Response $response, array $args): Response {
 
         $categories = $this->categories_model->getCategoriesWithImages();
+
         $products = $this->products_model->getProductsWithImages();
         $data = [
             'title'      => 'Home',
@@ -66,12 +65,12 @@ class HomeController extends BaseController
         return $this->render($response, 'products.php', $data);
     }
 
-    public function promotions(Request $request, Response $response, array $args): Response
+        public function promotions(Request $request, Response $response, array $args): Response
     {
-        $categories = $this->categories_model->getCategories();
+             $categories = $this->categories_model->getCategories();
 
 
-        $products = $this->products_model->getPromotionsWithImages();
+            $products = $this->products_model->getPromotionsWithImages();
 
 
         $data = [
@@ -86,36 +85,36 @@ class HomeController extends BaseController
     /**
      * Add Item to cart
      */
-    public function addItem(Request $request, Response $response, array $args): Response
-    {
-        $id = $request->getParsedBody()['id'];
-        $item = $this->products_model->getProductById((int) $id);
-        $cart =  SessionManager::get('cart') ?? [];
+    public function addItem(Request $request, Response $response, array $args):Response{
+        $cart =  SessionManager::get('cart')?? [];
+        $item = $this->products_model->getProductByID($request->getParsedBody()['id']);
+        $cart[$item['name']]  = $item;
+        $cart[$item['name']]['amount'] = 1;
+        SessionManager::set('cart',$cart);
+        return $this->redirect($request, $response, 'user.products');
+    }
 
-        if (isset($cart[$item['name']])) {
-            $cart[$item['name']]['amount'] = $request->getParsedBody()['amount'] ?? $cart[$item['name']]['amount'] + 1;
-        } else {
-            $cart[$item['name']] = [
-                'id' => $item['product_id'],
-                'amount' => 1,
-                'price' => $item['price'],
-                'description' => $item['description'],
-                'category_name' => $item['category_name']
-            ];
+    public function updateItems(Request $request, Response $response, array $args):Response{
+        $cart =  SessionManager::get('cart')?? [];
+        foreach ($cart as $name => $item) {
+            if(isset($_POST[$item['product_id']])){
+                $cart[$name]['amount'] = $_POST[$item['product_id']];
+            }
         }
-        SessionManager::set('cart', $cart);
+
+
+        SessionManager::set('cart',$cart);
         return $this->redirect($request, $response, 'user.products');
     }
 
     /**
      * Remove item from cart
      */
-    public function removeItem(Request $request, Response $response, array $args): Response
-    {
-        $name = $request->getParsedBody()['name'];
-        $cart =  SessionManager::get('cart') ?? [];
-        unset($cart[$name]);
-        SessionManager::set('cart', $cart);
+     public function removeItem(Request $request, Response $response, array $args):Response{
+
+        $cart =  SessionManager::get('cart')?? [];
+        unset($cart[$args['name']]);
+        SessionManager::set('cart',$cart);
         return $this->redirect($request, $response, 'user.products');
     }
 
@@ -132,19 +131,18 @@ class HomeController extends BaseController
      */
     public function checkout(Request $request, Response $response, array $args): Response
     {
-        $data = ['title' => 'Checkout'];
-        return $this->render($response, 'user/checkout.php', $data);
+        $data = ['title'=>'Checkout'];
+        return $this->render($response, 'user/checkout.php',$data);
     }
 
     /**
      * Create order
      */
-    public function createOrder(Request $request, Response $response, array $args): Response
-    {
+    public function createOrder(Request $request, Response $response, array $args): Response{
         $cart = SessionManager::get('cart');
         $orderID = $this->order_model->insertOrder([
-            'customer_id' => SessionManager::get('user_id'),
-            'tracking_number' => random_int(1000000, 9999999)
+            'customer_id'=>SessionManager::get('user_id'),
+            'tracking_number'=> random_int(1000000,9999999)
         ]);
         foreach ($cart as $item) {
             // dd($item);
@@ -157,27 +155,24 @@ class HomeController extends BaseController
             ]);
             $this->products_model->updateProductQuantity($item['id'], $productBought['quantity'], $item['amount']);
         }
-        SessionManager::set('cart', []);
-        return $this->redirect($request, $response, 'user.products');
+       SessionManager::set('cart',[]);
+        return $this->redirect($request,$response,'user.products');
     }
 
 
-    public function customerOrders(Request $request, Response $response, array $args): Response
-    {
-        $data = ['title' => 'Orders Page'];
+    public function customerOrders(Request $request, Response $response, array $args): Response {
+        $data = ['title'=> 'Orders Page'];
         $data['orders'] = $this->order_model->getOrdersById(SessionManager::get('user_id'));
         return $this->render($response, 'user/orders.php', $data);
     }
 
-    /**
+     /**
      * Display order details
      */
-    public function customerOrderDetails(Request $request, Response $response, array $args): Response
-    {
-        // dd($args); wrong id calling
-        $data = ['title' => 'Orders Page'];
-        $data['order_id'] = $args['order_id'];
-        $data['products'] = $this->order_model->getOrderProducts($args['order_id']);
+    public function customerOrderDetails(Request $request, Response $response, array $args): Response {
+        $data = ['title'=> 'Orders Page'];
+        $data['order_id'] = $args['id'];
+        $data['products'] = $this->order_model->getOrderProducts($args['id']);
         return $this->render($response, 'user/orderDetails.php', $data);
     }
 }
