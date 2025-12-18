@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 18, 2025 at 01:30 AM
+-- Generation Time: Dec 18, 2025 at 02:24 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -91,8 +91,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `tracking_number`, `order_date`) VALUES
-(27, 2, '4485624', '2025-12-17'),
-(28, 2, '7618703', '2025-12-17');
+(27, 2, '4485624', '2025-12-17');
 
 -- --------------------------------------------------------
 
@@ -113,9 +112,7 @@ CREATE TABLE `orders_products` (
 INSERT INTO `orders_products` (`product_id`, `order_id`, `quantity`) VALUES
 (1, 27, 1),
 (2, 27, 1),
-(3, 27, 3),
-(1, 28, 1),
-(2, 28, 1);
+(3, 27, 3);
 
 -- --------------------------------------------------------
 
@@ -142,7 +139,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`, `InStock`, `description`, `promotion_percentage`, `isBulk`) VALUES
 (1, 2, 'NUA Lash Extensions – Midnight Luxe', 25, 50, 1, 'Ultra-black matte-finish lash extensions designed for a bold and defined look.', 40, 0),
 (2, 3, 'NUA Lash Extensions – Cocoa Luxe', 20, 50, 1, 'Soft, lightweight lash extensions ideal for warm and natural looks.', 15, 0),
-(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', NULL, 0),
+(3, 2, 'NUA Tweezers – Volume & Precision', 20, 50, 1, 'Professional tweezers with textured grip and angled tip for precision.', 0, 0),
 (4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 20, 0),
 (5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', NULL, 0),
 (6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', NULL, 0),
@@ -217,9 +214,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `username`, `password_hash`, `role`, `address`, `created_at`, `updated_ at`, `date_of_birth`, `postal_code`, `phone_number`) VALUES
 (1, 'Luke Ryan', 'Nwantoly', 'NwantolyLuke@gmail.com', 'Luke', '$2y$12$xs5xdIx7aN2vhDHU9DIzIORudu0n4//KKkhMZ.a8kklLdAJk4fSAa', 'admin', '5975 Rue Croissant Précourt Laval QC', '2025-12-02', '2025-12-02', '2025-12-15', 'H7H 2W2', '4383785400'),
-(2, 'Luke Ryan', 'Nwantoly', 'NwantolyRyan@gmail.com', 'Ryan', '$2y$12$pyUT5Ip0Vo9Xa6nq3B4w9OFaKKoiPTjPFoJWisCfl.SEP9kzB4R3y', 'customer', '5975 Rue Croissant Précourt Laval QC', '2025-12-03', '2025-12-03', '2025-12-24', 'H7H 2W2', '4383785406'),
+(2, 'Luke Ryan', 'Nwantoly', 'LukeNwantoly@gmail.com', 'Ryan', '$2y$12$pyUT5Ip0Vo9Xa6nq3B4w9OFaKKoiPTjPFoJWisCfl.SEP9kzB4R3y', 'customer', '5975 Rue Croissant Précourt Laval QC', '2025-12-03', '2025-12-03', '2025-12-24', 'H7H 2W2', '4383785406'),
 (7, 'Luke Ryan', 'Nwantoly', 'Mike@gmail.com', 'Mike', '$2y$12$UuCMW3BMcNYJlWCICjC5Z.Nql7Qz9GEOtS1N4Qde6Z4ZzmNDUmtAq', 'customer', '5975 Rue Croissant Précourt', '2025-12-16', '2025-12-16', '2025-12-10', 'H7H 2W2', '4383785400'),
-(8, 'Customer', 'Generic', 'Generic@gmail.com', 'Generic', '$2y$12$1mAszTn9cAcRrw5vWHcKRu26R9r0/EXpxDTeSluJxmUQ.i83XRFuO', 'customer', '1234 Rue Generic', '2025-12-16', '2025-12-16', '2025-12-01', 'A1A 2B2', '514-123-1234');
+(8, 'Customer', 'Generic', 'Generic@gmail.com', 'Generic', '$2y$12$1mAszTn9cAcRrw5vWHcKRu26R9r0/EXpxDTeSluJxmUQ.i83XRFuO', 'customer', '1234 Rue Generic', '2025-12-16', '2025-12-16', '2025-12-01', 'A1A 2B2', '514-123-1234'),
+(9, 'Mike', 'Test', 'Jack@gmail.com', 'Jack', '$2y$12$ZKQa/AGx/oQu00FiOSdNGO8QyaaBFwgF1gv/T66Q4SoDRibrlmXsG', 'customer', '5975 Rue Croissant Précourt', '2025-12-17', '2025-12-17', '2007-01-01', 'H7H 2W2', '514-123-1234');
 
 --
 -- Indexes for dumped tables
@@ -299,7 +297,7 @@ ALTER TABLE `category_images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -323,7 +321,7 @@ ALTER TABLE `two_factor_auth`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

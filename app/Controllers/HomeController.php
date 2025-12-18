@@ -76,7 +76,7 @@ class HomeController extends BaseController
 
 
         $data = [
-            'title'      => 'HomePage',
+            'title'      => 'Promotions',
             'products'   => $products,
             'categories' => $categories
         ];

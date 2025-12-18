@@ -27,7 +27,7 @@ function parseLashes(lashes) {
     console.log(lashes.lashes);
 
     const lashCards = document.getElementById("services-catalog-lashes");
-    lashCards.classList.add("row", "justify-content-evenly", "flex-wrap");
+    lashCards.classList.add("mb-12", "justify-content-evenly", "flex-wrap");
 
     lashes.lashes.forEach((lashSet) => {
         const lashCard = document.createElement("div");
@@ -35,9 +35,9 @@ function parseLashes(lashes) {
             "col-8",
             "card",
             "col-sm-10",
-            "col-md-6",
-            "col-lg-4",
-            "m-2",
+            "col-md-8",
+            "col-lg-2",
+            "m-3",
             "p-2",
             "rounded"
         );
