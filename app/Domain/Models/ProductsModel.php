@@ -30,6 +30,24 @@ class ProductsModel extends BaseModel
         return $products;
     }
 
+    public function getProductsByCategory(int $categoryId): array
+    {
+        $sql = "
+            SELECT
+                p.*,
+                pi.file_path
+            FROM products p
+            LEFT JOIN product_images pi
+                ON pi.product_id = p.product_id
+            WHERE p.category_id = :category_id
+            GROUP BY p.product_id
+        ";
+
+        return $this->selectAll($sql, [
+            'category_id' => $categoryId
+        ]);
+    }
+
     public function getProductsWithImages()
     {
         $query = "SELECT

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Domain\Models\CategoriesModel;
+use App\Domain\Models\ProductsModel;
 use App\Helpers\FlashMessage;
 use App\Helpers\SessionManager;
 use DI\Container;
@@ -11,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class CategoriesController extends BaseController
 {
-    public function __construct(Container $container, private CategoriesModel $categories_model)
+    public function __construct(Container $container, private CategoriesModel $categories_model, private ProductsModel $products_model)
     {
         parent::__construct($container);
     }
@@ -33,6 +34,31 @@ class CategoriesController extends BaseController
         ];
         return $this->render($response, 'admin/categories/categoriesIndexView.php', $data);
     }
+    public function show(Request $request, Response $response, array $args): Response
+    {
+        $categoryId = $args['category_id'] ?? 0;
+
+        if ($categoryId === 0) {
+            FlashMessage::error('Category ID is missing');
+            return $this->redirect($request, $response, 'categories.index');
+        }
+
+        $category = $this->categories_model->getCategoriesId($categoryId);
+
+        if (!$category) {
+            FlashMessage::error('Category not found');
+            return $this->redirect($request, $response, 'categories.index');
+        }
+
+        $products = $this->products_model->getProductsByCategory($categoryId);
+
+        return $this->render($response, 'categoriesDetailsView.php', [
+            'page_title' => $category['name'],
+            'category'   => $category,
+            'products'   => $products
+        ]);
+    }
+
 
     /**
      * Create Category

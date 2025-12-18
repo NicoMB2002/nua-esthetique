@@ -199,6 +199,9 @@ return static function (Slim\App $app): void {
     $app->get('/upload', [UploadController::class, 'index'])
         ->setName('upload.index'); // GET displays the form
 
+        $app->get('/categories/{category_id}', [CategoriesController::class, 'show'])->setName('categories.show');
+
+
     $app->post('/upload', [UploadController::class, 'upload'])
         ->setName('upload.process'); //POST processes uploads
 
