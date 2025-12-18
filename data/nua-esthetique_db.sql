@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 17, 2025 at 12:56 AM
+-- Generation Time: Dec 18, 2025 at 01:30 AM
 -- Server version: 11.8.3-MariaDB-log
 -- PHP Version: 8.4.10
 
@@ -83,7 +83,7 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `tracking_number` varchar(50) NOT NULL,
-  `order_date` date DEFAULT NULL
+  `order_date` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -91,9 +91,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `tracking_number`, `order_date`) VALUES
-(13, 2, '6254057', NULL),
-(14, 2, '5911357', NULL),
-(15, 2, '6451143', NULL);
+(27, 2, '4485624', '2025-12-17'),
+(28, 2, '7618703', '2025-12-17');
 
 -- --------------------------------------------------------
 
@@ -112,18 +111,11 @@ CREATE TABLE `orders_products` (
 --
 
 INSERT INTO `orders_products` (`product_id`, `order_id`, `quantity`) VALUES
-(2, 13, 1),
-(1, 13, 1),
-(3, 13, 1),
-(4, 13, 1),
-(5, 13, 1),
-(6, 13, 1),
-(3, 14, 1),
-(2, 14, 1),
-(2, 15, 1),
-(1, 15, 1),
-(4, 15, 1),
-(5, 15, 2);
+(1, 27, 1),
+(2, 27, 1),
+(3, 27, 3),
+(1, 28, 1),
+(2, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -154,9 +146,7 @@ INSERT INTO `products` (`product_id`, `category_id`, `name`, `price`, `quantity`
 (4, 3, 'NUA Lash Adhesive – 5ml', 30, 50, 1, 'Fast-drying professional adhesive with long-lasting retention.', 20, 0),
 (5, 4, 'NUA Eyelash & Eyebrow Growth Serum', 35, 50, 1, 'Nourishing formula that strengthens and boosts lash and brow growth.', NULL, 0),
 (6, 5, 'Portable Mini Fan – Fast Drying', 20, 50, 1, 'Compact rechargeable fan ideal for adhesive curing.', NULL, 0),
-(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', NULL, 0),
-(11, 1, 'Test', 20, 50, 1, 'Test', NULL, 0),
-(14, 1, 'Test', 20, 50, 1, 'Laptops for students on sale', NULL, 0);
+(7, 6, 'NUA Brow Freeze Gel', 20, 50, 1, 'Lightweight brow gel that delivers a laminated effect.', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -181,21 +171,7 @@ INSERT INTO `product_images` (`id`, `product_id`, `file_path`) VALUES
 (4, 4, 'public\\assets\\images\\Lash_Adhesive.png'),
 (5, 1, 'public\\assets\\images\\Midnight_Luxe.png'),
 (6, 6, 'public\\assets\\images\\Mini_Fan.png'),
-(8, 3, 'public\\assets\\images\\Tweezers.png'),
-(11, 11, 'public/assets/images/upload_6941ac602c1d4.png'),
-(14, 14, 'public/assets/images/upload_6941b96b991a8.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `promotions`
---
-
-CREATE TABLE `promotions` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `percentage` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(8, 3, 'public\\assets\\images\\Tweezers.png');
 
 -- --------------------------------------------------------
 
@@ -291,13 +267,6 @@ ALTER TABLE `product_images`
   ADD KEY `product_images_FK` (`product_id`);
 
 --
--- Indexes for table `promotions`
---
-ALTER TABLE `promotions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `promotions_product_id_FK` (`product_id`);
-
---
 -- Indexes for table `two_factor_auth`
 --
 ALTER TABLE `two_factor_auth`
@@ -330,7 +299,7 @@ ALTER TABLE `category_images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -343,12 +312,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `promotions`
---
-ALTER TABLE `promotions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `two_factor_auth`
@@ -372,11 +335,11 @@ ALTER TABLE `users`
 ALTER TABLE `category_images`
   ADD CONSTRAINT `category_images_category_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
 
-
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `customer_id_FK` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `customer_id_FK` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders_products`
@@ -396,12 +359,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `promotions`
---
-ALTER TABLE `promotions`
-  ADD CONSTRAINT `promotions_product_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `two_factor_auth`

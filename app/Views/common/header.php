@@ -93,20 +93,22 @@ use App\Helpers\SessionManager;
                 <button id="cartClose" type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-
-                <ul class="list-group">
+<form action="update_item" method="POST">
+ <ul class="list-group">
 
     <?php
  $total = 0.0;
 $cart = SessionManager::get('cart');
  foreach ($cart ?? [] as $name => $item):
-    $total += ($item['price'] ?? 1 * (int) $item['amount'])
+    $total += ($item['price']-($item['price']*$item['promotion']/100)  * (int) $item['amount']?? 1)
  ?>
  <li class="list-group-item text-bg-dark">
- <?= $name?>
- <div class="ml-1">
+ <?= $name?> - <?= $item['price']-($item['price']*$item['promotion']/100)?>$
+ <div class=" mb-4">
 <input  class="text-bg-dark" type="number" name="<?= $item['product_id']?>" value="<?= $item['amount']?>" >
+
 </div>
+
 <a href="remove_item/<?= $name?>" class="btn btn-danger"> Delete</a>
 
  </li>
@@ -114,6 +116,7 @@ $cart = SessionManager::get('cart');
     <?php endforeach; ?>
  </ul>
      <input type="submit" class="btn btn-success btn-sm" value="Confirm Changes">
+
 </form>
   </div>
   <footer style="margin-left:20px;">
@@ -122,8 +125,9 @@ $cart = SessionManager::get('cart');
   </footer>
 </div>
 
-        <script>
-            $('#cartBtn').click(function() {
+<script>
+
+    $('#cartBtn').click(function(){
 
 
                 if ($('#cart').hasClass('show')) {

@@ -32,13 +32,13 @@ ViewHelper::loadAdminHeader($page_title);
             </button>
         </div>
     </div>
-    <div class="table-responsive small">
+    <div class="table-responsive small rounded">
         <!--TODO: render the list of products/categories using an HTML table -->
 
         <h1>Products Management</h1>
         <br>
         <div><?= FlashMessage::render(); ?></div>
-        <table class="table table-striped">
+        <table class="table table-striped ">
             <thead>
                 <tr>
                     <th style="background-color:var(--color-dark-beige);">Id</th>
@@ -57,7 +57,7 @@ ViewHelper::loadAdminHeader($page_title);
 
                 ?>
                     <tr>
-                        <td style="background-color:var(--color-dark-beige);"><?= $product["product_id"] ?></td>
+                        <td class="" style="background-color:var(--color-dark-beige);"><?= $product["product_id"] ?></td>
                         <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["name"]) ?> </td>
                         <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["category_name"]) ?> </td>
                         <td style="background-color:var(--color-dark-beige);"> <?= htmlspecialchars($product["description"]) ?> </td>
