@@ -45,7 +45,7 @@ use App\Helpers\SessionManager;
         <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/contact"><?= trans('nav.contact'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/faq"><?= trans('nav.faq'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/promotions"><?= trans('nav.promotions'); ?></a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><?= trans('nav.about'); ?></a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= APP_BASE_URL?>/aboutUs"><?= trans('nav.about'); ?></a></li>
         <li class="nav-item"><a class="nav-link" href="services"><?= trans('nav.services'); ?></a></li>
       </ul>
 
