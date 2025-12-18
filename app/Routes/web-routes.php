@@ -6,6 +6,7 @@ declare(strict_types=1);
  * This file contains the routes for the web application.
  */
 
+use App\Controllers\AboutUsController;
 use App\Controllers\AuthController;
 use App\Controllers\CategoriesController;
 use App\Controllers\CustomersController;
@@ -72,6 +73,8 @@ return static function (Slim\App $app): void {
     $app->get('/product/{id}', [ProductsController::class, 'show'])
         ->setName('product.show');
 
+    $app->get('/categories/{category_id}', [CategoriesController::class, 'show'])->setName('categories.show');
+
     $app->post('/add_item', [HomeController::class, 'addItem']);
 
         $app->post('/update_item', [HomeController::class, 'updateItems']);
@@ -87,6 +90,9 @@ return static function (Slim\App $app): void {
 
     $app->post('/contact', [ContactController::class, 'submit'])
         ->setName('contact.submit');
+
+    $app->get('/aboutUs', [AboutUsController::class, 'index'])
+        ->setName('aboutUs.index');
 
     $app->get('/faq', [FAQController::class, 'index'])
     ->setName('faq.index');

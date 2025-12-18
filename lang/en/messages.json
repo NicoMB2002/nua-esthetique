@@ -34,6 +34,25 @@
         "addToCartBtn": "Add to Cart",
         "searchBtn": "Search"
     },
+    "faq" :{
+        "faq": "Frequently Asked Questions",
+        "place_order_q": "How can I place an order?",
+        "place_order_a": "Creating an account is required to place an order. This allows you to track your purchases, receive promotions, and manage your information securely.",
+        "where_products_q": "Where do your products come from?",
+        "where_products_a": "Our products are imported from overseas and carefully selected to meet professional beauty standards.",
+        "where_ship_q": "Where do you ship?",
+        "where_ship_a": "We ship nationwide across Canada.",
+        "contact_q": "How can I contact you if I have a question?",
+        "contact_a": "You can contact us through the Contact Us page or by email. A support representative will respond as soon as possible.",
+        "payments_q": "What payment methods do you accept?",
+        "payments_a": "We accept PayPal, a secure online payment method."
+    },
+    "about_us": {
+        "about_us": "About Us",
+        "about_us_desc1": "Salon Esthétique Nua is a beauty salon dedicated to providing high-quality beauty products and services for both professionals and individual clients. Founded with a passion for aesthetics and self-care, our goal is to offer carefully selected products that meet professional standards while remaining accessible to everyone.",
+        "about_us_desc2": "In addition to our in-salon services, we created this online platform to make our exclusive products easier to discover and purchase. We offer a wide range of beauty products, including lashes, tools, skincare items, and professional supplies used daily in our salon. Many of our products are imported from overseas and chosen based on quality, reliability, and performance.",
+        "about_us_desc3": "Our website is designed to provide a smooth and secure shopping experience. Customers can browse products by category, create an account to track orders, and stay informed about promotions and new arrivals. For professionals, we also offer specialized products tailored to business needs."
+    },
     "login": {
         "loginBtn": "Login",
         "password": "Password",

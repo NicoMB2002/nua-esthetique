@@ -34,6 +34,25 @@
         "addToCartBtn": "Ajouter au Panier",
         "searchBtn": "Rechercher"
     },
+    "faq": {
+        "faq": "Foire aux questions",
+        "place_order_q": "Comment puis-je passer une commande ?",
+        "place_order_a": "La création d'un compte est requise pour passer une commande. Cela vous permet de suivre vos achats, de recevoir des promotions et de gérer vos informations en toute sécurité.",
+        "where_products_q": "D'où viennent vos produits ?",
+        "where_products_a": "Nos produits sont importés de l'étranger et soigneusement sélectionnés pour répondre aux normes professionnelles de beauté.",
+        "where_ship_q": "Où expédiez-vous vos produits ?",
+        "where_ship_a": "Nous expédions partout au Canada.",
+        "contact_q": "Comment puis-je vous contacter si j'ai une question ?",
+        "contact_a": "Vous pouvez nous contacter via la page Contactez-nous ou par courriel. Un représentant du service clientèle vous répondra dès que possible.",
+        "payments_q": "Quels modes de paiement acceptez-vous ?",
+        "payments_a": "Nous acceptons PayPal, une méthode de paiement en ligne sécurisée."
+    },
+    "about_us": {
+        "about_us": "À propos de nous",
+        "about_us_desc1": "Salon Esthétique Nua est un salon de beauté dédié à offrir des produits et services esthétiques de haute qualité, tant pour les professionnels que pour les clients particuliers. Fondé avec une passion pour l'esthétique et le bien-être, notre objectif est de proposer des produits soigneusement sélectionnés qui répondent aux normes professionnelles tout en demeurant accessibles à tous.",
+        "about_us_desc2": "En plus de nos services en salon, nous avons créé cette plateforme en ligne afin de rendre nos produits exclusifs plus faciles à découvrir et à acheter. Nous offrons une vaste gamme de produits de beauté, incluant des extensions de cils, des outils, des articles de soins de la peau et des fournitures professionnelles utilisées quotidiennement dans notre salon. Plusieurs de nos produits sont importés de l'étranger et choisis en fonction de leur qualité, fiabilité et performance.",
+        "about_us_desc3": "Notre site web est conçu pour offrir une expérience d'achat fluide et sécurisée. Les clients peuvent parcourir les produits par catégorie, créer un compte pour suivre leurs commandes et rester informés des promotions et des nouveautés. Pour les professionnels, nous proposons également des produits spécialisés adaptés aux besoins des entreprises."
+    },
     "login": {
         "loginBtn": "Connexion",
         "password": "Mot de passe",
