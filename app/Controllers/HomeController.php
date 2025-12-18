@@ -11,6 +11,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Helpers\SessionManager;
 use App\Domain\Models\ProductsModel;
+use App\Helpers\FlashMessage;
+
 class HomeController extends BaseController
 {
     //NOTE: Passing the entire container violates the Dependency Inversion Principle and creates a service locator anti-pattern.
@@ -140,6 +142,10 @@ class HomeController extends BaseController
      */
     public function createOrder(Request $request, Response $response, array $args): Response{
         $cart = SessionManager::get('cart');
+        if (!SessionManager::has('user_id')) {
+            FlashMessage::error('Please Login to complete transaction');
+            return $this->redirect($request,$response,'auth.login');
+        }
         $orderID = $this->order_model->insertOrder([
             'customer_id'=>SessionManager::get('user_id'),
             'tracking_number'=> random_int(1000000,9999999)
